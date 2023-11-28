@@ -1,0 +1,35 @@
+﻿<Page x:Class="VA_Leo.Chat"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:VA_Leo"
+      mc:Ignorable="d" 
+      d:DesignHeight="560" d:DesignWidth="850"
+      Background="#1C1C1C"
+      Title="Chat">
+
+    <Grid>
+        <Image HorizontalAlignment="Left" Height="356" Margin="-92,315,0,0" VerticalAlignment="Top" Width="319" Source="/dragon.png" Opacity="0.2" StretchDirection="DownOnly"/>
+        <Rectangle HorizontalAlignment="Left" Height="234" Margin="-67,332,0,0" VerticalAlignment="Top" Width="66" Fill="#FF1B1B1B"/>
+        <Border BorderThickness="1" Margin="25,495,25,20" Background="#FF171717" CornerRadius="10">
+            <Grid>
+                <Border BorderThickness="1" Height="28" Margin="755,0,0,0" VerticalAlignment="Center" Width="28" HorizontalAlignment="Left" CornerRadius="50" MouseLeftButtonDown="sendButton_MouseDown" MouseEnter="SendBtnMouseEnter" MouseLeave="SendBtnMouseLeave">
+                    <Grid Margin="-1,-1,-1,-1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="0*"/>
+                        </Grid.RowDefinitions>
+                        <Rectangle Name="SendButtonBackgound" Height="28" VerticalAlignment="Center" Width="28" HorizontalAlignment="Center" Opacity="0" RadiusX="8" RadiusY="8" Fill="White"/>
+                        <Image Name="SendButton" HorizontalAlignment="Center" Height="24" VerticalAlignment="Center" Width="24" Source="/send.png"/>
+                    </Grid>
+                </Border>
+                <TextBox x:Name="TextBox" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="732" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" SelectionBrush="White" CaretBrush="White"  BorderThickness="0,0,0,0" SelectionOpacity="1" IsTabStop="False" SpellCheck.IsEnabled="True" Language="ru-ru"/>
+            </Grid>
+        </Border>
+        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Отображение истории сообщений в разработке, но вы можете отправлять сообщения. Напишите сообщение ниже." VerticalAlignment="Center" FontStyle="Italic" Foreground="White" Height="48" Width="270" TextAlignment="Center" Opacity="0.4" Margin="309,0,0,0"/>
+        <Image HorizontalAlignment="Left" Height="48" Margin="271,0,0,0" VerticalAlignment="Center" Width="48" Opacity="0.2" Source="/info.png"/>
+
+
+    </Grid>
+</Page>

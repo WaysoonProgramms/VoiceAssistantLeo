@@ -1,0 +1,70 @@
+﻿<Window x:Class="VA_Leo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VA_Leo"
+        mc:Ignorable="d"
+        Name="Window"
+        Title="Лео" Height="600" Width="1100" Background="#FF1F1F1F" Foreground="White" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" Icon="/dragon.png" AllowsTransparency="True">
+    <Grid Background="#FF1B1B1B">
+        <Rectangle Name="Border" HorizontalAlignment="Center" Height="40" VerticalAlignment="Top" Width="1100" Fill="#FF171717" MouseLeftButtonDown="LayoutRoot_MouseLeftButtonDown"/>
+
+        <Border BorderThickness="1" Height="25" Margin="0,7,10,0" VerticalAlignment="Top" Width="25" HorizontalAlignment="Right" CornerRadius="50" MouseLeftButtonDown="closeWindow" MouseEnter="CloseBtnMouseEnter" MouseLeave="CloseBtnMouseLeave">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="0*"/>
+                </Grid.RowDefinitions>
+                <Rectangle Name="CloseBackgound" Height="25" VerticalAlignment="Center" Width="25" HorizontalAlignment="Center" Fill="#FFA70000" Opacity="0" RadiusX="8" RadiusY="8"/>
+                <Image Name="Close" HorizontalAlignment="Center" Height="25" VerticalAlignment="Center" Width="25" Source="/close.png"/>
+            </Grid>
+        </Border>
+
+        <Border BorderThickness="1" Height="25" Margin="0,7,45,0" VerticalAlignment="Top" Width="25" HorizontalAlignment="Right" CornerRadius="50" MouseLeftButtonDown="minimizeWindow" MouseEnter="MinimizeBtnMouseEnter" MouseLeave="MinimizeBtnMouseLeave">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="0*"/>
+                </Grid.RowDefinitions>
+                <Rectangle Name="MinimizeBackgound" Height="25" VerticalAlignment="Center" Width="25" HorizontalAlignment="Center" Opacity="0" RadiusX="8" RadiusY="8" Fill="White"/>
+                <Image Name="Minimize" HorizontalAlignment="Center" Height="25" VerticalAlignment="Center" Width="25" Source="/hide.png"/>
+            </Grid>
+        </Border>
+
+        <Frame Name="MainFrame" Margin="250,40,0,0" NavigationUIVisibility="Hidden"/>
+
+        <Image HorizontalAlignment="Left" Height="20" Margin="15,9,0,0" VerticalAlignment="Top" Width="20" Source="/dragon.png"/>
+
+        <Label Content="Ассистент Лео" HorizontalAlignment="Left" Margin="40,5,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.349,0.585"/>
+
+        <Border BorderThickness="1" Margin="0,62,850,496" MouseLeftButtonDown="getHome" MouseEnter="HomeBtnMouseEnter" MouseLeave="HomeBtnMouseLeave">
+            <Grid>
+                <Image HorizontalAlignment="Left" Height="26" Margin="13,0,0,0" VerticalAlignment="Center" Width="25" Source="/Home.png"/>
+                <Label Content="Домашняя" HorizontalAlignment="Left" Margin="43,4,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.349,0.585" FontSize="14"/>
+                <Rectangle x:Name="HomeBtnMarker" HorizontalAlignment="Left" Height="40" VerticalAlignment="Center" Width="5" Margin="-1,0,0,0" Fill="White" Opacity="0"/>
+            </Grid>
+        </Border>
+
+        <Border BorderThickness="1" Margin="0,104,850,460" MouseLeftButtonDown="getSettings" MouseEnter="SettingsBtnMouseEnter" MouseLeave="SettingsBtnMouseLeave">
+            <Grid>
+                <Image HorizontalAlignment="Left" Height="26" Margin="13,0,0,1" VerticalAlignment="Center" Width="25" Source="/settings.png"/>
+                <Label Content="Настройки" HorizontalAlignment="Left" Margin="43,0,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.348,0.526" FontSize="14"/>
+                <Rectangle x:Name="SettingsBtnMarker" HorizontalAlignment="Left" Height="40" VerticalAlignment="Center" Width="5" Margin="-1,0,0,0" Fill="White" Opacity="0.01"/>
+            </Grid>
+        </Border>
+
+        <Border BorderThickness="1" Margin="0,140,850,424" MouseLeftButtonDown="getChat" MouseEnter="ChatBtnMouseEnter" MouseLeave="ChatBtnMouseLeave">
+            <Grid>
+                <Image HorizontalAlignment="Left" Height="26" Margin="13,0,0,1" VerticalAlignment="Center" Width="25" Source="/Chat.png"/>
+                <Label Content="Чат" HorizontalAlignment="Left" Margin="43,0,0,0" VerticalAlignment="Center" Foreground="White" RenderTransformOrigin="0.348,0.526" FontSize="14"/>
+                <Rectangle x:Name="ChatBtnMarker" HorizontalAlignment="Left" Height="40" VerticalAlignment="Center" Width="5" Margin="-1,0,0,0" Fill="White" Opacity="0"/>
+            </Grid>
+        </Border>
+        <Label Content="v0.1" HorizontalAlignment="Left" Margin="123,5,0,0" VerticalAlignment="Top" Foreground="#FF313131" RenderTransformOrigin="0.349,0.585"/>
+        <Image HorizontalAlignment="Left" Height="15" Margin="63,573,0,0" VerticalAlignment="Top" Width="15" Source="/avatar.png"/>
+        <Label Content="WaysoonProgramms" HorizontalAlignment="Left" Margin="83,570,0,0" VerticalAlignment="Top" FontSize="9" Foreground="White"/>
+
+    </Grid>
+
+</Window>

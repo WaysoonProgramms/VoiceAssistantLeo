@@ -1,0 +1,98 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>VA_Leo</RootNamespace>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>assets\images\icon.ico</ApplicationIcon>
+    <AssemblyName>Ассистент Лео</AssemblyName>
+    <Platforms>AnyCPU;x64</Platforms>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <DebugType>portable</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="avatar.png" />
+    <None Remove="Chat.png" />
+    <None Remove="close.png" />
+    <None Remove="data.png" />
+    <None Remove="dragon.png" />
+    <None Remove="dragon_small.png" />
+    <None Remove="functions.png" />
+    <None Remove="hide.png" />
+    <None Remove="Home.png" />
+    <None Remove="icon.ico" />
+    <None Remove="info.png" />
+    <None Remove="logo.png" />
+    <None Remove="rules.png" />
+    <None Remove="send.png" />
+    <None Remove="settings.png" />
+    <None Remove="sound.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="assets\images\icon.ico" />
+	<Content Include="assets" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Caliburn.Micro.Core" Version="4.0.212" />
+    <PackageReference Include="NAudio" Version="2.2.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NLog" Version="5.2.6" />
+    <PackageReference Include="Notification.Wpf" Version="7.0.0.2" />
+    <PackageReference Include="Vosk" Version="0.3.38" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="avatar.png" />
+    <Resource Include="Chat.png" />
+    <Resource Include="close.png" />
+    <Resource Include="data.png" />
+    <Resource Include="dragon.png" />
+    <Resource Include="dragon_small.png" />
+    <Resource Include="functions.png" />
+    <Resource Include="hide.png" />
+    <Resource Include="Home.png" />
+    <Resource Include="icon.ico" />
+    <Resource Include="info.png" />
+    <Resource Include="logo.png" />
+    <Resource Include="rules.png" />
+    <Resource Include="send.png" />
+    <Resource Include="settings.png" />
+    <Resource Include="sound.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>

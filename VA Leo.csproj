@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>assets\images\icon.ico</ApplicationIcon>
+    <ApplicationIcon>assets\icon.ico</ApplicationIcon>
     <AssemblyName>Ассистент Лео</AssemblyName>
     <Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
@@ -36,6 +36,7 @@
     <None Remove="dragon.png" />
     <None Remove="dragon_small.png" />
     <None Remove="functions.png" />
+    <None Remove="githubIcon.png" />
     <None Remove="hide.png" />
     <None Remove="Home.png" />
     <None Remove="icon.ico" />
@@ -45,19 +46,22 @@
     <None Remove="send.png" />
     <None Remove="settings.png" />
     <None Remove="sound.png" />
+    <None Remove="tgLogo.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="assets\images\icon.ico" />
+    <Content Include="assets\icon.ico" />
 	<Content Include="assets" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Caliburn.Micro.Core" Version="4.0.212" />
+    <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
     <PackageReference Include="NAudio" Version="2.2.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="NLog" Version="5.2.6" />
-    <PackageReference Include="Notification.Wpf" Version="7.0.0.2" />
+    <PackageReference Include="NLog" Version="5.2.7" />
+    <PackageReference Include="ToastNotifications" Version="2.5.1" />
+    <PackageReference Include="ToastNotifications.Messages" Version="2.5.1" />
     <PackageReference Include="Vosk" Version="0.3.38" />
   </ItemGroup>
 
@@ -69,6 +73,7 @@
     <Resource Include="dragon.png" />
     <Resource Include="dragon_small.png" />
     <Resource Include="functions.png" />
+    <Resource Include="githubIcon.png" />
     <Resource Include="hide.png" />
     <Resource Include="Home.png" />
     <Resource Include="icon.ico" />
@@ -78,6 +83,7 @@
     <Resource Include="send.png" />
     <Resource Include="settings.png" />
     <Resource Include="sound.png" />
+    <Resource Include="tgLogo.png" />
   </ItemGroup>
 
   <ItemGroup>

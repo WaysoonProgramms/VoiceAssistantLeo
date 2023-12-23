@@ -7,7 +7,31 @@
       mc:Ignorable="d" 
       d:DesignHeight="560" d:DesignWidth="850"
       Background="#1C1C1C"
-      Title="Chat">
+      Title="Chat" PreviewKeyDown="Chat_KeyDown">
+
+    <Page.Resources>
+        <DataTemplate DataType= "MyMessage">
+            <Grid HorizontalAlignment="Right" Margin="2">
+                <Rectangle Fill="YellowGreen" />
+                <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="2"
+                        SnapsToDevicePixels="True">
+                    <TextBlock Text="{Binding Text}"
+                               Margin="5"/>
+                </Border>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate DataType="CustomMessage">
+            <Grid HorizontalAlignment="Left" Margin="2">
+                <Rectangle Fill="LightGray" />
+                <Border BorderBrush="Gray" BorderThickness="1" CornerRadius="2"
+                        SnapsToDevicePixels="True">
+                    <TextBlock Text="{Binding Text}"
+                               Margin="5"/>
+                </Border>
+            </Grid>
+        </DataTemplate>
+    </Page.Resources>
 
     <Grid>
         <Image HorizontalAlignment="Left" Height="356" Margin="-92,315,0,0" VerticalAlignment="Top" Width="319" Source="/dragon.png" Opacity="0.2" StretchDirection="DownOnly"/>
@@ -27,8 +51,6 @@
                 <TextBox x:Name="TextBox" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="732" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" SelectionBrush="White" CaretBrush="White"  BorderThickness="0,0,0,0" SelectionOpacity="1" IsTabStop="False" SpellCheck.IsEnabled="True" Language="ru-ru"/>
             </Grid>
         </Border>
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Отображение истории сообщений в разработке, но вы можете отправлять сообщения. Напишите сообщение ниже." VerticalAlignment="Center" FontStyle="Italic" Foreground="White" Height="48" Width="270" TextAlignment="Center" Opacity="0.4" Margin="309,0,0,0"/>
-        <Image HorizontalAlignment="Left" Height="48" Margin="271,0,0,0" VerticalAlignment="Center" Width="48" Opacity="0.2" Source="/info.png"/>
 
 
     </Grid>

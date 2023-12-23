@@ -12,7 +12,7 @@
 
 
 <a href="http://voiceassistantleo.tilda.ws/">Официальный сайт / Official website</a><br>
-<a href="http://voiceassistantleo.tilda.ws/">Группа ВК / VK Community</a>
+<a href="https://t.me/waysoon_official">Telegram канал / Telegram channel</a>
 
 # Технологии / Technologies
 - Text-to-speech

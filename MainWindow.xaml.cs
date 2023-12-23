@@ -1,10 +1,12 @@
-﻿using System.Text;
+﻿using System.Drawing;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -24,6 +26,14 @@ namespace VA_Leo
             Vosk.main();
         }
 
+        WindowState prevState;
+
+        private void TaskbarIcon_TrayLeftMouseDown(object sender, RoutedEventArgs e)
+        {
+            Show();
+            WindowState = prevState;
+        }
+
         void LayoutRoot_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) 
         {
             this.Opacity = 0.8;
@@ -33,16 +43,23 @@ namespace VA_Leo
 
         private void closeWindow(object sender, MouseButtonEventArgs e)
         {
-            DoubleAnimation animation;
-            Storyboard storyboardFade = new Storyboard();
+            if (Properties.Settings.Default.isMinimizeToTrayTrue == true)
+            {
+                Hide();
+            }
+            else
+            {
+                DoubleAnimation animation;
+                Storyboard storyboardFade = new Storyboard();
 
-            animation = new DoubleAnimation(1, 0, new Duration(TimeSpan.FromSeconds(0.3)));
-            animation.Completed += closeAnimationComplete;
-            Storyboard.SetTargetName(animation, this.Name);
-            Storyboard.SetTargetProperty(animation, new PropertyPath(MainWindow.OpacityProperty));
-            storyboardFade.Children.Add(animation);
+                animation = new DoubleAnimation(1, 0, new Duration(TimeSpan.FromSeconds(0.3)));
+                animation.Completed += closeAnimationComplete;
+                Storyboard.SetTargetName(animation, this.Name);
+                Storyboard.SetTargetProperty(animation, new PropertyPath(MainWindow.OpacityProperty));
+                storyboardFade.Children.Add(animation);
 
-            storyboardFade.Begin(this);
+                storyboardFade.Begin(this);
+            }
         }
 
         private void closeAnimationComplete(object sender, EventArgs e)
@@ -148,6 +165,5 @@ namespace VA_Leo
         {
             MinimizeBackgound.Opacity = 0;
         }
-
     }
 }

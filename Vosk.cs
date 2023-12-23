@@ -12,6 +12,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using Vosk;
 
@@ -31,6 +32,7 @@ namespace VA_Leo
         public static int num = 1;
 
         public static Logger logger = LogManager.GetCurrentClassLogger();
+        public static Stopwatch wakeTimer = new Stopwatch();
 
         public static void main()
         {
@@ -46,6 +48,7 @@ namespace VA_Leo
 
             // Временный файл записи голоса
             writer = new WaveFileWriter(@"C:\Users\User\AppData\Local\Temp\VoiceAssistantRecord.wav", waveIn.WaveFormat);
+
         }
 
         enum RecycleFlags : uint
@@ -85,6 +88,18 @@ namespace VA_Leo
 
         public void SpeechRecognized()
         {
+
+            if (wakeTimer.Elapsed.Seconds >= 15 && active)
+            {
+                player.Open(new Uri($".\\sounds\\stop.wav", UriKind.Relative));
+                player.Volume = Settings.vVoulme / 100.0f;
+                player.Play();
+
+                wakeTimer.Stop();
+                wakeTimer.Reset();
+                active = false;
+            }
+
             if (Properties.Settings.Default.isMuted)
             {
                 return;
@@ -94,6 +109,8 @@ namespace VA_Leo
             if (txt == "лео" && !Vosk.started)
             {
                 Vosk.started = true;
+                wakeTimer.Start();
+                active = true;
 
                 // Воспроизведение ответа
                 player.Open(new Uri($".\\sounds\\start.wav", UriKind.Relative));
@@ -105,9 +122,10 @@ namespace VA_Leo
             }
 
             // Спасибо
-            if (txt == "спасибо" && !Vosk.started)
+            if (txt == "спасибо" && !Vosk.started && active)
             {
                 Vosk.started = true;
+                wakeTimer.Restart();
 
                 player.Open(new Uri(@".\voices\vsegda_pozyalusta.wav", UriKind.Relative));
                 player.Volume = Settings.vVoulme / 100.0f;
@@ -123,6 +141,7 @@ namespace VA_Leo
             if (txt == "алиса" && !Vosk.started)
             {
                 Vosk.started = true;
+                wakeTimer.Restart();
 
                 // Воспроизведение ответа
                 player.Open(new Uri($".\\voices\\neAlica.wav", UriKind.Relative));
@@ -137,6 +156,7 @@ namespace VA_Leo
             if (txt == "сири" && !Vosk.started)
             {
                 Vosk.started = true;
+                wakeTimer.Restart();
 
                 // Воспроизведение ответа
                 player.Open(new Uri($".\\voices\\neSiri.wav", UriKind.Relative));
@@ -151,6 +171,7 @@ namespace VA_Leo
             if (txt == "маруся" && !Vosk.started)
             {
                 Vosk.started = true;
+                wakeTimer.Restart();
 
                 // Воспроизведение ответа
                 player.Open(new Uri($".\\voices\\neMarusa.wav", UriKind.Relative));
@@ -162,9 +183,10 @@ namespace VA_Leo
             }
 
             // Очистка корзины
-            if (txt == "очисти корзину" && !Vosk.started)
+            if (txt == "очисти корзину" && !Vosk.started && active)
             {
                 Vosk.started = true;
+                wakeTimer.Restart();
 
                 if (Properties.Settings.Default.allowPC)
                 {
@@ -196,7 +218,7 @@ namespace VA_Leo
             }
 
             // Запуск ТГ
-            if ((txt == "открой телеграмм") && !Vosk.started)
+            if ((txt == "открой телеграмм") && !Vosk.started && active)
             {
                 startProgramm(@"C:\Users\User\AppData\Roaming\Telegram Desktop\Telegram.exe",
                     $".\\voices\\open{num}.wav",
@@ -204,7 +226,7 @@ namespace VA_Leo
                     4);
             }
 
-            if ((txt == "открой консоль") && !Vosk.started)
+            if ((txt == "открой консоль") && !Vosk.started && active)
             {
                 startProgramm("cmd.exe",
                     $".\\voices\\open{num}.wav",
@@ -212,7 +234,7 @@ namespace VA_Leo
                     3);
             }
 
-            if (txt == "открой вконтакте" && !Vosk.started)
+            if (txt == "открой вконтакте" && !Vosk.started && active)
             {
                 openWebsite("https://vk.com",
                     $".\\voices\\open{num}.wav",
@@ -220,7 +242,7 @@ namespace VA_Leo
                     4);
             }
 
-            if (txt == "открой ютуб" && !Vosk.started)
+            if (txt == "открой ютуб" && !Vosk.started && active)
             {
                 openWebsite("https://youtube.com",
                     $".\\voices\\open{num}.wav",
@@ -228,7 +250,7 @@ namespace VA_Leo
                     3);
             }
 
-            if ((txt == "запусти майнкрафт" || txt == "открой майн") && !Vosk.started)
+            if ((txt == "запусти майнкрафт" || txt == "открой майн") && !Vosk.started && active)
             {
                 startProgramm(@"C:\XboxGames\Minecraft Launcher\Content\Minecraft.exe",
                     $".\\voices\\open{num}.wav",
@@ -236,7 +258,7 @@ namespace VA_Leo
                     3);
             }
 
-            if ((txt == "открой почту") && !Vosk.started)
+            if ((txt == "открой почту") && !Vosk.started && active)
             {
                 openWebsite("https://mail.google.com",
                     $".\\voices\\open{num}.wav",
@@ -248,6 +270,7 @@ namespace VA_Leo
         public void startProgramm(string target, string media, string error, int rndInt)
         {
             Vosk.started = true;
+            wakeTimer.Restart();
 
             if (Properties.Settings.Default.allowProgrammsStart)
             {
@@ -300,6 +323,7 @@ namespace VA_Leo
         public void openWebsite(string url, string media, string error, int rndInt)
         {
             Vosk.started = true;
+            wakeTimer.Restart();
 
             // Рандомайзер
             Random rnd = new Random();

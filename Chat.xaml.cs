@@ -23,6 +23,9 @@ namespace VA_Leo
         public Chat()
         {
             InitializeComponent();
+            
+
+
         }
 
         private void sendButton_MouseDown(object sender, MouseButtonEventArgs e)
@@ -41,6 +44,14 @@ namespace VA_Leo
         private void SendBtnMouseLeave(object sender, MouseEventArgs e)
         {
             SendButtonBackgound.Opacity = 0;
+        }
+
+        private void Chat_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                sendButton_MouseDown(SendButton, null);
+            }
         }
     }
 }

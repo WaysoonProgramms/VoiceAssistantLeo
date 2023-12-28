@@ -29,7 +29,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="assets\icon.ico" />
+    <None Remove="Assets\icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,48 +44,48 @@
   </ItemGroup>
 
   <ItemGroup>
-	<Resource Include="assets\icon.ico"/>
-    <Resource Include="assets\images\avatar.png" />
-    <Resource Include="assets\images\Chat.png" />
-    <Resource Include="assets\images\close.png" />
-    <Resource Include="assets\images\data.png" />
-    <Resource Include="assets\images\dragon.png" />
-    <Resource Include="assets\images\functions.png" />
-    <Resource Include="assets\images\githubIcon.png" />
-    <Resource Include="assets\images\hide.png" />
-    <Resource Include="assets\images\Home.png" />
-    <Resource Include="assets\images\info.png" />
-    <Resource Include="assets\images\microphone.png" />
-    <Resource Include="assets\images\mute.png" />
-    <Resource Include="assets\images\rules.png" />
-    <Resource Include="assets\images\send.png" />
-    <Resource Include="assets\images\settings.png" />
-    <Resource Include="assets\images\sleep.png" />
-    <Resource Include="assets\images\sound.png" />
-    <Resource Include="assets\images\tgLogo.png" />
-    <Resource Include="assets\images\yes.png" />
-    <Resource Include="assets\sounds\start.wav" />
-    <Resource Include="assets\sounds\stop.wav" />
-    <Resource Include="assets\voices\anekdot1.wav" />
-    <Resource Include="assets\voices\bin1.wav" />
-    <Resource Include="assets\voices\bin2.wav" />
-    <Resource Include="assets\voices\err1.wav" />
-    <Resource Include="assets\voices\err2.wav" />
-    <Resource Include="assets\voices\err3.wav" />
-    <Resource Include="assets\voices\err4.wav" />
-    <Resource Include="assets\voices\err5.wav" />
-    <Resource Include="assets\voices\good.wav" />
-    <Resource Include="assets\voices\infobtn.wav" />
-    <Resource Include="assets\voices\music.wav" />
-    <Resource Include="assets\voices\neAlica.wav" />
-    <Resource Include="assets\voices\neMarusa.wav" />
-    <Resource Include="assets\voices\neSiri.wav" />
-    <Resource Include="assets\voices\open0.wav" />
-    <Resource Include="assets\voices\open1.wav" />
-    <Resource Include="assets\voices\open2.wav" />
-    <Resource Include="assets\voices\open3.wav" />
-    <Resource Include="assets\voices\vsegda_pozyalusta.wav" />
-    <Resource Include="assets\voices\zarikrolen.wav" />
+	<Resource Include="Assets\icon.ico" />
+    <Resource Include="Assets\images\avatar.png" />
+    <Resource Include="Assets\images\Chat.png" />
+    <Resource Include="Assets\images\close.png" />
+    <Resource Include="Assets\images\data.png" />
+    <Resource Include="Assets\images\dragon.png" />
+    <Resource Include="Assets\images\functions.png" />
+    <Resource Include="Assets\images\githubIcon.png" />
+    <Resource Include="Assets\images\hide.png" />
+    <Resource Include="Assets\images\Home.png" />
+    <Resource Include="Assets\images\info.png" />
+    <Resource Include="Assets\images\microphone.png" />
+    <Resource Include="Assets\images\mute.png" />
+    <Resource Include="Assets\images\rules.png" />
+    <Resource Include="Assets\images\send.png" />
+    <Resource Include="Assets\images\settings.png" />
+    <Resource Include="Assets\images\sleep.png" />
+    <Resource Include="Assets\images\sound.png" />
+    <Resource Include="Assets\images\tgLogo.png" />
+    <Resource Include="Assets\images\yes.png" />
+    <Resource Include="Assets\sounds\start.wav" />
+    <Resource Include="Assets\sounds\stop.wav" />
+    <Resource Include="Assets\voices\anekdot1.wav" />
+    <Resource Include="Assets\voices\bin1.wav" />
+    <Resource Include="Assets\voices\bin2.wav" />
+    <Resource Include="Assets\voices\err1.wav" />
+    <Resource Include="Assets\voices\err2.wav" />
+    <Resource Include="Assets\voices\err3.wav" />
+    <Resource Include="Assets\voices\err4.wav" />
+    <Resource Include="Assets\voices\err5.wav" />
+    <Resource Include="Assets\voices\good.wav" />
+    <Resource Include="Assets\voices\infobtn.wav" />
+    <Resource Include="Assets\voices\music.wav" />
+    <Resource Include="Assets\voices\neAlica.wav" />
+    <Resource Include="Assets\voices\neMarusa.wav" />
+    <Resource Include="Assets\voices\neSiri.wav" />
+    <Resource Include="Assets\voices\open0.wav" />
+    <Resource Include="Assets\voices\open1.wav" />
+    <Resource Include="Assets\voices\open2.wav" />
+    <Resource Include="Assets\voices\open3.wav" />
+    <Resource Include="Assets\voices\vsegda_pozyalusta.wav" />
+    <Resource Include="Assets\voices\zarikrolen.wav" />
   </ItemGroup>
 
   <ItemGroup>
@@ -101,6 +101,22 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="C:\Users\User\.nuget\packages\vosk\0.3.38\build\lib\win-x64\libgcc_s_seh-1.dll" Link="Libraries\libgcc_s_seh-1.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="C:\Users\User\.nuget\packages\vosk\0.3.38\build\lib\win-x64\libstdc++-6.dll" Link="Libraries\libstdc++-6.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="C:\Users\User\.nuget\packages\vosk\0.3.38\build\lib\win-x64\libvosk.dll" Link="Libraries\libvosk.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="C:\Users\User\.nuget\packages\vosk\0.3.38\build\lib\win-x64\libwinpthread-1.dll" Link="Libraries\libwinpthread-1.dll" />
   </ItemGroup>
 
 </Project>

@@ -23,9 +23,6 @@ namespace VA_Leo
         public Chat()
         {
             InitializeComponent();
-            
-
-
         }
 
         private void sendButton_MouseDown(object sender, MouseButtonEventArgs e)

@@ -8,19 +8,19 @@
       mc:Ignorable="d" 
       d:DesignHeight="560" d:DesignWidth="850"
       Title="Settings"
-      Background="#1C1C1C">
+      Background="#FF151515">
 
     <Grid>
-        <Image HorizontalAlignment="Left" Height="356" Margin="-92,315,0,0" VerticalAlignment="Top" Width="319" Source="/dragon.png" Opacity="0.2" StretchDirection="DownOnly"/>
-        <Image Margin="168,84,642,436" Width="40" Height="40" Source="/functions.png"/>
+        <Image HorizontalAlignment="Left" Height="356" Margin="-92,315,0,0" VerticalAlignment="Top" Width="319" Source="/assets/images/dragon.png" Opacity="0.2" StretchDirection="DownOnly"/>
+        <Image Margin="168,84,642,436" Width="40" Height="40" Source="/assets/images/functions.png"/>
         <Label Content="Функции" HorizontalAlignment="Left" Margin="213,86,0,0" VerticalAlignment="Top" FontSize="18" Foreground="White"/>
-        <Image Margin="577,83,233,437" Width="40" Height="40" Source="/data.png"/>
+        <Image Margin="577,83,233,437" Width="40" Height="40" Source="/assets/images/data.png"/>
         <Label Content="Данные" HorizontalAlignment="Left" Margin="621,85,0,0" VerticalAlignment="Top" FontSize="18" Foreground="White"/>
         <CheckBox x:Name="muteBox" Content="Выключить микрофон" HorizontalAlignment="Left" Margin="129,144,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="White" Checked="muteBox_Checked" Unchecked="muteBox_Unchecked"/>
         <CheckBox x:Name="devModeBox" Content="Режим разработчика" ToolTip="Функции для тестирования и разработки. ТОЛЬКО ДЛЯ ОПЫТНЫХ ПОЛЬЗВАТЕЛЕЙ!" HorizontalAlignment="Left" Margin="129,166,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="White" Checked="devModeBox_Checked" Unchecked="devModeBox_Unchecked"/>
         <CheckBox Content="Запуск с системой (BETA)" ToolTip="Запускать ассистента с системой" HorizontalAlignment="Left" Margin="129,188,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="White"/>
         <CheckBox x:Name="minimizeToTrayBox" Content="Сворачивать в трей" ToolTip="Сворачивать ассистента в трей вместо закрытия" HorizontalAlignment="Left" Margin="129,210,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="White" Checked="minimizeToTrayBox_Checked" Unchecked="minimizeToTrayBox_Unchecked"/>
-        <Image Margin="174,267,636,253" Width="40" Height="40" Source="/rules.png"/>
+        <Image Margin="174,267,636,253" Width="40" Height="40" Source="/assets/images/rules.png"/>
         <Label Content="Правила" HorizontalAlignment="Left" Margin="219,269,0,0" VerticalAlignment="Top" FontSize="18" Foreground="White"/>
         <CheckBox x:Name="appStartBox" Content="Запуск приложений на устройстве" ToolTip="Разрешить ассистенту открывать приложения на вашем устройстве по запросу" HorizontalAlignment="Left" Margin="129,323,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="White" IsChecked="False" Checked="appStartBox_Checked" Unchecked="appStartBox_Unchecked"/>
         <CheckBox x:Name="browserStartBox" Content="Запуск браузера по умолчанию" ToolTip="Разрешить ассистенту открывать браузер по умолчанию на вашем устройстве по запросу" HorizontalAlignment="Left" Margin="129,346,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="White" IsChecked="False" Checked="browserStartBox_Checked" Unchecked="browserStartBox_Unchecked"/>
@@ -35,12 +35,12 @@
             <TextBlock Text="Русский, Россия"/>
         </ComboBox>
         <Label Content="Язык озвучки и общения" HorizontalAlignment="Left" Margin="522,174,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <Image Margin="597,295,213,225" Width="40" Height="40" Source="/sound.png"/>
+        <Image Margin="597,295,213,225" Width="40" Height="40" Source="/assets/images/sound.png"/>
         <Label Content="Звук" HorizontalAlignment="Left" Margin="642,297,0,0" VerticalAlignment="Top" FontSize="18" Foreground="White"/>
         <Slider HorizontalAlignment="Left" Margin="522,360,0,0" VerticalAlignment="Top" Width="236" Maximum="100" SmallChange="1" Value="100" IsEnabled="False"/>
         <Label Content="Уведомления и оповещения" HorizontalAlignment="Left" Margin="522,336,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Slider x:Name="voiceVolumeSlider" HorizontalAlignment="Left" Margin="522,402,0,0" VerticalAlignment="Top" Width="236" Maximum="100" SmallChange="1" AutoToolTipPlacement="TopLeft" ValueChanged="voiceVolumeSlider_ValueChanged"/>
         <Label Content="Голос ассистента" HorizontalAlignment="Left" Margin="522,378,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <Rectangle HorizontalAlignment="Left" Height="234" Margin="-67,332,0,0" VerticalAlignment="Top" Width="66" Fill="#FF1B1B1B"/>
+        <Rectangle HorizontalAlignment="Left" Height="234" Margin="-67,332,0,0" VerticalAlignment="Top" Width="66" Fill="#FF151515"/>
     </Grid>
 </Page>

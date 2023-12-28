@@ -6,10 +6,10 @@
       xmlns:local="clr-namespace:VA_Leo"
       mc:Ignorable="d" 
       d:DesignHeight="560" d:DesignWidth="850"
-      Title="Home" Width="850" Height="560" Background="#1C1C1C">
+      Title="Home" Width="850" Height="560" Background="#FF161616">
 
     <Grid>
-        <Image x:Name="logo" HorizontalAlignment="Left" Height="332" VerticalAlignment="Top" Width="332" Margin="75,100,0,0" Source="/dragon.png">
+        <Image x:Name="logo" HorizontalAlignment="Left" Height="332" VerticalAlignment="Top" Width="332" Margin="75,100,0,0" Source="/assets/images/dragon.png">
             <Image.Effect>
                 <DropShadowEffect BlurRadius="990" Color="#56D353" Opacity="0.4"/>
             </Image.Effect>
@@ -20,7 +20,7 @@
             <Grid>
                 <Rectangle Name="tgBtnRec" RadiusX="10" RadiusY="10" Fill="#FF0D82BF" Opacity="0"/>
                 <Label Content="Telegram" Foreground="White" Margin="25,0,-1,0"/>
-                <Image HorizontalAlignment="Left" Width="16" Margin="6,6,0,5" Source="/tgLogo.png"/>
+                <Image HorizontalAlignment="Left" Width="16" Margin="6,6,0,5" Source="/assets/images/tgLogo.png"/>
             </Grid>
         </Border>
 
@@ -28,7 +28,7 @@
             <Grid>
                 <Rectangle Name="webBtnRec" RadiusX="10" RadiusY="10" Fill="White" Opacity="0"/>
                 <Label Content="Сайт" Foreground="White" Margin="25,0,-1,0"/>
-                <Image HorizontalAlignment="Left" Width="16" Margin="6,6,0,5" Source="/icon.ico"/>
+                <Image HorizontalAlignment="Left" Width="16" Margin="6,6,0,5" Source="/assets/icon.ico"/>
             </Grid>
         </Border>
 
@@ -36,7 +36,7 @@
             <Grid>
                 <Rectangle Name="gitBtnRec" RadiusX="10" RadiusY="10" Fill="White" Opacity="0"/>
                 <Label Content="Исходный код" Foreground="White" Margin="25,0,-1,0"/>
-                <Image HorizontalAlignment="Left" Width="16" Margin="6,6,0,5" Source="/githubIcon.png"/>
+                <Image HorizontalAlignment="Left" Width="16" Margin="6,6,0,5" Source="/assets/images/githubIcon.png"/>
             </Grid>
         </Border>
     </Grid>

@@ -218,7 +218,7 @@ namespace VA_Leo
             }
 
             // Запуск ТГ
-            if ((txt == "открой телеграмм") && !Vosk.started && active)
+            if ((txt == "открой телеграмм" || txt == "открой телеграм") && !Vosk.started && active)
             {
                 startProgramm(@"C:\Users\User\AppData\Roaming\Telegram Desktop\Telegram.exe",
                     $".\\voices\\open{num}.wav",

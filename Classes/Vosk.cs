@@ -1,38 +1,25 @@
-﻿using Microsoft.VisualBasic;
-using NAudio.Wave;
+﻿using NAudio.Wave;
 using Newtonsoft.Json.Linq;
 using NLog;
-using NLog.Targets;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Media;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using Vosk;
 
 namespace VA_Leo
 {
-    class Vosk
+    public class Vosk
     {
-        public static VoskRecognizer rec;
-        static WaveFileWriter writer;
-        public static bool started = false;
+        private static VoskRecognizer rec;
+        private static WaveFileWriter writer;
+        private static bool started = false;
 
         public static string txt; // Текст распознанный Vosk
-        public static bool end = false; // Окончание обработки фразы и произношения
-        public static bool active = false; // Статус Wake Word
-        public static string awaitTime = ""; // Время активации
-        public static int awaitRang = 0; // Кол-во запросов в не активном режиме
-        public static int num = 1;
+        private static bool active = false; // Статус Wake Word
+        private static int num = 1;
 
-        public static Logger logger = LogManager.GetCurrentClassLogger();
-        public static Stopwatch wakeTimer = new Stopwatch();
+        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
+        private static readonly Stopwatch wakeTimer = new Stopwatch();
 
         public static void main()
         {
@@ -41,7 +28,7 @@ namespace VA_Leo
             rec = new VoskRecognizer(model, 16000f);
 
             // Инициализация прослушивания
-            WaveInEvent waveIn = new WaveInEvent();
+            var waveIn = new WaveInEvent();
             waveIn.WaveFormat = new WaveFormat(16000, 1);
             waveIn.DataAvailable += WaveInOnDataAvailable;
             waveIn.StartRecording();
@@ -51,7 +38,7 @@ namespace VA_Leo
 
         }
 
-        enum RecycleFlags : uint
+        private enum RecycleFlags : uint
         {
             SHERB_NOCONFIRMATION = 0x00000001,
             SHERB_NOPROGRESSUI = 0x00000002,
@@ -84,7 +71,7 @@ namespace VA_Leo
             }
         }
 
-        private MediaPlayer player = new MediaPlayer();
+        private readonly MediaPlayer player = new MediaPlayer();
 
         public void SpeechRecognized()
         {
@@ -191,7 +178,7 @@ namespace VA_Leo
                 if (Properties.Settings.Default.allowPC)
                 {
                     // Очистка
-                    uint result = SHEmptyRecycleBin(IntPtr.Zero, null, 0);
+                    var result = SHEmptyRecycleBin(IntPtr.Zero, null, 0);
                     if (result == 0)
                     {
                         player.Open(new Uri($".\\voices\\bin1.wav", UriKind.Relative));

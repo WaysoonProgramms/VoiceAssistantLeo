@@ -11,32 +11,32 @@
     <Grid Background="#FF151515">
         <Rectangle Name="Border" HorizontalAlignment="Center" Height="40" VerticalAlignment="Top" Width="1100" Fill="#FF0E0E0E" MouseLeftButtonDown="LayoutRoot_MouseLeftButtonDown"/>
         <tb:TaskbarIcon Visibility="Visible" ToolTipText="Ассистент Лео" IconSource="/assets/icon.ico" TrayLeftMouseDown="TaskbarIcon_TrayLeftMouseDown"/>
-        
-        <Border BorderThickness="1" Height="25" Margin="0,7,10,0" VerticalAlignment="Top" Width="25" HorizontalAlignment="Right" CornerRadius="50" MouseLeftButtonDown="closeWindow" MouseEnter="CloseBtnMouseEnter" MouseLeave="CloseBtnMouseLeave">
+
+        <Border BorderThickness="1" Height="30" Margin="0,4,8,0" VerticalAlignment="Top" Width="30" HorizontalAlignment="Right" CornerRadius="50" MouseLeftButtonDown="closeWindow" MouseEnter="CloseBtnMouseEnter" MouseLeave="CloseBtnMouseLeave">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition Height="0*"/>
                 </Grid.RowDefinitions>
-                <Rectangle Name="CloseBackgound" Height="25" VerticalAlignment="Center" Width="25" HorizontalAlignment="Center" Fill="#FFA70000" Opacity="0" RadiusX="8" RadiusY="8"/>
+                <Rectangle Name="CloseBackgound" Height="30" VerticalAlignment="Center" Width="30" HorizontalAlignment="Center" Fill="#FFA70000" Opacity="0" RadiusX="8" RadiusY="8"/>
                 <Image Name="Close" HorizontalAlignment="Center" Height="25" VerticalAlignment="Center" Width="25" Source="/assets/images/close.png"/>
             </Grid>
         </Border>
 
-        <Border BorderThickness="1" Height="25" Margin="0,7,45,0" VerticalAlignment="Top" Width="25" HorizontalAlignment="Right" CornerRadius="50" MouseLeftButtonDown="minimizeWindow" MouseEnter="MinimizeBtnMouseEnter" MouseLeave="MinimizeBtnMouseLeave">
+        <Border BorderThickness="1" Height="30" Margin="0,5,46,0" VerticalAlignment="Top" Width="30" HorizontalAlignment="Right" CornerRadius="50" MouseLeftButtonDown="minimizeWindow" MouseEnter="MinimizeBtnMouseEnter" MouseLeave="MinimizeBtnMouseLeave">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition Height="0*"/>
                 </Grid.RowDefinitions>
-                <Rectangle Name="MinimizeBackgound" Height="25" VerticalAlignment="Center" Width="25" HorizontalAlignment="Center" Opacity="0" RadiusX="8" RadiusY="8" Fill="White"/>
+                <Rectangle Name="MinimizeBackgound" Height="30" VerticalAlignment="Center" Width="30" HorizontalAlignment="Center" Opacity="0" RadiusX="8" RadiusY="8" Fill="White"/>
                 <Image Name="Minimize" HorizontalAlignment="Center" Height="25" VerticalAlignment="Center" Width="25" Source="/assets/images/hide.png"/>
             </Grid>
         </Border>
 
         <Frame Name="MainFrame" Margin="250,40,0,0" NavigationUIVisibility="Hidden"/>
 
-        <Image HorizontalAlignment="Left" Height="20" Margin="15,9,0,0" VerticalAlignment="Top" Width="20" Source="/assets/icon.ico"/>
+        <Image HorizontalAlignment="Left" Height="20" Margin="15,9,0,0" VerticalAlignment="Top" Width="20" Source="/Assets/icon.ico"/>
 
         <Label Content="Ассистент Лео" HorizontalAlignment="Left" Margin="40,5,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.349,0.585"/>
 
@@ -48,7 +48,7 @@
             </Grid>
         </Border>
 
-        <Border BorderThickness="1" Margin="0,104,850,460" MouseLeftButtonDown="getSettings" MouseEnter="SettingsBtnMouseEnter" MouseLeave="SettingsBtnMouseLeave">
+        <Border BorderThickness="1" Margin="0,108,850,456" MouseLeftButtonDown="getSettings" MouseEnter="SettingsBtnMouseEnter" MouseLeave="SettingsBtnMouseLeave">
             <Grid>
                 <Image HorizontalAlignment="Left" Height="26" Margin="13,0,0,1" VerticalAlignment="Center" Width="25" Source="/assets/images/settings.png"/>
                 <Label Content="Настройки" HorizontalAlignment="Left" Margin="43,0,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.348,0.526" FontSize="14"/>
@@ -56,7 +56,7 @@
             </Grid>
         </Border>
 
-        <Border BorderThickness="1" Margin="0,140,850,424" MouseLeftButtonDown="getChat" MouseEnter="ChatBtnMouseEnter" MouseLeave="ChatBtnMouseLeave">
+        <Border BorderThickness="1" Margin="0,150,850,414" MouseLeftButtonDown="getChat" MouseEnter="ChatBtnMouseEnter" MouseLeave="ChatBtnMouseLeave">
             <Grid>
                 <Image HorizontalAlignment="Left" Height="26" Margin="13,0,0,1" VerticalAlignment="Center" Width="25" Source="/assets/images/Chat.png"/>
                 <Label Content="Чат" HorizontalAlignment="Left" Margin="43,0,0,0" VerticalAlignment="Center" Foreground="White" RenderTransformOrigin="0.348,0.526" FontSize="14"/>

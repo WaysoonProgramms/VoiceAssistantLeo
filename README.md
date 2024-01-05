@@ -12,7 +12,7 @@
 
 
 <a href="http://voiceassistantleo.tilda.ws/">Официальный сайт / Official website</a><br>
-<a href="https://t.me/waysoon_official">Telegram канал / Telegram channel</a>
+<a href="https://t.me/waysoon_official">Telegram канал / Telegram channel</a><br>
 <a href="https://www.donationalerts.com/r/waysoon">Поддержать проект / Support the project</a>
 
 # Технологии / Technologies

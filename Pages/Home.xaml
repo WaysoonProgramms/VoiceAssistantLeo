@@ -9,14 +9,14 @@
       Title="Home" Width="850" Height="560" Background="#FF161616">
 
     <Grid>
-        <Image x:Name="logo" HorizontalAlignment="Center" Height="213" VerticalAlignment="Top" Width="214" Margin="0,67,0,0" Source="/assets/images/dragon.png">
+        <Image x:Name="logo" HorizontalAlignment="Center" Height="213" VerticalAlignment="Top" Width="214" Margin="0,79,0,0" Source="/assets/images/dragon.png">
             <Image.Effect>
-                <DropShadowEffect BlurRadius="990" Color="#56D353" Opacity="0.4"/>
+                <DropShadowEffect BlurRadius="990" Color="#FFFF" Opacity="0.4"/>
             </Image.Effect>
         </Image>
-        <Label Content="Ассистент Лео" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="64" FontFamily="Bahnschrift Condensed" Margin="272,296,0,0"/>
-        <Label Content="Простой голосовой помощник для Windows" HorizontalAlignment="Center" Margin="0,358,0,0" VerticalAlignment="Top" Foreground="#FFCECECE" FontSize="14"/>
-        <Border BorderThickness="1" Margin="272,392,486,139" CornerRadius="10" MouseEnter="tgBtnEnter" MouseLeave="tgBtnLeave" MouseDown="tgBtnClick">
+        <Label Content="Ассистент Лео" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="64" FontFamily="Bahnschrift Condensed" Margin="272,329,0,0"/>
+        <Label Content="Простой голосовой помощник для Windows" HorizontalAlignment="Center" Margin="0,391,0,0" VerticalAlignment="Top" Foreground="#FFCECECE" FontSize="14"/>
+        <Border BorderThickness="1" Margin="272,425,486,106" CornerRadius="10" MouseEnter="tgBtnEnter" MouseLeave="tgBtnLeave" MouseDown="tgBtnClick">
             <Grid>
                 <Rectangle Name="tgBtnRec" RadiusX="10" RadiusY="10" Fill="#FF0D82BF" Opacity="0"/>
                 <Label Content="Telegram" Foreground="White" Margin="25,0,-1,0"/>
@@ -24,7 +24,7 @@
             </Grid>
         </Border>
 
-        <Border BorderThickness="1" Margin="378,392,402,139" CornerRadius="10" MouseEnter="webBtnEnter" MouseLeave="webBtnLeave" MouseDown="webBtnClick">
+        <Border BorderThickness="1" Margin="378,425,402,106" CornerRadius="10" MouseEnter="webBtnEnter" MouseLeave="webBtnLeave" MouseDown="webBtnClick">
             <Grid>
                 <Rectangle Name="webBtnRec" RadiusX="10" RadiusY="10" Fill="White" Opacity="0"/>
                 <Label Content="Сайт" Foreground="White" Margin="25,0,-1,0"/>
@@ -32,7 +32,7 @@
             </Grid>
         </Border>
 
-        <Border BorderThickness="1" Margin="465,392,266,139" CornerRadius="10" MouseEnter="gitBtnEnter" MouseLeave="gitBtnLeave" MouseDown="gitBtnClick">
+        <Border BorderThickness="1" Margin="465,425,266,106" CornerRadius="10" MouseEnter="gitBtnEnter" MouseLeave="gitBtnLeave" MouseDown="gitBtnClick">
             <Grid>
                 <Rectangle Name="gitBtnRec" RadiusX="10" RadiusY="10" Fill="White" Opacity="0"/>
                 <Label Content="Исходный код" Foreground="White" Margin="25,0,-1,0"/>

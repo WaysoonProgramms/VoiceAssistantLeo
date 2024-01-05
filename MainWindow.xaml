@@ -23,6 +23,17 @@
             </Grid>
         </Border>
 
+        <Border BorderThickness="1" Height="30" Margin="0,5,83,0" VerticalAlignment="Top" Width="30" HorizontalAlignment="Right" CornerRadius="50" MouseLeftButtonDown="mute" MouseEnter="MuteBtnMouseEnter" MouseLeave="MuteBtnMouseLeave" RenderTransformOrigin="0.55,0.535">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="0*"/>
+                </Grid.RowDefinitions>
+                <Rectangle Name="MuteBackgound" Height="30" VerticalAlignment="Center" Width="30" HorizontalAlignment="Center" Opacity="0" RadiusX="8" RadiusY="8" Fill="White"/>
+                <Image Name="Mute" HorizontalAlignment="Center" Height="25" VerticalAlignment="Center" Width="25" Source="/Assets/images/mute.png"/>
+            </Grid>
+        </Border>
+
         <Border BorderThickness="1" Height="30" Margin="0,5,46,0" VerticalAlignment="Top" Width="30" HorizontalAlignment="Right" CornerRadius="50" MouseLeftButtonDown="minimizeWindow" MouseEnter="MinimizeBtnMouseEnter" MouseLeave="MinimizeBtnMouseLeave">
             <Grid>
                 <Grid.RowDefinitions>
@@ -64,8 +75,8 @@
             </Grid>
         </Border>
         <Label Content="v0.1" HorizontalAlignment="Left" Margin="123,5,0,0" VerticalAlignment="Top" Foreground="#FF313131" RenderTransformOrigin="0.349,0.585"/>
-        <Image HorizontalAlignment="Left" Height="15" Margin="63,573,0,0" VerticalAlignment="Top" Width="15" Source="/assets/images/avatar.png"/>
-        <Label Content="WaysoonProgramms" HorizontalAlignment="Left" Margin="83,570,0,0" VerticalAlignment="Top" FontSize="9" Foreground="White"/>
+        <Image HorizontalAlignment="Left" Height="15" Margin="49,573,0,0" VerticalAlignment="Top" Width="15" Source="/assets/images/avatar.png"/>
+        <Label Content="© WaysoonProgramms 2024" HorizontalAlignment="Left" Margin="69,570,0,0" VerticalAlignment="Top" FontSize="9" Foreground="White"/>
 
     </Grid>
 

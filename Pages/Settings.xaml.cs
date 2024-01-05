@@ -1,5 +1,7 @@
-﻿using System.Windows;
+﻿using System.Threading;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace VA_Leo
 {
@@ -14,7 +16,6 @@ namespace VA_Leo
         {
             InitializeComponent();
 
-            muteBox.IsChecked = Properties.Settings.Default.isMuted;
             devModeBox.IsChecked = Properties.Settings.Default.isDevModeTrue;
             minimizeToTrayBox.IsChecked = Properties.Settings.Default.isMinimizeToTrayTrue;
 
@@ -33,18 +34,6 @@ namespace VA_Leo
             vVoulme = (float)voiceVolumeSlider.Value;
 
             Properties.Settings.Default.voiceVol = vVoulme;
-            Properties.Settings.Default.Save();
-        }
-
-        private void muteBox_Checked(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.isMuted = true;
-            Properties.Settings.Default.Save();
-        }
-
-        private void muteBox_Unchecked(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.isMuted = false;
             Properties.Settings.Default.Save();
         }
 

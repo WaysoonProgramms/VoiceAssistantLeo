@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿using System.Drawing;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
 
 namespace VA_Leo
 {
@@ -14,6 +16,15 @@ namespace VA_Leo
             InitializeComponent();
             getHome(this, null);
             Vosk.main();
+
+            if (Properties.Settings.Default.isMuted == true)
+            {
+                Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/microphone.png"));
+            }
+            else
+            {
+                Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/mute.png"));
+            }
         }
 
         WindowState prevState;
@@ -55,6 +66,23 @@ namespace VA_Leo
         private void closeAnimationComplete(object sender, EventArgs e)
         {
             Close();
+        }
+
+        public void mute(object sender, MouseButtonEventArgs e)
+        {
+            if (Properties.Settings.Default.isMuted == true)
+            {
+                Properties.Settings.Default.isMuted = false;
+                Properties.Settings.Default.Save();
+
+                Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/mute.png"));
+            } else
+            {
+                Properties.Settings.Default.isMuted = true;
+                Properties.Settings.Default.Save();
+
+                Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/microphone.png"));
+            }
         }
 
         private void minimizeWindow(object sender, MouseButtonEventArgs e)
@@ -154,6 +182,16 @@ namespace VA_Leo
         private void MinimizeBtnMouseLeave(object sender, MouseEventArgs e)
         {
             MinimizeBackgound.Opacity = 0;
+        }
+
+        private void MuteBtnMouseEnter(object sender, MouseEventArgs e)
+        {
+            MuteBackgound.Opacity = 0.2;
+        }
+
+        private void MuteBtnMouseLeave(object sender, MouseEventArgs e)
+        {
+            MuteBackgound.Opacity = 0;
         }
     }
 }

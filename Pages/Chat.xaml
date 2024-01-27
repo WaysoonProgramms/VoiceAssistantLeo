@@ -3,6 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:uc="clr-namespace:VA_Leo.Controls"
       xmlns:local="clr-namespace:VA_Leo"
       mc:Ignorable="d" 
       d:DesignHeight="560" d:DesignWidth="850"
@@ -11,6 +12,8 @@
 
     <Grid>
         <Image HorizontalAlignment="Left" Height="356" Margin="-92,315,0,0" VerticalAlignment="Top" Width="319" Source="/assets/images/dragon.png" Opacity="0.2" StretchDirection="DownOnly"/>
+        <uc:UserMessage Message="Съешь этих французких булочек..." Time="20:00" Margin="25,367,525,143"/>
+        <uc:UserMessage Message="...да выпей чаю" Time="20:01" Margin="550,424,0,86"/>
         <Rectangle HorizontalAlignment="Left" Height="234" Margin="-67,332,0,0" VerticalAlignment="Top" Width="66" Fill="#FF151515"/>
         <Border BorderThickness="1" Margin="25,495,25,20" Background="#FF0E0E0E" CornerRadius="10">
             <Grid>

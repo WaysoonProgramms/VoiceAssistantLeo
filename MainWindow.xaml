@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:VA_Leo"
         mc:Ignorable="d"
         Name="Window"
-        Title="Ассистент Лео" Height="600" Width="1100" Background="#FF1F1F1F" Foreground="White" WindowStartupLocation="CenterScreen" WindowStyle="None" ResizeMode="NoResize" Icon="/assets/icon.ico" AllowsTransparency="True">
+        Title="Ассистент Лео" Height="600" Width="1100" Background="#FF1F1F1F" Foreground="White" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/assets/icon.ico" WindowStyle="None">
     <Grid Background="#FF151515">
         <Rectangle Name="Border" HorizontalAlignment="Center" Height="40" VerticalAlignment="Top" Width="1100" Fill="#FF0E0E0E" MouseLeftButtonDown="LayoutRoot_MouseLeftButtonDown"/>
         <tb:TaskbarIcon Visibility="Visible" ToolTipText="Ассистент Лео" IconSource="/assets/icon.ico" TrayLeftMouseDown="TaskbarIcon_TrayLeftMouseDown"/>

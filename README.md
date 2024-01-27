@@ -10,9 +10,6 @@
 
 [ENG] Simple voice assistant for OC Windows. Developmented via C#. It is created with complete enthusiasm without sponsorship or desire to benefit. Application under development. Recognizes commands using the Vosk Speech Recognition Toolkit. You can follow the development in my VKontakte group (for Russian speakers)
 
-
-<a href="http://voiceassistantleo.tilda.ws/">Официальный сайт / Official website</a><br>
-<a href="https://t.me/waysoon_official">Telegram канал / Telegram channel</a><br>
 <a href="https://www.donationalerts.com/r/waysoon">Поддержать проект / Support the project</a>
 
 # Технологии / Technologies

@@ -10,14 +10,14 @@
         Title="Ассистент Лео" Height="600" Width="1100" Background="#FF1F1F1F" Foreground="White" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/assets/icon.ico" WindowStyle="None">
     <Grid Background="#FF151515">
         <Rectangle Name="Border" HorizontalAlignment="Center" Height="40" VerticalAlignment="Top" Width="1100" Fill="#FF0E0E0E" MouseLeftButtonDown="LayoutRoot_MouseLeftButtonDown"/>
+        <Image HorizontalAlignment="Left" Height="20" Margin="15,9,0,0" VerticalAlignment="Top" Width="20" Source="/Assets/icon.ico"/>
+        <Label Content="Ассистент Лео" HorizontalAlignment="Left" Margin="40,5,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.349,0.585"/>
+        <Label Content="v0.1" HorizontalAlignment="Left" Margin="123,5,0,0" VerticalAlignment="Top" Foreground="#FF313131" RenderTransformOrigin="0.349,0.585"/>
+        
         <tb:TaskbarIcon Visibility="Visible" ToolTipText="Ассистент Лео" IconSource="/assets/icon.ico" TrayLeftMouseDown="TaskbarIcon_TrayLeftMouseDown"/>
 
         <Border BorderThickness="1" Height="30" Margin="0,4,8,0" VerticalAlignment="Top" Width="30" HorizontalAlignment="Right" CornerRadius="50" MouseLeftButtonDown="closeWindow" MouseEnter="CloseBtnMouseEnter" MouseLeave="CloseBtnMouseLeave">
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition Height="0*"/>
-                </Grid.RowDefinitions>
                 <Rectangle Name="CloseBackgound" Height="30" VerticalAlignment="Center" Width="30" HorizontalAlignment="Center" Fill="#FFA70000" Opacity="0" RadiusX="8" RadiusY="8"/>
                 <Image Name="Close" HorizontalAlignment="Center" Height="25" VerticalAlignment="Center" Width="25" Source="/assets/images/close.png"/>
             </Grid>
@@ -25,10 +25,6 @@
 
         <Border BorderThickness="1" Height="30" Margin="0,5,83,0" VerticalAlignment="Top" Width="30" HorizontalAlignment="Right" CornerRadius="50" MouseLeftButtonDown="mute" MouseEnter="MuteBtnMouseEnter" MouseLeave="MuteBtnMouseLeave" RenderTransformOrigin="0.55,0.535">
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition Height="0*"/>
-                </Grid.RowDefinitions>
                 <Rectangle Name="MuteBackgound" Height="30" VerticalAlignment="Center" Width="30" HorizontalAlignment="Center" Opacity="0" RadiusX="8" RadiusY="8" Fill="White"/>
                 <Image Name="Mute" HorizontalAlignment="Center" Height="25" VerticalAlignment="Center" Width="25" Source="/Assets/images/mute.png"/>
             </Grid>
@@ -36,20 +32,12 @@
 
         <Border BorderThickness="1" Height="30" Margin="0,5,46,0" VerticalAlignment="Top" Width="30" HorizontalAlignment="Right" CornerRadius="50" MouseLeftButtonDown="minimizeWindow" MouseEnter="MinimizeBtnMouseEnter" MouseLeave="MinimizeBtnMouseLeave">
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition Height="0*"/>
-                </Grid.RowDefinitions>
                 <Rectangle Name="MinimizeBackgound" Height="30" VerticalAlignment="Center" Width="30" HorizontalAlignment="Center" Opacity="0" RadiusX="8" RadiusY="8" Fill="White"/>
                 <Image Name="Minimize" HorizontalAlignment="Center" Height="25" VerticalAlignment="Center" Width="25" Source="/assets/images/hide.png"/>
             </Grid>
         </Border>
 
         <Frame Name="MainFrame" Margin="250,40,0,0" NavigationUIVisibility="Hidden"/>
-
-        <Image HorizontalAlignment="Left" Height="20" Margin="15,9,0,0" VerticalAlignment="Top" Width="20" Source="/Assets/icon.ico"/>
-
-        <Label Content="Ассистент Лео" HorizontalAlignment="Left" Margin="40,5,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.349,0.585"/>
 
         <Border BorderThickness="1" Margin="0,62,850,496" MouseLeftButtonDown="getHome" MouseEnter="HomeBtnMouseEnter" MouseLeave="HomeBtnMouseLeave">
             <Grid>
@@ -74,7 +62,7 @@
                 <Rectangle x:Name="ChatBtnMarker" HorizontalAlignment="Left" Height="40" VerticalAlignment="Center" Width="5" Margin="-1,0,0,0" Fill="White" Opacity="0"/>
             </Grid>
         </Border>
-        <Label Content="v0.1" HorizontalAlignment="Left" Margin="123,5,0,0" VerticalAlignment="Top" Foreground="#FF313131" RenderTransformOrigin="0.349,0.585"/>
+        
         <Image HorizontalAlignment="Left" Height="15" Margin="49,573,0,0" VerticalAlignment="Top" Width="15" Source="/assets/images/avatar.png"/>
         <Label Content="© WaysoonProgramms 2024" HorizontalAlignment="Left" Margin="69,570,0,0" VerticalAlignment="Top" FontSize="9" Foreground="White"/>
 

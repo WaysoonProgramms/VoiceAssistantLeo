@@ -12,20 +12,29 @@
 
     <Grid>
         <Image HorizontalAlignment="Left" Height="356" Margin="-92,315,0,0" VerticalAlignment="Top" Width="319" Source="/assets/images/dragon.png" Opacity="0.2" StretchDirection="DownOnly"/>
+        
         <Image Margin="168,84,642,436" Width="40" Height="40" Source="/assets/images/functions.png"/>
         <Label Content="Функции" HorizontalAlignment="Left" Margin="213,86,0,0" VerticalAlignment="Top" FontSize="18" Foreground="White"/>
+        
         <Image Margin="577,83,233,437" Width="40" Height="40" Source="/assets/images/data.png"/>
         <Label Content="Данные" HorizontalAlignment="Left" Margin="621,85,0,0" VerticalAlignment="Top" FontSize="18" Foreground="White"/>
+
+        <Image Margin="174,267,636,253" Width="40" Height="40" Source="/assets/images/rules.png"/>
+        <Label Content="Правила" HorizontalAlignment="Left" Margin="219,269,0,0" VerticalAlignment="Top" FontSize="18" Foreground="White"/>
+
+        <Image Margin="597,295,213,225" Width="40" Height="40" Source="/assets/images/sound.png"/>
+        <Label Content="Звук" HorizontalAlignment="Left" Margin="642,297,0,0" VerticalAlignment="Top" FontSize="18" Foreground="White"/>
+
         <CheckBox x:Name="devModeBox" Content="Режим разработчика" ToolTip="Функции для тестирования и разработки. ТОЛЬКО ДЛЯ ОПЫТНЫХ ПОЛЬЗВАТЕЛЕЙ!" HorizontalAlignment="Left" Margin="129,143,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="White" Checked="devModeBox_Checked" Unchecked="devModeBox_Unchecked"/>
         <CheckBox Content="Запуск с системой (BETA)" ToolTip="Запускать ассистента с системой" HorizontalAlignment="Left" Margin="129,165,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="White"/>
         <CheckBox x:Name="minimizeToTrayBox" Content="Сворачивать в трей" ToolTip="Сворачивать ассистента в трей вместо закрытия" HorizontalAlignment="Left" Margin="129,187,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="White" Checked="minimizeToTrayBox_Checked" Unchecked="minimizeToTrayBox_Unchecked"/>
-        <Image Margin="174,267,636,253" Width="40" Height="40" Source="/assets/images/rules.png"/>
-        <Label Content="Правила" HorizontalAlignment="Left" Margin="219,269,0,0" VerticalAlignment="Top" FontSize="18" Foreground="White"/>
+        
         <CheckBox x:Name="appStartBox" Content="Запуск приложений на устройстве" ToolTip="Разрешить ассистенту открывать приложения на вашем устройстве по запросу" HorizontalAlignment="Left" Margin="129,323,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="White" IsChecked="False" Checked="appStartBox_Checked" Unchecked="appStartBox_Unchecked"/>
         <CheckBox x:Name="browserStartBox" Content="Запуск браузера по умолчанию" ToolTip="Разрешить ассистенту открывать браузер по умолчанию на вашем устройстве по запросу" HorizontalAlignment="Left" Margin="129,346,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="White" IsChecked="False" Checked="browserStartBox_Checked" Unchecked="browserStartBox_Unchecked"/>
         <CheckBox x:Name="usingNetworkBox" Content="Использование интернет соеденения" ToolTip="Разрешить ассистенту использовать интернет соеденение" HorizontalAlignment="Left" Margin="129,370,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="White" IsChecked="False" Checked="usingNetworkBox_Checked" Unchecked="usingNetworkBox_Unchecked"/>
         <CheckBox x:Name="AIbox" Content="Интеграция ИИ" ToolTip="Включить голосовой интерфейс для ИИ" HorizontalAlignment="Left" Margin="129,394,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="White" Checked="AIbox_Checked" Unchecked="AIbox_Unchecked"/>
         <CheckBox x:Name="PCbox" Content="Управление компьютером" ToolTip="Разрешить ассистенту управлять компьютером" HorizontalAlignment="Left" Margin="129,417,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="White" IsChecked="False" Checked="PCbox_Checked" Unchecked="PCbox_Unchecked"/>
+        
         <ComboBox HorizontalAlignment="Left" Margin="524,154,0,0" VerticalAlignment="Top" Width="234" SelectedIndex="0" Height="23">
             <TextBlock Text="Русский, Россия"/>
         </ComboBox>
@@ -34,8 +43,7 @@
             <TextBlock Text="Русский, Россия"/>
         </ComboBox>
         <Label Content="Язык озвучки и общения" HorizontalAlignment="Left" Margin="522,174,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <Image Margin="597,295,213,225" Width="40" Height="40" Source="/assets/images/sound.png"/>
-        <Label Content="Звук" HorizontalAlignment="Left" Margin="642,297,0,0" VerticalAlignment="Top" FontSize="18" Foreground="White"/>
+        
         <Slider HorizontalAlignment="Left" Margin="522,360,0,0" VerticalAlignment="Top" Width="236" Maximum="100" SmallChange="1" Value="100" IsEnabled="False"/>
         <Label Content="Уведомления и оповещения" HorizontalAlignment="Left" Margin="522,336,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Slider x:Name="voiceVolumeSlider" HorizontalAlignment="Left" Margin="522,402,0,0" VerticalAlignment="Top" Width="236" Maximum="100" SmallChange="1" AutoToolTipPlacement="TopLeft" ValueChanged="voiceVolumeSlider_ValueChanged"/>

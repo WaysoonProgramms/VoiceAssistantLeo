@@ -14,8 +14,8 @@
                 <DropShadowEffect BlurRadius="990" Color="#FFFF" Opacity="0.4"/>
             </Image.Effect>
         </Image>
+        
         <Label Content="Ассистент Лео" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="64" FontFamily="Bahnschrift Condensed" Margin="272,342,0,0"/>
         <Label Content="Простой голосовой помощник для Windows" HorizontalAlignment="Center" Margin="0,404,0,0" VerticalAlignment="Top" Foreground="#FFCECECE" FontSize="14"/>
-
     </Grid>
 </Page>

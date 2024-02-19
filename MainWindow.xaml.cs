@@ -1,4 +1,6 @@
-﻿using System.Drawing;
+﻿using System.Diagnostics;
+using System.Drawing;
+using System.Security.Policy;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
@@ -109,6 +111,11 @@ namespace VA_Leo
             ChatBtnMarker.Opacity = 1;
         }
 
+        private void copyrightLink(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo { FileName = "https://raw.githubusercontent.com/WaysoonProgramms/VoiceAssistantLeo/master/LICENSE", UseShellExecute = true });
+        }
+
         private void removeMarkers()
         {
             HomeBtnMarker.Opacity = 0;
@@ -118,49 +125,49 @@ namespace VA_Leo
 
         private void HomeBtnMouseEnter(object sender, MouseEventArgs e)
         {
-            if (HomeBtnMarker.Opacity == 0)
+            if (HomeBtnFillMarker.Opacity == 0)
             {
-                HomeBtnMarker.Opacity = 0.2;
+                HomeBtnFillMarker.Opacity = 0.1;
             }
         }
 
         private void HomeBtnMouseLeave(object sender, MouseEventArgs e)
         {
-            if (HomeBtnMarker.Opacity == 0.2)
+            if (HomeBtnFillMarker.Opacity == 0.1)
             {
-                HomeBtnMarker.Opacity = 0;
+                HomeBtnFillMarker.Opacity = 0;
             }
         }
 
         private void SettingsBtnMouseEnter(object sender, MouseEventArgs e)
         {
-            if (SettingsBtnMarker.Opacity == 0)
+            if (SettingsBtnFillMarker.Opacity == 0)
             {
-                SettingsBtnMarker.Opacity = 0.2;
+                SettingsBtnFillMarker.Opacity = 0.1;
             }
         }
 
         private void SettingsBtnMouseLeave(object sender, MouseEventArgs e)
         {
-            if (SettingsBtnMarker.Opacity == 0.2)
+            if (SettingsBtnFillMarker.Opacity == 0.1)
             {
-                SettingsBtnMarker.Opacity = 0;
+                SettingsBtnFillMarker.Opacity = 0;
             }
         }
 
         private void ChatBtnMouseEnter(object sender, MouseEventArgs e)
         {
-            if (ChatBtnMarker.Opacity == 0)
+            if (ChatBtnFillMarker.Opacity == 0)
             {
-                ChatBtnMarker.Opacity = 0.2;
+                ChatBtnFillMarker.Opacity = 0.1;
             }
         }
 
         private void ChatBtnMouseLeave(object sender, MouseEventArgs e)
         {
-            if (ChatBtnMarker.Opacity == 0.2)
+            if (ChatBtnFillMarker.Opacity == 0.1)
             {
-                ChatBtnMarker.Opacity = 0;
+                ChatBtnFillMarker.Opacity = 0;
             }
         }
 
@@ -192,6 +199,16 @@ namespace VA_Leo
         private void MuteBtnMouseLeave(object sender, MouseEventArgs e)
         {
             MuteBackgound.Opacity = 0;
+        }
+
+        private void CopyrightMouseEnter(object sender, MouseEventArgs e)
+        {
+            CopyrigtLine.Opacity = 1;
+        }
+
+        private void CopyrightMouseLeave(object sender, MouseEventArgs e)
+        {
+            CopyrigtLine.Opacity = 0;
         }
     }
 }

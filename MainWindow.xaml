@@ -11,9 +11,9 @@
     <Grid Background="#FF151515">
         <Rectangle Name="Border" HorizontalAlignment="Center" Height="40" VerticalAlignment="Top" Width="1100" Fill="#FF0E0E0E" MouseLeftButtonDown="LayoutRoot_MouseLeftButtonDown"/>
         <Image HorizontalAlignment="Left" Height="20" Margin="15,9,0,0" VerticalAlignment="Top" Width="20" Source="/Assets/icon.ico"/>
-        <Label Content="Ассистент Лео" HorizontalAlignment="Left" Margin="40,5,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.349,0.585"/>
-        <Label Content="v0.1" HorizontalAlignment="Left" Margin="123,5,0,0" VerticalAlignment="Top" Foreground="#FF313131" RenderTransformOrigin="0.349,0.585"/>
-        
+        <Label Content="Ассистент Лео" HorizontalAlignment="Left" Margin="40,6,0,0" VerticalAlignment="Top" Foreground="White" Style="{StaticResource LabelFont}" RenderTransformOrigin="0.349,0.585" />
+        <Label Content="v0.1" HorizontalAlignment="Left" Margin="155,6,0,0" VerticalAlignment="Top" Foreground="#FF313131" Style="{StaticResource LabelFont}" RenderTransformOrigin="0.349,0.585"/>
+
         <tb:TaskbarIcon Visibility="Visible" ToolTipText="Ассистент Лео" IconSource="/assets/icon.ico" TrayLeftMouseDown="TaskbarIcon_TrayLeftMouseDown"/>
 
         <Border BorderThickness="1" Height="30" Margin="0,4,8,0" VerticalAlignment="Top" Width="30" HorizontalAlignment="Right" CornerRadius="50" MouseLeftButtonDown="closeWindow" MouseEnter="CloseBtnMouseEnter" MouseLeave="CloseBtnMouseLeave">
@@ -39,32 +39,36 @@
 
         <Frame Name="MainFrame" Margin="250,40,0,0" NavigationUIVisibility="Hidden"/>
 
-        <Border BorderThickness="1" Margin="0,62,850,496" MouseLeftButtonDown="getHome" MouseEnter="HomeBtnMouseEnter" MouseLeave="HomeBtnMouseLeave">
+        <Border BorderThickness="1" Margin="0,62,850,496" MouseLeftButtonDown="getHome" MouseEnter="HomeBtnMouseEnter" MouseLeave="HomeBtnMouseLeave" Cursor="Hand">
             <Grid>
                 <Image HorizontalAlignment="Left" Height="26" Margin="13,0,0,0" VerticalAlignment="Center" Width="25" Source="/assets/images/Home.png"/>
-                <Label Content="Домашняя" HorizontalAlignment="Left" Margin="43,4,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.349,0.585" FontSize="14"/>
+                <Label Content="Домашняя" HorizontalAlignment="Left" Margin="43,0,0,0" VerticalAlignment="Center" Style="{StaticResource MenuButton}" RenderTransformOrigin="0.349,0.585"/>
+                <Rectangle x:Name="HomeBtnFillMarker" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="249" Fill="White" Opacity="0"/>
                 <Rectangle x:Name="HomeBtnMarker" HorizontalAlignment="Left" Height="40" VerticalAlignment="Center" Width="5" Margin="-1,0,0,0" Fill="White" Opacity="0"/>
             </Grid>
         </Border>
 
-        <Border BorderThickness="1" Margin="0,108,850,456" MouseLeftButtonDown="getSettings" MouseEnter="SettingsBtnMouseEnter" MouseLeave="SettingsBtnMouseLeave">
+        <Border BorderThickness="1" Margin="0,104,850,460" MouseLeftButtonDown="getSettings" MouseEnter="SettingsBtnMouseEnter" MouseLeave="SettingsBtnMouseLeave" Cursor="Hand">
             <Grid>
                 <Image HorizontalAlignment="Left" Height="26" Margin="13,0,0,1" VerticalAlignment="Center" Width="25" Source="/assets/images/settings.png"/>
-                <Label Content="Настройки" HorizontalAlignment="Left" Margin="43,0,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.348,0.526" FontSize="14"/>
-                <Rectangle x:Name="SettingsBtnMarker" HorizontalAlignment="Left" Height="40" VerticalAlignment="Center" Width="5" Margin="-1,0,0,0" Fill="White" Opacity="0.01"/>
+                <Label Content="Настройки" HorizontalAlignment="Left" Margin="43,0,0,0" VerticalAlignment="Center" Style="{StaticResource MenuButton}" RenderTransformOrigin="0.348,0.526"/>
+                <Rectangle x:Name="SettingsBtnFillMarker" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="249" Fill="White" Opacity="0"/>
+                <Rectangle x:Name="SettingsBtnMarker" HorizontalAlignment="Left" Height="40" VerticalAlignment="Center" Width="5" Margin="-1,0,0,0" Fill="White" Opacity="0"/>
             </Grid>
         </Border>
 
-        <Border BorderThickness="1" Margin="0,150,850,414" MouseLeftButtonDown="getChat" MouseEnter="ChatBtnMouseEnter" MouseLeave="ChatBtnMouseLeave">
+        <Border BorderThickness="1" Margin="0,143,850,421" MouseLeftButtonDown="getChat" MouseEnter="ChatBtnMouseEnter" MouseLeave="ChatBtnMouseLeave" Cursor="Hand">
             <Grid>
                 <Image HorizontalAlignment="Left" Height="26" Margin="13,0,0,1" VerticalAlignment="Center" Width="25" Source="/assets/images/Chat.png"/>
-                <Label Content="Чат" HorizontalAlignment="Left" Margin="43,0,0,0" VerticalAlignment="Center" Foreground="White" RenderTransformOrigin="0.348,0.526" FontSize="14"/>
+                <Label Content="Чат" HorizontalAlignment="Left" Margin="43,0,0,0" VerticalAlignment="Center" Style="{StaticResource MenuButton}" RenderTransformOrigin="0.348,0.526" />
+                <Rectangle x:Name="ChatBtnFillMarker" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="249" Fill="White" Opacity="0"/>
                 <Rectangle x:Name="ChatBtnMarker" HorizontalAlignment="Left" Height="40" VerticalAlignment="Center" Width="5" Margin="-1,0,0,0" Fill="White" Opacity="0"/>
             </Grid>
         </Border>
-        
+
         <Image HorizontalAlignment="Left" Height="15" Margin="49,573,0,0" VerticalAlignment="Top" Width="15" Source="/assets/images/avatar.png"/>
-        <Label Content="© WaysoonProgramms 2024" HorizontalAlignment="Left" Margin="69,570,0,0" VerticalAlignment="Top" FontSize="9" Foreground="White"/>
+        <Label Content="© WaysoonProgramms 2024" HorizontalAlignment="Left" Margin="69,570,0,0" VerticalAlignment="Top" FontSize="9" Cursor="Hand" Foreground="White" MouseDown="copyrightLink" MouseEnter="CopyrightMouseEnter" MouseLeave="CopyrightMouseLeave"/>
+        <Rectangle x:Name="CopyrigtLine" HorizontalAlignment="Left" Height="1" Margin="75,587,0,0" Stroke="White" VerticalAlignment="Top" Width="114" Opacity="0"/>
 
     </Grid>
 

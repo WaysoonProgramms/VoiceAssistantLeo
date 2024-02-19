@@ -9,13 +9,14 @@
       Title="Home" Width="850" Height="560" Background="#FF161616">
 
     <Grid>
+        
         <Image x:Name="logo" HorizontalAlignment="Center" Height="213" VerticalAlignment="Top" Width="214" Margin="0,98,0,0" Source="/assets/images/dragon.png">
             <Image.Effect>
                 <DropShadowEffect BlurRadius="990" Color="#FFFF" Opacity="0.4"/>
             </Image.Effect>
         </Image>
-        
-        <Label Content="Ассистент Лео" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="64" FontFamily="Bahnschrift Condensed" Margin="272,342,0,0"/>
-        <Label Content="Простой голосовой помощник для Windows" HorizontalAlignment="Center" Margin="0,404,0,0" VerticalAlignment="Top" Foreground="#FFCECECE" FontSize="14"/>
+
+        <Label Content="Ассистент Лео" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource HomeTitle}" Margin="168,338,0,0"/>
+        <Label Content="Простой голосовой помощник для Windows" HorizontalAlignment="Center" Style="{StaticResource HomeSubtitle}" Margin="0,404,0,0" VerticalAlignment="Top" />
     </Grid>
 </Page>

@@ -30,6 +30,8 @@
 
   <ItemGroup>
     <None Remove="Assets\icon.ico" />
+    <None Remove="Fonts\MontserratAlternates-ExtraBold.ttf" />
+    <None Remove="Fonts\MontserratAlternates-Regular.ttf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -84,6 +86,8 @@
     <Resource Include="Assets\voices\open3.wav" />
     <Resource Include="Assets\voices\vsegda_pozyalusta.wav" />
     <Resource Include="Assets\voices\zarikrolen.wav" />
+    <Resource Include="Fonts\MontserratAlternates-ExtraBold.ttf" />
+    <Resource Include="Fonts\MontserratAlternates-Regular.ttf" />
   </ItemGroup>
 
   <ItemGroup>

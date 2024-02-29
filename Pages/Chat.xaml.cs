@@ -1,13 +1,9 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Input;
 
 
 namespace VA_Leo
 {
-    /// <summary>
-    /// Логика взаимодействия для Chat.xaml
-    /// </summary>
     public partial class Chat : Page
     {
         public Chat()

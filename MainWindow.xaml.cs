@@ -1,6 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Drawing;
-using System.Security.Policy;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
@@ -8,9 +6,6 @@ using System.Windows.Media.Imaging;
 
 namespace VA_Leo
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -110,10 +105,16 @@ namespace VA_Leo
             MainFrame.Content = new Chat();
             ChatBtnMarker.Opacity = 1;
         }
-
+        private void getAbout(object sender, MouseButtonEventArgs e)
+        {
+            removeMarkers();
+            MainFrame.Content = new About();
+            AboutBtnMarker.Opacity = 1;
+        }
         private void copyrightLink(object sender, MouseButtonEventArgs e)
         {
-            Process.Start(new ProcessStartInfo { FileName = "https://raw.githubusercontent.com/WaysoonProgramms/VoiceAssistantLeo/master/LICENSE", UseShellExecute = true });
+            Process.Start(new ProcessStartInfo 
+            { FileName = "https://raw.githubusercontent.com/WaysoonProgramms/VoiceAssistantLeo/master/LICENSE", UseShellExecute = true });
         }
 
         private void removeMarkers()
@@ -121,6 +122,7 @@ namespace VA_Leo
             HomeBtnMarker.Opacity = 0;
             SettingsBtnMarker.Opacity = 0;
             ChatBtnMarker.Opacity = 0;
+            AboutBtnMarker.Opacity = 0;
         }
 
         private void HomeBtnMouseEnter(object sender, MouseEventArgs e)
@@ -168,6 +170,22 @@ namespace VA_Leo
             if (ChatBtnFillMarker.Opacity == 0.1)
             {
                 ChatBtnFillMarker.Opacity = 0;
+            }
+        }
+
+        private void AboutBtnMouseEnter(object sender, MouseEventArgs e)
+        {
+            if (AboutBtnFillMarker.Opacity == 0)
+            {
+                AboutBtnFillMarker.Opacity = 0.1;
+            }
+        }
+
+        private void AboutBtnMouseLeave(object sender, MouseEventArgs e)
+        {
+            if (AboutBtnFillMarker.Opacity == 0.1)
+            {
+                AboutBtnFillMarker.Opacity = 0;
             }
         }
 

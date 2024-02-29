@@ -24,7 +24,7 @@ namespace VA_Leo
         public static void main()
         {
             // Инициализация модели
-            var model = new Model(".\\vosk\\small-model");
+            var model = new Model(".\\vosk");
             rec = new VoskRecognizer(model, 16000f);
 
             // Инициализация прослушивания
@@ -34,8 +34,7 @@ namespace VA_Leo
             waveIn.StartRecording();
 
             // Временный файл записи голоса
-            writer = new WaveFileWriter(@"C:\Users\User\AppData\Local\Temp\VoiceAssistantRecord.wav", waveIn.WaveFormat);
-
+            writer = new WaveFileWriter("C:\\Users\\User\\AppData\\Local\\Temp\\assistant_leo_audio_rec_temp.wav", waveIn.WaveFormat);
         }
 
         private enum RecycleFlags : uint
@@ -96,6 +95,7 @@ namespace VA_Leo
             if (txt == "лео" && !Vosk.started)
             {
                 Vosk.started = true;
+                wakeTimer.Reset();
                 wakeTimer.Start();
                 active = true;
 
@@ -252,6 +252,7 @@ namespace VA_Leo
                     @".\voices\err1.wav",
                     3);
             }
+
         }
 
         public void startProgramm(string target, string media, string error, int rndInt)

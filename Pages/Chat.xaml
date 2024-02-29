@@ -3,7 +3,6 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:uc="clr-namespace:VA_Leo.Controls"
       xmlns:local="clr-namespace:VA_Leo"
       mc:Ignorable="d" 
       d:DesignHeight="560" d:DesignWidth="850"
@@ -11,11 +10,10 @@
       Title="Chat" PreviewKeyDown="Chat_KeyDown">
 
     <Grid>
-        <!-- This file contains the draft code -->
+
+        <TextBox x:Name="MessageList" Margin="25,39,25,86" FontFamily="Montserrat Alternates" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}"/>
 
         <Image HorizontalAlignment="Left" Height="356" Margin="-92,315,0,0" VerticalAlignment="Top" Width="319" Source="/assets/images/dragon.png" Opacity="0.2" StretchDirection="DownOnly"/>
-        <uc:UserMessage Message="Съешь этих французких булочек..." Time="20:00" Margin="25,367,525,143"/>
-        <uc:UserMessage Message="...да выпей чаю" Time="20:01" Margin="550,424,0,86"/>
         <Rectangle HorizontalAlignment="Left" Height="234" Margin="-67,332,0,0" VerticalAlignment="Top" Width="66" Fill="#FF151515"/>
         <Border BorderThickness="1" Margin="25,495,25,20" Background="#FF0E0E0E" CornerRadius="10">
             <Grid>
@@ -32,7 +30,6 @@
                 <TextBox x:Name="TextBox" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="732" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" SelectionBrush="White" CaretBrush="White"  BorderThickness="0,0,0,0" SelectionOpacity="1" IsTabStop="False" SpellCheck.IsEnabled="True" Language="ru-ru"/>
             </Grid>
         </Border>
-
-
+      
     </Grid>
 </Page>

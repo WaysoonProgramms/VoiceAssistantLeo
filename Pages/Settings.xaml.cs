@@ -5,9 +5,6 @@ using System.Windows.Media.Imaging;
 
 namespace VA_Leo
 {
-    /// <summary>
-    /// Логика взаимодействия для Settings.xaml
-    /// </summary>
     public partial class Settings : Page
     {
         public static float vVoulme = Properties.Settings.Default.voiceVol;

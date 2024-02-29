@@ -16,7 +16,9 @@
             </Image.Effect>
         </Image>
 
-        <Label Content="Ассистент Лео" HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource HomeTitle}" Margin="168,338,0,0"/>
-        <Label Content="Простой голосовой помощник для Windows" HorizontalAlignment="Center" Style="{StaticResource HomeSubtitle}" Margin="0,404,0,0" VerticalAlignment="Top" />
+        <Label Content="Ассистент Лео" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="58" 
+               Margin="168,338,0,0" FontFamily="Montserrat Alternates" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Простой голосовой помощник для Windows" HorizontalAlignment="Center" FontSize="14" Foreground="#FFCECECE" 
+               FontFamily="Montserrat Alternates" Margin="0,404,0,0" VerticalAlignment="Top" />
     </Grid>
 </Page>

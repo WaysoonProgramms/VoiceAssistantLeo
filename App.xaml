@@ -4,26 +4,6 @@
              xmlns:local="clr-namespace:VA_Leo"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Style x:Key="HomeTitle" TargetType="Label">
-            <Setter Property="FontFamily" Value="Fonts/MontserratAlternates-ExtraBold.ttf #Montserrat Alternates ExtraBold"/>
-            <Setter Property="FontSize" Value="58"/>
-            <Setter Property="Foreground" Value="White"/>
-        </Style>
-        <Style x:Key="HomeSubtitle" TargetType="Label">
-            <Setter Property="FontFamily" Value="Fonts/MontserratAlternates-Regular.ttf #Montserrat Alternates ExtraBold"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="Foreground" Value="#FFCECECE"/>
-        </Style>
-        <Style x:Key="MenuButton" TargetType="Label">
-            <Setter Property="FontFamily" Value="Fonts/MontserratAlternates-Regular.ttf #Montserrat Alternates ExtraBold"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Foreground" Value="White"/>
-        </Style>
-        <Style x:Key="LabelFont" TargetType="Label">
-            <Setter Property="FontFamily" Value="Fonts/MontserratAlternates-Regular.ttf #Montserrat Alternates Regular"/>
-        </Style>
-        <Style x:Key="CheckBoxFont" TargetType="CheckBox">
-            <Setter Property="FontFamily" Value="Fonts/MontserratAlternates-Regular.ttf #Montserrat Alternates Regular"/>
-        </Style>
+        
     </Application.Resources>
 </Application>

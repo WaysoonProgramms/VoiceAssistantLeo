@@ -4,6 +4,8 @@
     <img src="./banner.png">
   </picture>
 </p>
+
+# Описание
 <p>
 Лео — простой голосовой помощник для Windows. Написанный на C#. 
 Создается на полном энтузиазме без спонсорской поддержки. Четко 
@@ -13,6 +15,8 @@
 понятно, что Лео имеет большой потанцеал, в качестве моего 
 первого крупного проекта.
 </p>
+
+# История создания
 <p>
 Проект начался внезапно в  начале лета 2023 года. Первоначальное
 название ассистена было Poping Cat (Отсылка на мем). Идеей послужил
@@ -23,18 +27,30 @@ WakeWord, а с таким сложным именем было сложно к 
 создать своего голосового помощника появиласьпосле того, как я 
 посмотрел видео, где писали своего ассистена — Jarvis.
 </p>
-Хочу поблагодарить моих родителей и учителя информатики, за моральную
-поддержку и помощь в создании этого проекта.
 
-# Технологии / Technologies
-- Text-to-speech
-	- <a href="https://github.com/snakers4/silero-models">Silero TTS</a>
-- Speech-to-text
-	- <a href="https://github.com/alphacep/vosk-api">Vosk Speech Recognition Toolkit</a>
-- Weather API
-	- <a href="https://openweathermap.org/">OpenWeather</a>
-- Wake Word
-  - <a href="https://github.com/alphacep/vosk-api">Vosk Speech Recognition Toolkit</a>
+<h1> Благодарности </h1>
+<p>Хочу поблагодарить моих родителей и учителя информатики, за моральную
+поддержку и помощь в создании этого проекта.</p>
+
+<h1> Технологии </h1>
+<ul>
+   <li>Text-to-speech</li>
+	<ul>
+	    <li><a href="https://github.com/snakers4/silero-models">Silero TTS</a></li>
+	</ul>
+   <li>Speech-to-text</li>
+	<ul>
+	    <li><a href="https://github.com/alphacep/vosk-api">Voks API</a></li>
+	</ul>
+   <li>Weather API</li>
+	<ul>
+	    <li><a href="https://openweathermap.org/">OpenWeather</a></li>
+	</ul>
+   <li>Wake Word</li>
+	<ul>
+	    <li><a href="https://github.com/alphacep/vosk-api">Vosk API</a></li>
+	</ul>
+</ul>
 
 
 # Голосовые Команды / Voice Commands

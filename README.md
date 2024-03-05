@@ -53,8 +53,7 @@ WakeWord, а с таким сложным именем было сложно к 
 </ul>
 
 
-# Голосовые Команды / Voice Commands
-> English language support for voice commands in development...
+# Голосовые Команды
 - ```Лео``` - Wake Word
 ### Технические
 - ```Открой Телеграм``` -  Запускает Telegram Desktop. Для выполнения требуется установленное приложение телеграмм.

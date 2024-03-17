@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
 namespace VA_Leo
@@ -116,6 +117,13 @@ namespace VA_Leo
         {
             Properties.Settings.Default.allowPC = false;
             Properties.Settings.Default.Save();
+        }
+
+        private void AIBox_Help(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("Этот параметр отвечает за активацию ИИ. Лео сможет отвечать на вопросы с помощью искусственного интеллекта (GPT-4)" +
+                "\n\nОБРАТИТЕ ВНИМАНИЕ! Все вычисления ИИ производит на вашем устройстве для этого требуется GPU",
+                    "Интеграция ИИ", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

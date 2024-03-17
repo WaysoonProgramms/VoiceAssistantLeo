@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Drawing.Text;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
@@ -11,6 +12,7 @@ namespace VA_Leo
         public MainWindow()
         {
             InitializeComponent();
+
             getHome(this, null);
             Vosk.main();
 
@@ -25,6 +27,11 @@ namespace VA_Leo
         }
 
         WindowState prevState;
+
+        public static void close()
+        {
+            close();
+        }
 
         private void TaskbarIcon_TrayLeftMouseDown(object sender, RoutedEventArgs e)
         {
@@ -51,7 +58,7 @@ namespace VA_Leo
                 Storyboard storyboardFade = new Storyboard();
 
                 animation = new DoubleAnimation(1, 0, new Duration(TimeSpan.FromSeconds(0.3)));
-                animation.Completed += closeAnimationComplete;
+                animation.Completed += closeApplication;
                 Storyboard.SetTargetName(animation, this.Name);
                 Storyboard.SetTargetProperty(animation, new PropertyPath(MainWindow.OpacityProperty));
                 storyboardFade.Children.Add(animation);
@@ -60,7 +67,7 @@ namespace VA_Leo
             }
         }
 
-        private void closeAnimationComplete(object sender, EventArgs e)
+        public void closeApplication(object sender, EventArgs e)
         {
             Close();
         }

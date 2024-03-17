@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System.Collections.ObjectModel;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 
@@ -6,6 +7,7 @@ namespace VA_Leo
 {
     public partial class Chat : Page
     {
+
         public Chat()
         {
             InitializeComponent();
@@ -16,6 +18,7 @@ namespace VA_Leo
             Vosk vosk = new Vosk();
             Vosk.txt = TextBox.Text.ToLower();
             vosk.SpeechRecognized();
+
             TextBox.Text = string.Empty;
         }
 

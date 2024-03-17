@@ -55,6 +55,9 @@
                   Margin="104,423,0,0" FontFamily="Montserrat Alternates" VerticalAlignment="Top" Foreground="White" BorderBrush="White" 
                   IsChecked="False" Checked="PCbox_Checked" Unchecked="PCbox_Unchecked"/>
 
+        <Image HorizontalAlignment="Left" Height="13" Margin="232,396,0,0" VerticalAlignment="Top" Width="13" RenderTransformOrigin="0.5,0.5" Source="/Assets/images/info.png"
+               ToolTip="Подробнее..." MouseDown="AIBox_Help" Cursor="Hand"/>
+        
         <ComboBox HorizontalAlignment="Left" Margin="499,160,0,0" VerticalAlignment="Top" Width="234" SelectedIndex="0" Height="23" FontFamily="Montserrat Alternates" >
             <TextBlock Text="Русский, Россия"/>
         </ComboBox>
@@ -72,5 +75,6 @@
                 SmallChange="1" AutoToolTipPlacement="TopLeft" ValueChanged="voiceVolumeSlider_ValueChanged"/>
         <Label Content="Голос ассистента" FontFamily="Montserrat Alternates"  HorizontalAlignment="Left" Margin="497,384,0,0" VerticalAlignment="Top" Foreground="White"/>
         <Rectangle HorizontalAlignment="Left" Height="234" Margin="-67,332,0,0" VerticalAlignment="Top" Width="66" Fill="#FF151515"/>
+        
     </Grid>
 </Page>

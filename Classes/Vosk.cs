@@ -2,7 +2,9 @@
 using Newtonsoft.Json.Linq;
 using NLog;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
+using System.Windows;
 using System.Windows.Media;
 using Vosk;
 
@@ -31,10 +33,22 @@ namespace VA_Leo
             var waveIn = new WaveInEvent();
             waveIn.WaveFormat = new WaveFormat(16000, 1);
             waveIn.DataAvailable += WaveInOnDataAvailable;
-            waveIn.StartRecording();
+            try
+            {
+                waveIn.StartRecording();
+            } 
+            catch
+            {
+                MessageBox.Show("Лео не удалось получить доступ к микрофону. Разрешите приложению доступ к " +
+                    "микрофону: Параметры Windows -> Конфиденциальность -> Разрешения -> Микрофон.\n\nКод ошибки: 01",
+                    "Что-то пошло не так...", MessageBoxButton.OK, MessageBoxImage.Error);
+                MainWindow.close();
+            }
 
             // Временный файл записи голоса
-            writer = new WaveFileWriter("C:\\Users\\User\\AppData\\Local\\Temp\\assistant_leo_audio_rec_temp.wav", waveIn.WaveFormat);
+            string tmp = Path.GetTempPath();
+            tmp += "assistant_leo_audio_rec_temp.wav";
+            writer = new WaveFileWriter(tmp, waveIn.WaveFormat);
         }
 
         private enum RecycleFlags : uint

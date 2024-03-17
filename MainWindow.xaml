@@ -8,13 +8,13 @@
         mc:Ignorable="d"
         Name="Window"
         Title="Ассистент Лео" Height="600" Width="1100" Background="#FF1F1F1F" Foreground="White" 
-        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/assets/icon.ico" WindowStyle="None">
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/assets/icon.ico" WindowStyle="None" AllowsTransparency="True">
     <Grid Background="#FF151515">
         <Rectangle Name="Border" HorizontalAlignment="Center" Height="40" VerticalAlignment="Top" Width="1100" Fill="#FF0E0E0E" 
                    MouseLeftButtonDown="LayoutRoot_MouseLeftButtonDown"/>
         <Image HorizontalAlignment="Left" Height="20" Margin="15,9,0,0" VerticalAlignment="Top" Width="20" Source="/Assets/icon.ico"/>
         <Label Content="Ассистент Лео" HorizontalAlignment="Left" Margin="40,6,0,0" VerticalAlignment="Top" Foreground="White" 
-               FontFamily="Montserrat Alternates" RenderTransformOrigin="0.349,0.585" />
+               FontFamily="#Montserrat Alternates" RenderTransformOrigin="0.349,0.585" />
         <Label Content="v0.1" HorizontalAlignment="Left" Margin="155,6,0,0" VerticalAlignment="Top" Foreground="#FF313131" 
                FontFamily="Montserrat Alternates" RenderTransformOrigin="0.349,0.585"/>
 

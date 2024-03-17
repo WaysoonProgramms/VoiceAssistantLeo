@@ -11,25 +11,24 @@
 
     <Grid>
 
-        <TextBox x:Name="MessageList" Margin="25,39,25,86" FontFamily="Montserrat Alternates" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}"/>
-
-        <Image HorizontalAlignment="Left" Height="356" Margin="-92,315,0,0" VerticalAlignment="Top" Width="319" Source="/assets/images/dragon.png" Opacity="0.2" StretchDirection="DownOnly"/>
+        <Image HorizontalAlignment="Left" Height="356" Margin="-92,315,0,0" VerticalAlignment="Top" Width="319" Source="/assets/images/dragon.png" 
+               Opacity="0.2" StretchDirection="DownOnly"/>
         <Rectangle HorizontalAlignment="Left" Height="234" Margin="-67,332,0,0" VerticalAlignment="Top" Width="66" Fill="#FF151515"/>
         <Border BorderThickness="1" Margin="25,495,25,20" Background="#FF0E0E0E" CornerRadius="10">
             <Grid>
-                <Border BorderThickness="1" Height="28" Margin="755,0,0,0" VerticalAlignment="Center" Width="28" HorizontalAlignment="Left" CornerRadius="50" MouseLeftButtonDown="sendButton_MouseDown" MouseEnter="SendBtnMouseEnter" MouseLeave="SendBtnMouseLeave">
+                <Border BorderThickness="1" Height="28" Margin="755,0,0,0" VerticalAlignment="Center" Width="28" HorizontalAlignment="Left" 
+                        CornerRadius="50" MouseLeftButtonDown="sendButton_MouseDown" MouseEnter="SendBtnMouseEnter" MouseLeave="SendBtnMouseLeave">
                     <Grid Margin="-1,-1,-1,-1">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition Height="0*"/>
-                        </Grid.RowDefinitions>
-                        <Rectangle Name="SendButtonBackgound" Height="28" VerticalAlignment="Center" Width="28" HorizontalAlignment="Center" Opacity="0" RadiusX="8" RadiusY="8" Fill="White"/>
+                        <Rectangle Name="SendButtonBackgound" Height="28" VerticalAlignment="Center" Width="28" HorizontalAlignment="Center" Opacity="0" 
+                                   RadiusX="8" RadiusY="8" Fill="White"/>
                         <Image Name="SendButton" HorizontalAlignment="Center" Height="24" VerticalAlignment="Center" Width="24" Source="/assets/images/send.png"/>
                     </Grid>
                 </Border>
-                <TextBox x:Name="TextBox" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="732" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" SelectionBrush="White" CaretBrush="White"  BorderThickness="0,0,0,0" SelectionOpacity="1" IsTabStop="False" SpellCheck.IsEnabled="True" Language="ru-ru"/>
+                <TextBox x:Name="TextBox" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="732" 
+                         Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" SelectionBrush="White" CaretBrush="White"  BorderThickness="0,0,0,0" 
+                         SelectionOpacity="1" IsTabStop="False" SpellCheck.IsEnabled="True" Language="ru-ru"/>
             </Grid>
         </Border>
-      
+
     </Grid>
 </Page>

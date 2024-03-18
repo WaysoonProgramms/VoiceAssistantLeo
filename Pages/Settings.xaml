@@ -13,6 +13,7 @@
     <Grid>
         <Image HorizontalAlignment="Left" Height="356" Margin="-92,315,0,0" VerticalAlignment="Top" Width="319" Source="/assets/images/dragon.png" 
                Opacity="0.2" StretchDirection="DownOnly"/>
+        <Rectangle HorizontalAlignment="Left" Height="234" Margin="-67,332,0,0" VerticalAlignment="Top" Width="66" Fill="#FF151515"/>
 
         <Image Margin="173,90,637,430" Width="40" Height="40" Source="/assets/images/functions.png"/>
         <Label Content="Функции" HorizontalAlignment="Left" Margin="218,92,0,0" FontSize="18" FontFamily="Montserrat Alternates" 
@@ -68,13 +69,13 @@
         <Label Content="Язык озвучки и общения" FontFamily="Montserrat Alternates"  HorizontalAlignment="Left" Margin="497,180,0,0" 
                VerticalAlignment="Top" Foreground="White"/>
 
-        <Slider HorizontalAlignment="Left" Margin="497,366,0,0" VerticalAlignment="Top" Width="236" Maximum="100" SmallChange="1" Value="100" IsEnabled="False"/>
+        <Slider x:Name="soundVolumeSlider" HorizontalAlignment="Left" Margin="497,366,0,0" VerticalAlignment="Top" Width="236" Maximum="100" SmallChange="1" 
+                AutoToolTipPlacement="TopLeft" ValueChanged="soundVolumeSlider_ValueChanged"/>
         <Label Content="Уведомления и оповещения" FontFamily="Montserrat Alternates"  HorizontalAlignment="Left" Margin="497,342,0,0" 
                VerticalAlignment="Top" Foreground="White"/>
         <Slider x:Name="voiceVolumeSlider" HorizontalAlignment="Left" Margin="497,408,0,0" VerticalAlignment="Top" Width="236" Maximum="100" 
                 SmallChange="1" AutoToolTipPlacement="TopLeft" ValueChanged="voiceVolumeSlider_ValueChanged"/>
         <Label Content="Голос ассистента" FontFamily="Montserrat Alternates"  HorizontalAlignment="Left" Margin="497,384,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <Rectangle HorizontalAlignment="Left" Height="234" Margin="-67,332,0,0" VerticalAlignment="Top" Width="66" Fill="#FF151515"/>
-        
+
     </Grid>
 </Page>

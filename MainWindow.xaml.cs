@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Drawing.Text;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
@@ -12,6 +13,12 @@ namespace VA_Leo
         public MainWindow()
         {
             InitializeComponent();
+
+            if (Properties.Settings.Default.isDevModeTrue)
+            {
+                AllocConsole();
+                consoleAuth();
+            }
 
             getHome(this, null);
             Vosk.main();
@@ -27,6 +34,45 @@ namespace VA_Leo
         }
 
         WindowState prevState;
+
+        [DllImport("Kernel32")]
+        public static extern void AllocConsole();
+
+        [DllImport("Kernel32")]
+        public static extern void FreeConsole();
+
+        private void consoleAuth()
+        {
+            Console.WriteLine("Ассистент Лео 0.1 | Режим разработчика\n@WaysoonProgramms 2024\n\nВведите ключ авторизации:");
+
+            List<char> passChar = new List<char>();
+            while (true)
+            {
+                ConsoleKeyInfo cki = Console.ReadKey(true);
+                if (cki.Key == ConsoleKey.Enter)
+                    break;
+                else
+                {
+                    Console.Write("*");
+                    passChar.Add(cki.KeyChar);
+                }
+            }
+            string passStr = null;
+            foreach (char c in passChar)
+                passStr += c;
+
+            if (passStr == "1234")
+            {
+                Console.WriteLine("\n\nДОСТУП РАЗРЕШЕН!\nЗапуск приложения...\n");
+            } else
+            {
+                MessageBox.Show("Неверный ключ авторизации! ДОСТУП ОГРАНИЧЕН!",
+                   "Режим разработчика", MessageBoxButton.OK, MessageBoxImage.Error);
+                FreeConsole();
+                Properties.Settings.Default.isDevModeTrue = false;
+                Properties.Settings.Default.Save();
+            }
+        }
 
         public static void close()
         {
@@ -234,6 +280,14 @@ namespace VA_Leo
         private void CopyrightMouseLeave(object sender, MouseEventArgs e)
         {
             CopyrigtLine.Opacity = 0;
+        }
+
+        private void hotKeys(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.M)
+            {
+                mute(null, null);
+            }
         }
     }
 }

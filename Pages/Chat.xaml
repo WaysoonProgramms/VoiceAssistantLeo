@@ -26,7 +26,7 @@
                 </Border>
                 <TextBox x:Name="TextBox" HorizontalAlignment="Left" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="732" 
                          Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White" SelectionBrush="White" CaretBrush="White"  BorderThickness="0,0,0,0" 
-                         SelectionOpacity="1" IsTabStop="False" SpellCheck.IsEnabled="True" Language="ru-ru"/>
+                         SelectionOpacity="1" IsTabStop="False" SpellCheck.IsEnabled="True" Language="ru-ru" TextChanged="TextBox_TextChanged" FontFamily="Montserrat Alternates"/>
             </Grid>
         </Border>
 

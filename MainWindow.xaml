@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Name="Window"
         Title="Ассистент Лео" Height="600" Width="1100" Background="#FF1F1F1F" Foreground="White" 
-        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/assets/icon.ico" WindowStyle="None" AllowsTransparency="True">
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/assets/icon.ico" WindowStyle="None" AllowsTransparency="True" PreviewKeyDown="hotKeys">
     <Grid Background="#FF151515">
         <Rectangle Name="Border" HorizontalAlignment="Center" Height="40" VerticalAlignment="Top" Width="1100" Fill="#FF0E0E0E" 
                    MouseLeftButtonDown="LayoutRoot_MouseLeftButtonDown"/>
@@ -18,7 +18,7 @@
         <Label Content="v0.1" HorizontalAlignment="Left" Margin="155,6,0,0" VerticalAlignment="Top" Foreground="#FF313131" 
                FontFamily="Montserrat Alternates" RenderTransformOrigin="0.349,0.585"/>
 
-        <tb:TaskbarIcon Visibility="Visible" ToolTipText="Ассистент Лео" IconSource="/assets/icon.ico" TrayLeftMouseDown="TaskbarIcon_TrayLeftMouseDown"/>
+        <tb:TaskbarIcon Visibility="Visible" ToolTipText="Ассистент Лео" IconSource="/assets/icon.ico" TrayLeftMouseDown="TaskbarIcon_TrayLeftMouseDown" KeyDown="hotKeys"/>
 
         <Border BorderThickness="1" Height="30" Margin="0,4,8,0" VerticalAlignment="Top" Width="30" HorizontalAlignment="Right" 
                 CornerRadius="50" MouseLeftButtonDown="closeWindow" MouseEnter="CloseBtnMouseEnter" MouseLeave="CloseBtnMouseLeave">

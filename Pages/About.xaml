@@ -9,6 +9,10 @@
       Title="About" Width="850" Height="560" Background="#FF161616">
 
     <Grid>
+        <Image HorizontalAlignment="Left" Height="356" Margin="-92,315,0,0" VerticalAlignment="Top" Width="319" Source="/assets/images/dragon.png" 
+            Opacity="0.2" StretchDirection="DownOnly"/>
+        <Rectangle HorizontalAlignment="Left" Height="234" Margin="-67,332,0,0" VerticalAlignment="Top" Width="66" Fill="#FF151515"/>
+
         <TextBlock HorizontalAlignment="Left" Margin="30,80,0,0" VerticalAlignment="Top" 
                    Foreground="White" FontSize="14" Width="474" Height="154" FontFamily="Montserrat Alternates" TextWrapping="Wrap">
             Лео — простой голосовой помощник для Windows. Написанный на C#. 
@@ -54,5 +58,9 @@
         <Label Content="Исходный код" HorizontalAlignment="Left" Margin="664,212,0,0" VerticalAlignment="Top" MouseEnter="repolinkMouseEnter" MouseLeave="repolinkMouseLeave" 
                MouseDown="repolinkClick" Foreground="White" FontFamily="Montserrat Alternates" FontSize="14"/>
         <Rectangle x:Name="repolink" HorizontalAlignment="Left" Height="1" Margin="670,233,0,0" Stroke="White" VerticalAlignment="Top" Width="103" Visibility="Hidden"/>
+
+        <Label Content="Сообщить об ошибке" HorizontalAlignment="Left" Margin="588,248,0,0" VerticalAlignment="Top" MouseEnter="issueslinkMouseEnter" MouseLeave="issueslinkMouseLeave" 
+       MouseDown="issueslinkClick" Foreground="White" FontFamily="Montserrat Alternates" FontSize="14"/>
+        <Rectangle x:Name="issueslink" HorizontalAlignment="Left" Height="1" Margin="595,269,0,0" Stroke="White" VerticalAlignment="Top" Width="162" Visibility="Hidden"/>
     </Grid>
 </Page>

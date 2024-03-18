@@ -11,13 +11,18 @@ namespace VA_Leo
         public Chat()
         {
             InitializeComponent();
+            TextBox.Text = message;
         }
+
+        public static string message = "";
 
         private void sendButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
             Vosk vosk = new Vosk();
             Vosk.txt = TextBox.Text.ToLower();
-            vosk.SpeechRecognized();
+            vosk.SpeechRecognized(1);
+
+            Console.WriteLine($"[INPUT] Введено > {Vosk.txt}");
 
             TextBox.Text = string.Empty;
         }
@@ -38,6 +43,20 @@ namespace VA_Leo
             {
                 sendButton_MouseDown(SendButton, null);
             }
+
+            if (e.Key == Key.Up)
+            {
+                TextBox.Text = message;
+            }
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (TextBox.Text != "")
+            {
+                message = TextBox.Text;
+            }
+            
         }
     }
 }

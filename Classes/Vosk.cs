@@ -71,28 +71,28 @@ namespace VA_Leo
             {
                 // Парсинг объекта с текстом
                 var p_result = JObject.Parse(rec.Result());
-                Vosk.txt = p_result["text"].ToString();
-                Vosk.SpeechRecognized(); // Проверка результатов
-
+                txt = p_result["text"].ToString();
+                Console.WriteLine($"[VOSK] Распознано > {txt}");
+                Vosk.SpeechRecognized(0); // Проверка результатов
             }
             else
             {
                 // Парсинг объекта с текстом
                 var p_result = JObject.Parse(rec.PartialResult());
-                Vosk.txt = p_result["partial"].ToString();
-                Vosk.SpeechRecognized(); // Проверка результатов
+                txt = p_result["partial"].ToString();
+                Vosk.SpeechRecognized(0); // Проверка результатов
             }
         }
 
         private readonly MediaPlayer player = new MediaPlayer();
 
-        public void SpeechRecognized()
+        public void SpeechRecognized(int sender)
         {
 
             if (wakeTimer.Elapsed.Seconds >= 15 && active)
             {
                 player.Open(new Uri($".\\sounds\\stop.wav", UriKind.Relative));
-                player.Volume = Settings.vVoulme / 100.0f;
+                player.Volume = Settings.sVoulme / 100.0f;
                 player.Play();
 
                 wakeTimer.Stop();
@@ -100,8 +100,9 @@ namespace VA_Leo
                 active = false;
             }
 
-            if (Properties.Settings.Default.isMuted)
+            if (Properties.Settings.Default.isMuted && sender == 0)
             {
+                txt = "";
                 return;
             }
 
@@ -115,7 +116,7 @@ namespace VA_Leo
 
                 // Воспроизведение ответа
                 player.Open(new Uri($".\\sounds\\start.wav", UriKind.Relative));
-                player.Volume = Settings.vVoulme / 100.0f;
+                player.Volume = Settings.sVoulme / 100.0f;
                 player.Play();
 
                 Vosk.rec.Reset();
@@ -221,7 +222,10 @@ namespace VA_Leo
             // Запуск ТГ
             if ((txt == "открой телеграмм" || txt == "открой телеграм") && !Vosk.started && active)
             {
-                startProgramm(@"C:\Users\User\AppData\Roaming\Telegram Desktop\Telegram.exe",
+                string appdt = "%APPDATA%\\Telegram Desktop\\Telegram.exe";
+                appdt = Environment.ExpandEnvironmentVariables(appdt);
+
+                startProgramm(appdt,
                     $".\\voices\\open{num}.wav",
                     @".\voices\err3.wav",
                     4);
@@ -295,8 +299,6 @@ namespace VA_Leo
                     p.Start();
                     txt = "";
 
-                    logger.Info($"Ассистент выполнил комманду - запуск приложения >>> {target}");
-
                 }
                 catch (System.ComponentModel.Win32Exception)
                 {
@@ -306,8 +308,6 @@ namespace VA_Leo
                     player.Play();
 
                     txt = "";
-
-                    logger.Error("При попытке выполнить комманду - запуск приложения - произошла ошибка (Win32Exception)");
                 }
             }
             else
@@ -341,7 +341,6 @@ namespace VA_Leo
                 Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
                 txt = "";
 
-                logger.Info($"Ассистент выполнил комманду - открытие ссылки >>> {url}");
             }
             else
             {

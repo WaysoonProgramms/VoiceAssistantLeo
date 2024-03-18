@@ -38,5 +38,8 @@
     <Setting Name="muteBtnIcon" Type="System.String" Scope="User">
       <Value Profile="(Default)">pack://application:,,,/Assets/images/mute.png</Value>
     </Setting>
+    <Setting Name="soundVol" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

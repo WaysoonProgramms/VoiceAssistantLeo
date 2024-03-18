@@ -9,6 +9,7 @@ namespace VA_Leo
     public partial class Settings : Page
     {
         public static float vVoulme = Properties.Settings.Default.voiceVol;
+        public static float sVoulme = Properties.Settings.Default.soundVol;
 
         public Settings()
         {
@@ -24,6 +25,7 @@ namespace VA_Leo
             PCbox.IsChecked = Properties.Settings.Default.allowPC;
 
             voiceVolumeSlider.Value = Properties.Settings.Default.voiceVol;
+            soundVolumeSlider.Value = Properties.Settings.Default.soundVol;
 
     }
 
@@ -32,6 +34,14 @@ namespace VA_Leo
             vVoulme = (float)voiceVolumeSlider.Value;
 
             Properties.Settings.Default.voiceVol = vVoulme;
+            Properties.Settings.Default.Save();
+        }
+
+        private void soundVolumeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            sVoulme = (float)soundVolumeSlider.Value;
+
+            Properties.Settings.Default.soundVol = sVoulme;
             Properties.Settings.Default.Save();
         }
 

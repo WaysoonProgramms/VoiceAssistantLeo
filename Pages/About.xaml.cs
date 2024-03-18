@@ -43,5 +43,21 @@ namespace VA_Leo
         {
             repolink.Visibility = Visibility.Hidden;
         }
+
+        private void issueslinkMouseEnter(object sender, MouseEventArgs e)
+        {
+            issueslink.Visibility = Visibility.Visible;
+        }
+
+        private void issueslinkClick(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            { FileName = "https://github.com/WaysoonProgramms/VoiceAssistantLeo/issues", UseShellExecute = true });
+        }
+
+        private void issueslinkMouseLeave(object sender, MouseEventArgs e)
+        {
+            issueslink.Visibility = Visibility.Hidden;
+        }
     }
 }

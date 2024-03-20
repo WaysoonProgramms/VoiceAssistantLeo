@@ -8,15 +8,17 @@ using System.Windows;
 using System.Windows.Media;
 using Vosk;
 
+using VA_Leo.Pages;
+
 namespace VA_Leo
 {
     public class Vosk
     {
-        private static VoskRecognizer rec;
-        private static WaveFileWriter writer;
-        private static bool started = false;
+        private static VoskRecognizer rec; // Объект распознования VOSK
+        private static WaveFileWriter writer; // Объект записи с микрофона
+        private static bool busy = false;
 
-        public static string txt; // Текст распознанный Vosk
+        public static string text; // Текст распознанный Vosk
         private static bool active = false; // Статус Wake Word
         private static int num = 1;
 
@@ -71,29 +73,27 @@ namespace VA_Leo
             {
                 // Парсинг объекта с текстом
                 var p_result = JObject.Parse(rec.Result());
-                txt = p_result["text"].ToString();
-                Console.WriteLine($"[VOSK] Распознано > {txt}");
-                Vosk.SpeechRecognized(0); // Проверка результатов
+                text = p_result["text"].ToString();
+                Console.WriteLine($"[VOSK] Распознано > {text}");
+                Vosk.speechRecognized(0); // Проверка результатов
             }
             else
             {
                 // Парсинг объекта с текстом
                 var p_result = JObject.Parse(rec.PartialResult());
-                txt = p_result["partial"].ToString();
-                Vosk.SpeechRecognized(0); // Проверка результатов
+                text = p_result["partial"].ToString();
+                Vosk.speechRecognized(0); // Проверка результатов
             }
         }
 
         private readonly MediaPlayer player = new MediaPlayer();
 
-        public void SpeechRecognized(int sender)
+        public void speechRecognized(int sender)
         {
 
             if (wakeTimer.Elapsed.Seconds >= 15 && active)
             {
-                player.Open(new Uri($".\\sounds\\stop.wav", UriKind.Relative));
-                player.Volume = Settings.sVoulme / 100.0f;
-                player.Play();
+                playSound(@".\sounds\stop.wav");
 
                 wakeTimer.Stop();
                 wakeTimer.Reset();
@@ -102,125 +102,103 @@ namespace VA_Leo
 
             if (Properties.Settings.Default.isMuted && sender == 0)
             {
-                txt = "";
+                text = "";
                 return;
             }
 
             // WAKE WORD
-            if (txt == "лео" && !Vosk.started)
+            if (text == "лео" && !busy)
             {
-                Vosk.started = true;
+                busy = true;
                 wakeTimer.Reset();
                 wakeTimer.Start();
                 active = true;
 
-                // Воспроизведение ответа
-                player.Open(new Uri($".\\sounds\\start.wav", UriKind.Relative));
-                player.Volume = Settings.sVoulme / 100.0f;
-                player.Play();
-
-                Vosk.rec.Reset();
-                Vosk.started = false;
+                playSound(@".\sounds\start.wav");
+                    
+                rec.Reset();
+                busy = false;
             }
 
             // Спасибо
-            if (txt == "спасибо" && !Vosk.started && active)
+            if (text == "спасибо" && !busy && active)
             {
-                Vosk.started = true;
+                busy = true;
                 wakeTimer.Restart();
 
-                player.Open(new Uri(@".\voices\vsegda_pozyalusta.wav", UriKind.Relative));
-                player.Volume = Settings.vVoulme / 100.0f;
-                player.Play();
+                playSound(@".\voices\vsegda_pozyalusta.wav");
 
-                txt = "";
+                text = "";
 
-                Vosk.rec.Reset();
-                Vosk.started = false;
+                rec.Reset();
+                busy = false;
             }
 
             // Алиса
-            if (txt == "алиса" && !Vosk.started)
+            if (text == "алиса" && !busy)
             {
-                Vosk.started = true;
+                busy = true;
                 wakeTimer.Restart();
 
-                // Воспроизведение ответа
-                player.Open(new Uri($".\\voices\\neAlica.wav", UriKind.Relative));
-                player.Volume = Settings.vVoulme / 100.0f;
-                player.Play();
+                playSound(@".\voices\neAlica.wav");
 
-                Vosk.rec.Reset();
-                Vosk.started = false;
+                rec.Reset();
+                busy = false;
             }
 
             // Siri
-            if (txt == "сири" && !Vosk.started)
+            if (text == "сири" && !busy)
             {
-                Vosk.started = true;
+                busy = true;
                 wakeTimer.Restart();
 
-                // Воспроизведение ответа
-                player.Open(new Uri($".\\voices\\neSiri.wav", UriKind.Relative));
-                player.Volume = Settings.vVoulme / 100.0f;
-                player.Play();
+                playSound(@".\voices\neSiri.wav");
 
-                Vosk.rec.Reset();
-                Vosk.started = false;
+                rec.Reset();
+                busy = false;
             }
 
             // Маруся
-            if (txt == "маруся" && !Vosk.started)
+            if (text == "маруся" && !busy)
             {
-                Vosk.started = true;
+                busy = true;
                 wakeTimer.Restart();
 
-                // Воспроизведение ответа
-                player.Open(new Uri($".\\voices\\neMarusa.wav", UriKind.Relative));
-                player.Volume = Settings.vVoulme / 100.0f;
-                player.Play();
+                playSound(@".\voices\neMarusa.wav");
 
-                Vosk.rec.Reset();
-                Vosk.started = false;
+                rec.Reset();
+                busy = false;
             }
 
             // Очистка корзины
-            if (txt == "очисти корзину" && !Vosk.started && active)
+            if (text == "очисти корзину" && !busy && active)
             {
-                Vosk.started = true;
+                busy = true;
                 wakeTimer.Restart();
 
-                if (Properties.Settings.Default.allowPC)
+                if (Properties.Settings.Default.allowComputerControl)
                 {
-                    // Очистка
                     var result = SHEmptyRecycleBin(IntPtr.Zero, null, 0);
                     if (result == 0)
                     {
-                        player.Open(new Uri($".\\voices\\bin1.wav", UriKind.Relative));
-                        player.Volume = Settings.vVoulme / 100.0f;
-                        player.Play();
+                        playSound(@".\voices\bin1.wav");
                     }
                     else
                     {
-                        player.Open(new Uri($".\\voices\\bin2.wav", UriKind.Relative));
-                        player.Volume = Settings.vVoulme / 100.0f;
-                        player.Play();
+                        playSound(@".\voices\bin2.wav");
                     }
                 }
                 else
                 {
-                    // Воспроизведение ошибки
-                    player.Open(new Uri($".\\voices\\err1.wav", UriKind.Relative));
-                    player.Volume = Settings.vVoulme / 100.0f;
-                    player.Play();
+                    playSound(@".\voices\err1.wav");
                 }
-                Vosk.rec.Reset();
-                Vosk.started = false;
+                rec.Reset();
+                busy = false;
 
             }
 
             // Запуск ТГ
-            if ((txt == "открой телеграмм" || txt == "открой телеграм") && !Vosk.started && active)
+            if ((text == "открой телеграмм" || text == "открой телеграм") && !busy && active)
             {
                 string appdt = "%APPDATA%\\Telegram Desktop\\Telegram.exe";
                 appdt = Environment.ExpandEnvironmentVariables(appdt);
@@ -231,7 +209,7 @@ namespace VA_Leo
                     4);
             }
 
-            if ((txt == "открой консоль") && !Vosk.started && active)
+            if ((text == "открой консоль") && !busy && active)
             {
                 startProgramm("cmd.exe",
                     $".\\voices\\open{num}.wav",
@@ -239,7 +217,7 @@ namespace VA_Leo
                     3);
             }
 
-            if (txt == "открой вконтакте" && !Vosk.started && active)
+            if (text == "открой вконтакте" && !busy && active)
             {
                 openWebsite("https://vk.com",
                     $".\\voices\\open{num}.wav",
@@ -247,7 +225,7 @@ namespace VA_Leo
                     4);
             }
 
-            if (txt == "открой ютуб" && !Vosk.started && active)
+            if (text == "открой ютуб" && !busy && active)
             {
                 openWebsite("https://youtube.com",
                     $".\\voices\\open{num}.wav",
@@ -255,7 +233,7 @@ namespace VA_Leo
                     3);
             }
 
-            if ((txt == "запусти майнкрафт" || txt == "открой майн") && !Vosk.started && active)
+            if ((text == "запусти майнкрафт" || text == "открой майн") && !busy && active)
             {
                 startProgramm(@"C:\XboxGames\Minecraft Launcher\Content\Minecraft.exe",
                     $".\\voices\\open{num}.wav",
@@ -263,7 +241,7 @@ namespace VA_Leo
                     3);
             }
 
-            if ((txt == "открой почту") && !Vosk.started && active)
+            if ((text == "открой почту") && !busy && active)
             {
                 openWebsite("https://mail.google.com",
                     $".\\voices\\open{num}.wav",
@@ -275,7 +253,7 @@ namespace VA_Leo
 
         public void startProgramm(string target, string media, string error, int rndInt)
         {
-            Vosk.started = true;
+            busy = true;
             wakeTimer.Restart();
 
             if (Properties.Settings.Default.allowProgrammsStart)
@@ -284,74 +262,63 @@ namespace VA_Leo
                 try
                 {
 
-                    // Рандомайзер
                     Random rnd = new Random();
                     num = rnd.Next(1, rndInt);
 
-                    // Воспроизведение ответа
-                    player.Open(new Uri(media, UriKind.Relative));
-                    player.Volume = Settings.vVoulme / 100.0f;
-                    player.Play();
+                    playSound(media);
 
-                    // Запуск
                     System.Diagnostics.Process p = new System.Diagnostics.Process();
                     p.StartInfo.FileName = target;
                     p.Start();
-                    txt = "";
+                    text = "";
 
                 }
                 catch (System.ComponentModel.Win32Exception)
                 {
-                    // Воспроизведение ошибки
-                    player.Open(new Uri(error, UriKind.Relative));
-                    player.Volume = Settings.vVoulme / 100.0f;
-                    player.Play();
+                    playSound(error);
 
-                    txt = "";
+                    text = "";
                 }
             }
             else
             {
-                // Воспроизведение ошибки
-                player.Open(new Uri(@".\voices\err1.wav", UriKind.Relative));
-                player.Volume = Settings.vVoulme / 100.0f;
-                player.Play();
+                playSound(@".\voices\err1.wav");
             }
 
-            Vosk.rec.Reset();
-            Vosk.started = false;
+            rec.Reset();
+            busy = false;
         }
 
         public void openWebsite(string url, string media, string error, int rndInt)
         {
-            Vosk.started = true;
+            busy = true;
             wakeTimer.Restart();
 
-            // Рандомайзер
             Random rnd = new Random();
             int num = rnd.Next(1, rndInt);
 
             if (Properties.Settings.Default.allowBrowserStart)
             {
-                // Воспроизведение ответа
-                player.Open(new Uri(media, UriKind.Relative));
-                player.Volume = Settings.vVoulme / 100.0f;
-                player.Play();
+                playSound(media);
 
                 Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
-                txt = "";
+                text = "";
 
             }
             else
             {
-                // Воспроизведение ошибки
-                player.Open(new Uri(error, UriKind.Relative));
-                player.Volume = Settings.vVoulme / 100.0f;
-                player.Play();
+                playSound(error);
             }
 
-            Vosk.rec.Reset();
-            Vosk.started = false;
+            rec.Reset();
+            busy = false;
+        }
+
+        public void playSound(string file)
+        {
+            player.Open(new Uri(file, UriKind.Relative));
+            player.Volume = Settings.vVoulme / 100.0f;
+            player.Play();
         }
     }
 }

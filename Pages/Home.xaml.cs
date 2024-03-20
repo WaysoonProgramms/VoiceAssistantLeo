@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace VA_Leo
+namespace VA_Leo.Pages
 {
     public partial class Home : Page
     {

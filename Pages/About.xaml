@@ -1,4 +1,4 @@
-﻿<Page x:Class="VA_Leo.About"
+﻿<Page x:Class="VA_Leo.Pages.About"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -62,5 +62,8 @@
         <Label Content="Сообщить об ошибке" HorizontalAlignment="Left" Margin="588,248,0,0" VerticalAlignment="Top" MouseEnter="issueslinkMouseEnter" MouseLeave="issueslinkMouseLeave" 
        MouseDown="issueslinkClick" Foreground="White" FontFamily="Montserrat Alternates" FontSize="14"/>
         <Rectangle x:Name="issueslink" HorizontalAlignment="Left" Height="1" Margin="595,269,0,0" Stroke="White" VerticalAlignment="Top" Width="162" Visibility="Hidden"/>
+        
+        <Label Content="В проекте используются иконки Icons8" HorizontalAlignment="Left" Margin="30,534,0,0" VerticalAlignment="Top" FontSize="9" 
+            Foreground="White" FontFamily="Montserrat Alternates" FontStyle="Italic"/>
     </Grid>
 </Page>

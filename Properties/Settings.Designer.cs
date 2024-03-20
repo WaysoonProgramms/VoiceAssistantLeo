@@ -110,12 +110,12 @@ namespace VA_Leo.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool allowPC {
+        public bool allowComputerControl {
             get {
-                return ((bool)(this["allowPC"]));
+                return ((bool)(this["allowComputerControl"]));
             }
             set {
-                this["allowPC"] = value;
+                this["allowComputerControl"] = value;
             }
         }
         
@@ -176,6 +176,18 @@ namespace VA_Leo.Properties {
             }
             set {
                 this["soundVol"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool isAutoRun {
+            get {
+                return ((bool)(this["isAutoRun"]));
+            }
+            set {
+                this["isAutoRun"] = value;
             }
         }
     }

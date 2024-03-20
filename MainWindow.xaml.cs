@@ -1,10 +1,11 @@
 ﻿using System.Diagnostics;
-using System.Drawing.Text;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+
+using VA_Leo.Pages;
 
 namespace VA_Leo
 {
@@ -31,6 +32,8 @@ namespace VA_Leo
             {
                 Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/mute.png"));
             }
+
+            
         }
 
         WindowState prevState;
@@ -79,13 +82,13 @@ namespace VA_Leo
             close();
         }
 
-        private void TaskbarIcon_TrayLeftMouseDown(object sender, RoutedEventArgs e)
+        private void trayIconClick(object sender, RoutedEventArgs e)
         {
             Show();
             WindowState = prevState;
         }
 
-        void LayoutRoot_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) 
+        void movingWindow(object sender, MouseButtonEventArgs e) 
         {
             this.Opacity = 0.8;
             this.DragMove();
@@ -178,7 +181,7 @@ namespace VA_Leo
             AboutBtnMarker.Opacity = 0;
         }
 
-        private void HomeBtnMouseEnter(object sender, MouseEventArgs e)
+        private void homeBtnMouseEnter(object sender, MouseEventArgs e)
         {
             if (HomeBtnFillMarker.Opacity == 0)
             {
@@ -186,7 +189,7 @@ namespace VA_Leo
             }
         }
 
-        private void HomeBtnMouseLeave(object sender, MouseEventArgs e)
+        private void homeBtnMouseLeave(object sender, MouseEventArgs e)
         {
             if (HomeBtnFillMarker.Opacity == 0.1)
             {
@@ -194,7 +197,7 @@ namespace VA_Leo
             }
         }
 
-        private void SettingsBtnMouseEnter(object sender, MouseEventArgs e)
+        private void settingsBtnMouseEnter(object sender, MouseEventArgs e)
         {
             if (SettingsBtnFillMarker.Opacity == 0)
             {
@@ -202,7 +205,7 @@ namespace VA_Leo
             }
         }
 
-        private void SettingsBtnMouseLeave(object sender, MouseEventArgs e)
+        private void settingsBtnMouseLeave(object sender, MouseEventArgs e)
         {
             if (SettingsBtnFillMarker.Opacity == 0.1)
             {
@@ -210,7 +213,7 @@ namespace VA_Leo
             }
         }
 
-        private void ChatBtnMouseEnter(object sender, MouseEventArgs e)
+        private void chatBtnMouseEnter(object sender, MouseEventArgs e)
         {
             if (ChatBtnFillMarker.Opacity == 0)
             {
@@ -218,7 +221,7 @@ namespace VA_Leo
             }
         }
 
-        private void ChatBtnMouseLeave(object sender, MouseEventArgs e)
+        private void chatBtnMouseLeave(object sender, MouseEventArgs e)
         {
             if (ChatBtnFillMarker.Opacity == 0.1)
             {
@@ -226,7 +229,7 @@ namespace VA_Leo
             }
         }
 
-        private void AboutBtnMouseEnter(object sender, MouseEventArgs e)
+        private void aboutBtnMouseEnter(object sender, MouseEventArgs e)
         {
             if (AboutBtnFillMarker.Opacity == 0)
             {
@@ -234,7 +237,7 @@ namespace VA_Leo
             }
         }
 
-        private void AboutBtnMouseLeave(object sender, MouseEventArgs e)
+        private void aboutBtnMouseLeave(object sender, MouseEventArgs e)
         {
             if (AboutBtnFillMarker.Opacity == 0.1)
             {
@@ -242,42 +245,42 @@ namespace VA_Leo
             }
         }
 
-        private void CloseBtnMouseEnter(object sender, MouseEventArgs e)
+        private void closeBtnMouseEnter(object sender, MouseEventArgs e)
         {
             CloseBackgound.Opacity = 1;
         }
 
-        private void CloseBtnMouseLeave(object sender, MouseEventArgs e)
+        private void closeBtnMouseLeave(object sender, MouseEventArgs e)
         {
             CloseBackgound.Opacity = 0;
         }
 
-        private void MinimizeBtnMouseEnter(object sender, MouseEventArgs e)
+        private void minimizeBtnMouseEnter(object sender, MouseEventArgs e)
         {
             MinimizeBackgound.Opacity = 0.2;
         }
 
-        private void MinimizeBtnMouseLeave(object sender, MouseEventArgs e)
+        private void minimizeBtnMouseLeave(object sender, MouseEventArgs e)
         {
             MinimizeBackgound.Opacity = 0;
         }
 
-        private void MuteBtnMouseEnter(object sender, MouseEventArgs e)
+        private void muteBtnMouseEnter(object sender, MouseEventArgs e)
         {
             MuteBackgound.Opacity = 0.2;
         }
 
-        private void MuteBtnMouseLeave(object sender, MouseEventArgs e)
+        private void muteBtnMouseLeave(object sender, MouseEventArgs e)
         {
             MuteBackgound.Opacity = 0;
         }
 
-        private void CopyrightMouseEnter(object sender, MouseEventArgs e)
+        private void copyrightMouseEnter(object sender, MouseEventArgs e)
         {
             CopyrigtLine.Opacity = 1;
         }
 
-        private void CopyrightMouseLeave(object sender, MouseEventArgs e)
+        private void copyrightMouseLeave(object sender, MouseEventArgs e)
         {
             CopyrigtLine.Opacity = 0;
         }

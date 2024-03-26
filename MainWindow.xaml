@@ -8,7 +8,8 @@
         mc:Ignorable="d"
         Name="Window"
         Title="Ассистент Лео" Height="600" Width="1100" Background="#FF1F1F1F" Foreground="White" 
-        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/assets/icon.ico" PreviewKeyDown="hotKeys" WindowStyle="None" AllowsTransparency="True">
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/assets/icon.ico" PreviewKeyDown="hotKeys" WindowStyle="None" 
+        AllowsTransparency="True">
     <Grid Background="#FF151515">
         <Rectangle Name="Border" HorizontalAlignment="Center" Height="40" VerticalAlignment="Top" Width="1100" Fill="#FF0E0E0E" 
                    MouseLeftButtonDown="movingWindow"/>
@@ -18,7 +19,19 @@
         <Label Content="v0.1" HorizontalAlignment="Left" Margin="155,6,0,0" VerticalAlignment="Top" Foreground="#FF313131" 
                FontFamily="Montserrat Alternates" RenderTransformOrigin="0.349,0.585"/>
 
-        <tb:TaskbarIcon Visibility="Visible" ToolTipText="Ассистент Лео" IconSource="/assets/icon.ico" TrayLeftMouseDown="trayIconClick" KeyDown="hotKeys" Margin="1077,573,0,0"/>
+        <tb:TaskbarIcon Visibility="Visible" ToolTipText="Ассистент Лео" IconSource="/assets/icon.ico" TrayLeftMouseDown="trayIconClick" KeyDown="hotKeys" Margin="1077,573,0,0" OpacityMask="#FF0E0E0E">
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem x:Name="TrayIconMuteBtn" Header="Выкл. микрофон" Click="trayIconMute" FontFamily="Montserrat Alternates"/>
+                    <MenuItem Header="Открыть" Click="trayIconClick" FontFamily="Montserrat Alternates"/>
+                    <Separator/>
+                    <MenuItem x:Name="TrayIconSettingsBtn" Header="Настройки" Click="trayIconClick" FontFamily="Montserrat Alternates"/>
+                    <MenuItem x:Name="TrayIconChatBtn" Header="Чат" Click="trayIconClick" FontFamily="Montserrat Alternates"/>
+                    <Separator/>
+                    <MenuItem Header="Закрыть" Click="trayIconClose" FontFamily="Montserrat Alternates"/>
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
 
         <Border BorderThickness="1" Height="30" Margin="0,4,8,0" VerticalAlignment="Top" Width="30" HorizontalAlignment="Right" 
                 CornerRadius="50" MouseLeftButtonDown="closeWindow" MouseEnter="closeBtnMouseEnter" MouseLeave="closeBtnMouseLeave">
@@ -92,7 +105,7 @@
         <Image HorizontalAlignment="Left" Height="15" Margin="41,573,0,0" VerticalAlignment="Top" Width="15" Source="/assets/images/avatar.png"/>
         <Label Content="© WaysoonProgramms 2024" HorizontalAlignment="Left" Margin="61,570,0,0" VerticalAlignment="Top" FontSize="9" 
                Cursor="Hand" Foreground="White" MouseDown="copyrightLink" MouseEnter="copyrightMouseEnter" MouseLeave="copyrightMouseLeave" FontFamily="Montserrat Alternates" FontStyle="Italic"/>
-        <Rectangle x:Name="CopyrigtLine" HorizontalAlignment="Left" Height="1" Margin="75,587,0,0" Stroke="White" VerticalAlignment="Top" Width="114" Opacity="0"/>
+        <Rectangle x:Name="CopyrigtLine" HorizontalAlignment="Left" Height="1" Margin="66,587,0,0" Stroke="White" VerticalAlignment="Top" Width="134" Opacity="0"/>
 
     </Grid>
 

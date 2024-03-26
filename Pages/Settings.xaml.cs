@@ -144,15 +144,15 @@ namespace VA_Leo.Pages
         private void addToAutoRun(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.isAutoRun = true;
-            Properties.Settings.Default.Save(); 
+            Properties.Settings.Default.Save();
 
             try
             {
                 string dir = Environment.CurrentDirectory;
                 dir += @"\Ассистент Лео.exe";
                 reg.SetValue("LeoAssistan", dir);
-            } 
-            catch 
+            }
+            catch
             {
                 MessageBox.Show("Не удалось создать запись в реестре" +
                 "\n\nКод ошибки: 02",

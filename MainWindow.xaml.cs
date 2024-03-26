@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using NLog.Targets;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
@@ -33,7 +34,8 @@ namespace VA_Leo
                 Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/mute.png"));
             }
 
-            
+            Vosk.update();
+            //windowAnimation(this.Name, 0, 1);
         }
 
         WindowState prevState;
@@ -84,8 +86,44 @@ namespace VA_Leo
 
         private void trayIconClick(object sender, RoutedEventArgs e)
         {
+            if (sender == TrayIconChatBtn)
+            {
+                getChat(TrayIconChatBtn, null);
+            }
+            if (sender == TrayIconSettingsBtn)
+            {
+                getSettings(TrayIconSettingsBtn, null);
+            }
+
             Show();
             WindowState = prevState;
+        }
+
+        private void trayIconMute(object sender, RoutedEventArgs e)
+        {
+            if (Properties.Settings.Default.isMuted == true)
+            {
+                Properties.Settings.Default.isMuted = false;
+                Properties.Settings.Default.Save();
+
+                Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/mute.png"));
+                TrayIconMuteBtn.Header = "Выкл. микрофон";
+            }
+            else
+            {
+                Properties.Settings.Default.isMuted = true;
+                Properties.Settings.Default.Save();
+
+                Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/microphone.png"));
+                TrayIconMuteBtn.Header = "Вкл. микрофон";
+            }
+
+            Vosk.update();
+        }
+
+        private void trayIconClose(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
 
         void movingWindow(object sender, MouseButtonEventArgs e) 
@@ -95,24 +133,30 @@ namespace VA_Leo
             this.Opacity = 1;
         }
 
+        private void windowAnimation(string target, int at, int to)
+        {
+            DoubleAnimation animation;
+            Storyboard storyboardFade = new Storyboard();
+
+            animation = new DoubleAnimation(at, to, new Duration(TimeSpan.FromSeconds(0.3)));
+            animation.Completed += closeApplication;
+            Storyboard.SetTargetName(animation, target);
+            Storyboard.SetTargetProperty(animation, new PropertyPath(MainWindow.OpacityProperty));
+            storyboardFade.Children.Add(animation);
+
+            storyboardFade.Begin(this);
+        }
+
         private void closeWindow(object sender, MouseButtonEventArgs e)
         {
             if (Properties.Settings.Default.isMinimizeToTrayTrue == true)
             {
+                windowAnimation(this.Name, 1, 0);
                 Hide();
             }
             else
             {
-                DoubleAnimation animation;
-                Storyboard storyboardFade = new Storyboard();
-
-                animation = new DoubleAnimation(1, 0, new Duration(TimeSpan.FromSeconds(0.3)));
-                animation.Completed += closeApplication;
-                Storyboard.SetTargetName(animation, this.Name);
-                Storyboard.SetTargetProperty(animation, new PropertyPath(MainWindow.OpacityProperty));
-                storyboardFade.Children.Add(animation);
-
-                storyboardFade.Begin(this);
+                windowAnimation(this.Name, 1, 0);
             }
         }
 
@@ -136,6 +180,8 @@ namespace VA_Leo
 
                 Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/microphone.png"));
             }
+
+            Vosk.update();
         }
 
         private void minimizeWindow(object sender, MouseButtonEventArgs e)
@@ -183,6 +229,7 @@ namespace VA_Leo
 
         private void homeBtnMouseEnter(object sender, MouseEventArgs e)
         {
+
             if (HomeBtnFillMarker.Opacity == 0)
             {
                 HomeBtnFillMarker.Opacity = 0.1;

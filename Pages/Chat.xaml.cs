@@ -19,7 +19,7 @@ namespace VA_Leo.Pages
         {
             Vosk vosk = new Vosk();
             Vosk.text = TextBox.Text.ToLower();
-            vosk.speechRecognized(1);
+            vosk.speechRecognized();
 
             Console.WriteLine($"[INPUT] Введено > {Vosk.text}");
 

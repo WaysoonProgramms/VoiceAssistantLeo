@@ -1,22 +1,72 @@
-﻿using System.Windows.Controls;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Globalization;
+using System.Windows.Controls;
 using System.Windows.Input;
-
+using System.Windows.Media;
+using System.Windows.Threading;
+using System.Security.Policy;
+using Newtonsoft.Json.Linq;
+using System.IO;
+using System.Xml.Serialization;
+using Windows.Storage.Streams;
+using Windows.Storage;
 
 namespace VA_Leo.Pages
 {
     public partial class Chat : Page
     {
-
+        public static ObservableCollection<Messages> Message { get; set; }
         public Chat()
         {
             InitializeComponent();
-            TextBox.Text = message;
+            TextBox.Text = textMessage;
+            Message = new ObservableCollection<Messages> { };
+            chatList.ItemsSource = Message;
         }
 
-        public static string message = "";
-
-        private void sendButtonClick(object sender, MouseButtonEventArgs e)
+        public class Messages
         {
+            public string Message { get; set; }
+            public string Time { get; set; }
+            public int Length { get; set; }
+            public string Aligment { get; set; }
+        }
+
+        public static string textMessage = "";
+
+        public static void addMessage(string text, string aligment)
+        {
+            if (text == "")
+            {
+                return;
+            }
+
+            int length;
+
+            if (text.Length < 5)
+            {
+                length = text.Length + 50;
+            }
+            else
+            {
+                length = text.Length * 8 + 20;
+            }
+
+            Message.Add(new Messages
+            {
+                Message = text,
+                Time = DateTime.Now.ToShortTimeString(),
+                Length = length,
+                Aligment = aligment
+            });
+        }
+
+        public void send(object sender, MouseButtonEventArgs e)
+        {
+
+            addMessage(TextBox.Text, "Left");
+
             Vosk vosk = new Vosk();
             Vosk.text = TextBox.Text.ToLower();
             vosk.speechRecognized();
@@ -40,12 +90,12 @@ namespace VA_Leo.Pages
         {
             if (e.Key == Key.Enter)
             {
-                sendButtonClick(SendButton, null);
+                send(SendButton, null);
             }
 
             if (e.Key == Key.Up)
             {
-                TextBox.Text = message;
+                TextBox.Text = textMessage;
             }
         }
 
@@ -53,9 +103,13 @@ namespace VA_Leo.Pages
         {
             if (TextBox.Text != "")
             {
-                message = TextBox.Text;
+                textMessage = TextBox.Text;
             }
-            
+        }
+
+        public static void saveMessages()
+        {
+            // TODO: Сохранение сообщений
         }
     }
 }

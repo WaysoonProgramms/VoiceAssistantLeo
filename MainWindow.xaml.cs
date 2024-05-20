@@ -1,11 +1,10 @@
-﻿using NLog.Targets;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-
+using System.Windows.Threading;
 using VA_Leo.Pages;
 
 namespace VA_Leo
@@ -28,14 +27,16 @@ namespace VA_Leo
             if (Properties.Settings.Default.isMuted == true)
             {
                 Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/microphone.png"));
+                TrayIconMuteBtn.Header = "Вкл. микрофон";
             }
             else
             {
                 Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/mute.png"));
+                TrayIconMuteBtn.Header = "Выкл. микрофон";
             }
 
             Vosk.update();
-            //windowAnimation(this.Name, 0, 1);
+
         }
 
         WindowState prevState;
@@ -95,8 +96,11 @@ namespace VA_Leo
                 getSettings(TrayIconSettingsBtn, null);
             }
 
+
             Show();
             WindowState = prevState;
+
+            opacityAnimation(this.Name, 0, 1, 0.3, 2);
         }
 
         private void trayIconMute(object sender, RoutedEventArgs e)
@@ -128,41 +132,74 @@ namespace VA_Leo
 
         void movingWindow(object sender, MouseButtonEventArgs e) 
         {
-            this.Opacity = 0.8;
-            this.DragMove();
-            this.Opacity = 1;
+            if (Properties.Settings.Default.allowOpacity == true)
+            {
+                this.DragMove();
+            }
+            else
+            {
+                this.DragMove();
+            }            
         }
 
-        private void windowAnimation(string target, int at, int to)
+        private void opacityAnimation(string target, double at, double to, double time, int opID)
         {
-            DoubleAnimation animation;
-            Storyboard storyboardFade = new Storyboard();
+            if (Properties.Settings.Default.allowOpacity)
+            {
+                DoubleAnimation animation;
+                Storyboard storyboardFade = new Storyboard();
 
-            animation = new DoubleAnimation(at, to, new Duration(TimeSpan.FromSeconds(0.3)));
-            animation.Completed += closeApplication;
-            Storyboard.SetTargetName(animation, target);
-            Storyboard.SetTargetProperty(animation, new PropertyPath(MainWindow.OpacityProperty));
-            storyboardFade.Children.Add(animation);
+                animation = new DoubleAnimation(at, to, new Duration(TimeSpan.FromSeconds(time)));
+                // Если opID = 2, то ни что не выполняется следом
+                if (opID == 0)
+                {
+                    animation.Completed += closeApplication;
+                }
+                if (opID == 1)
+                {
+                    animation.Completed += hideApplication;
+                }
+                Storyboard.SetTargetName(animation, target);
+                Storyboard.SetTargetProperty(animation, new PropertyPath(MainWindow.OpacityProperty));
+                storyboardFade.FillBehavior = FillBehavior.Stop;
+                storyboardFade.Children.Add(animation);
 
-            storyboardFade.Begin(this);
+                storyboardFade.Begin(this);
+            } 
+            else
+            {
+                if (opID == 0)
+                {
+                    Close();
+                }
+                if (opID == 1)
+                {
+                    Hide();
+                }
+            }
+        }
+
+        public void closeApplication(object sender, EventArgs e)
+        {
+            Chat.saveMessages();
+            Close();
+        }
+
+        public void hideApplication(object sender, EventArgs e)
+        {
+            Hide();
         }
 
         private void closeWindow(object sender, MouseButtonEventArgs e)
         {
             if (Properties.Settings.Default.isMinimizeToTrayTrue == true)
             {
-                windowAnimation(this.Name, 1, 0);
-                Hide();
+                opacityAnimation(this.Name, 1, 0, 0.3, 1);
             }
             else
             {
-                windowAnimation(this.Name, 1, 0);
+                opacityAnimation(this.Name, 1, 0, 0.3, 0);
             }
-        }
-
-        public void closeApplication(object sender, EventArgs e)
-        {
-            Close();
         }
 
         public void mute(object sender, MouseButtonEventArgs e)
@@ -201,7 +238,7 @@ namespace VA_Leo
             MainFrame.Content = new Settings();
             SettingsBtnMarker.Opacity = 1;
         }
-        private void getChat(object sender, MouseButtonEventArgs e)
+        public void getChat(object sender, MouseButtonEventArgs e)
         {
             removeMarkers();
             MainFrame.Content = new Chat();
@@ -229,96 +266,85 @@ namespace VA_Leo
 
         private void homeBtnMouseEnter(object sender, MouseEventArgs e)
         {
-
-            if (HomeBtnFillMarker.Opacity == 0)
-            {
-                HomeBtnFillMarker.Opacity = 0.1;
-            }
+            opacityAnimation(HomeBtnFillMarker.Name, 0, 0.1, 0.1, 2);
+            HomeBtnFillMarker.Opacity = 0.1;
         }
 
         private void homeBtnMouseLeave(object sender, MouseEventArgs e)
         {
-            if (HomeBtnFillMarker.Opacity == 0.1)
-            {
-                HomeBtnFillMarker.Opacity = 0;
-            }
+            opacityAnimation(HomeBtnFillMarker.Name, 0.1, 0, 0.1, 2);
+            HomeBtnFillMarker.Opacity = 0;
         }
 
         private void settingsBtnMouseEnter(object sender, MouseEventArgs e)
         {
-            if (SettingsBtnFillMarker.Opacity == 0)
-            {
-                SettingsBtnFillMarker.Opacity = 0.1;
-            }
+            opacityAnimation(SettingsBtnFillMarker.Name, 0, 0.1, 0.1, 2);
+            SettingsBtnFillMarker.Opacity = 0.1;
         }
 
         private void settingsBtnMouseLeave(object sender, MouseEventArgs e)
         {
-            if (SettingsBtnFillMarker.Opacity == 0.1)
-            {
-                SettingsBtnFillMarker.Opacity = 0;
-            }
+            opacityAnimation(SettingsBtnFillMarker.Name, 0.1, 0, 0.1, 2);
+            SettingsBtnFillMarker.Opacity = 0;
         }
 
         private void chatBtnMouseEnter(object sender, MouseEventArgs e)
         {
-            if (ChatBtnFillMarker.Opacity == 0)
-            {
-                ChatBtnFillMarker.Opacity = 0.1;
-            }
+            opacityAnimation(ChatBtnFillMarker.Name, 0, 0.1, 0.1, 2);
+            ChatBtnFillMarker.Opacity = 0.1;
         }
 
         private void chatBtnMouseLeave(object sender, MouseEventArgs e)
         {
-            if (ChatBtnFillMarker.Opacity == 0.1)
-            {
-                ChatBtnFillMarker.Opacity = 0;
-            }
+            opacityAnimation(ChatBtnFillMarker.Name, 0.1, 0, 0.1, 2);
+            ChatBtnFillMarker.Opacity = 0;
         }
 
         private void aboutBtnMouseEnter(object sender, MouseEventArgs e)
         {
-            if (AboutBtnFillMarker.Opacity == 0)
-            {
-                AboutBtnFillMarker.Opacity = 0.1;
-            }
+            opacityAnimation(AboutBtnFillMarker.Name, 0, 0.1, 0.1, 2);
+            AboutBtnFillMarker.Opacity = 0.1;
         }
 
         private void aboutBtnMouseLeave(object sender, MouseEventArgs e)
         {
-            if (AboutBtnFillMarker.Opacity == 0.1)
-            {
-                AboutBtnFillMarker.Opacity = 0;
-            }
+            opacityAnimation(AboutBtnFillMarker.Name, 0.1, 0, 0.1, 2);
+            AboutBtnFillMarker.Opacity = 0;
         }
 
         private void closeBtnMouseEnter(object sender, MouseEventArgs e)
         {
+            opacityAnimation(CloseBackgound.Name, 0, 1, 0.1, 2);
             CloseBackgound.Opacity = 1;
         }
 
         private void closeBtnMouseLeave(object sender, MouseEventArgs e)
         {
+            opacityAnimation(CloseBackgound.Name, 1, 0, 0.1, 2);
             CloseBackgound.Opacity = 0;
         }
 
         private void minimizeBtnMouseEnter(object sender, MouseEventArgs e)
         {
+            opacityAnimation(MinimizeBackgound.Name, 0, 0.2, 0.1, 2);
             MinimizeBackgound.Opacity = 0.2;
         }
 
         private void minimizeBtnMouseLeave(object sender, MouseEventArgs e)
         {
+            opacityAnimation(MinimizeBackgound.Name, 0.2, 0, 0.1, 2);
             MinimizeBackgound.Opacity = 0;
         }
 
         private void muteBtnMouseEnter(object sender, MouseEventArgs e)
         {
+            opacityAnimation(MuteBackgound.Name, 0, 0.2, 0.1, 2);
             MuteBackgound.Opacity = 0.2;
         }
 
         private void muteBtnMouseLeave(object sender, MouseEventArgs e)
         {
+            opacityAnimation(MuteBackgound.Name, 0.2, 0, 0.1, 2);
             MuteBackgound.Opacity = 0;
         }
 
@@ -338,6 +364,11 @@ namespace VA_Leo
             {
                 mute(null, null);
             }
+        }
+
+        private void windowLoaded(object sender, RoutedEventArgs e)
+        {
+            opacityAnimation(this.Name, 0, 1, 0.3, 2);
         }
     }
 }

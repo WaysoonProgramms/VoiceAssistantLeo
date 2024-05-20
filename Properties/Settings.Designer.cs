@@ -190,5 +190,28 @@ namespace VA_Leo.Properties {
                 this["isAutoRun"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool allowOpacity {
+            get {
+                return ((bool)(this["allowOpacity"]));
+            }
+            set {
+                this["allowOpacity"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.Collections.ObjectModel.ObservableCollection<VA_Leo.Pages.Chat.Messages> mesList {
+            get {
+                return ((global::System.Collections.ObjectModel.ObservableCollection<VA_Leo.Pages.Chat.Messages>)(this["mesList"]));
+            }
+            set {
+                this["mesList"] = value;
+            }
+        }
     }
 }

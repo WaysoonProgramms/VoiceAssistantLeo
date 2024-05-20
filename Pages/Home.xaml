@@ -9,16 +9,16 @@
       Title="Home" Width="850" Height="560" Background="#FF161616">
 
     <Grid>
-        
-        <Image x:Name="logo" HorizontalAlignment="Center" Height="213" VerticalAlignment="Top" Width="214" Margin="0,98,0,0" Source="/assets/images/dragon.png">
+
+        <Image x:Name="Logo" HorizontalAlignment="Left" Height="213" VerticalAlignment="Top" Width="213" Margin="315,108,0,0" Source="/assets/images/dragon.png">
             <Image.Effect>
                 <DropShadowEffect BlurRadius="990" Color="#FFFF" Opacity="0.4"/>
             </Image.Effect>
         </Image>
 
-        <Label Content="Ассистент Лео" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="58" 
-               Margin="168,338,0,0" FontFamily="Montserrat Alternates" FontWeight="Bold" Foreground="White"/>
+        <Label Content="Ассистент Лео" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="58" 
+               Margin="0,332,0,0" FontFamily="Montserrat Alternates" FontWeight="Bold" Foreground="White" Width="558"/>
         <Label Content="Простой голосовой помощник для Windows" HorizontalAlignment="Center" FontSize="14" Foreground="#FFCECECE" 
-               FontFamily="Montserrat Alternates" Margin="0,404,0,0" VerticalAlignment="Top" />
+               FontFamily="Montserrat Alternates" Margin="0,402,0,0" VerticalAlignment="Top" />
     </Grid>
 </Page>

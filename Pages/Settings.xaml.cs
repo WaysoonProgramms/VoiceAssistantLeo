@@ -19,13 +19,14 @@ namespace VA_Leo.Pages
 
             devModeBox.IsChecked = Properties.Settings.Default.isDevModeTrue;
             minimizeToTrayBox.IsChecked = Properties.Settings.Default.isMinimizeToTrayTrue;
+            autoRunBox.IsChecked = Properties.Settings.Default.isAutoRun;
+            opacityBox.IsChecked = Properties.Settings.Default.allowOpacity;
 
             appStartBox.IsChecked = Properties.Settings.Default.allowProgrammsStart;
             browserStartBox.IsChecked = Properties.Settings.Default.allowBrowserStart;
             usingNetworkBox.IsChecked = Properties.Settings.Default.allowNetworkUsing;
             AIbox.IsChecked = Properties.Settings.Default.allowAI;
             computerControlbox.IsChecked = Properties.Settings.Default.allowComputerControl;
-            autoRunBox.IsChecked = Properties.Settings.Default.isAutoRun;
 
             voiceVolumeSlider.Value = Properties.Settings.Default.voiceVol;
             soundVolumeSlider.Value = Properties.Settings.Default.soundVol;
@@ -136,6 +137,18 @@ namespace VA_Leo.Pages
         private void computerControlBoxUnchecked(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.allowComputerControl = false;
+            Properties.Settings.Default.Save();
+        }
+
+        private void opacityBoxChecked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.allowOpacity = true;
+            Properties.Settings.Default.Save();
+        }
+
+        private void opacityBoxUnchecked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.allowOpacity = false;
             Properties.Settings.Default.Save();
         }
 

@@ -7,18 +7,23 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Media;
 using Vosk;
-
 using VA_Leo.Pages;
+using System.Windows.Threading;
 
 namespace VA_Leo
 {
     public class Vosk
     {
+        public static Dispatcher _dispatcher;
+
         private static VoskRecognizer rec; // Объект распознования VOSK
         private static WaveFileWriter writer; // Объект записи с микрофона
-        private static bool busy = false;
+        public static bool busy = false;
 
+        public static bool ready;
         public static string text; // Текст распознанный Vosk
+        public static string chatReply; // Ответ в чат
+        public static string chatText;
         private static bool active = false; // Статус Wake Word
         private static int num = 1;
 
@@ -40,6 +45,9 @@ namespace VA_Leo
             string tmp = Path.GetTempPath();
             tmp += "assistant_leo_audio_rec_temp.wav";
             writer = new WaveFileWriter(tmp, waveIn.WaveFormat);
+
+            Dispatcher dispatcher = Dispatcher.CurrentDispatcher;
+            _dispatcher = dispatcher;
         }
 
         public static void update()
@@ -58,7 +66,7 @@ namespace VA_Leo
                 }
                 catch
                 {
-                    MessageBox.Show("Лео не удалось получить доступ к микрофону. Разрешите приложению доступ к " +
+                    MessageBox.Show("Лео не удалось получить доступ к микрофону. Попробуйте разрешить приложению доступ к " +
                         "микрофону: Параметры Windows -> Конфиденциальность -> Разрешения -> Микрофон.\n\nКод ошибки: 01",
                         "Что-то пошло не так...", MessageBoxButton.OK, MessageBoxImage.Error);
                     MainWindow.close();
@@ -131,6 +139,7 @@ namespace VA_Leo
                 if (!active)
                 {
                     playSound(@".\sounds\start.wav");
+                    initialMessage("Лео", "Left");
                 }
 
                 active = true; 
@@ -140,10 +149,14 @@ namespace VA_Leo
             // Спасибо
             if (text == "спасибо" && !busy && active)
             {
+
                 busy = true;
                 wakeTimer.Restart();
 
+                initialMessage("Спасибо", "Left");
+
                 playSound(@".\voices\vsegda_pozyalusta.wav");
+                initialMessage("Всегда пожалуйста!", "Right");
 
                 text = "";
 
@@ -154,10 +167,14 @@ namespace VA_Leo
             // Алиса
             if (text == "алиса" && !busy)
             {
+
                 busy = true;
                 wakeTimer.Restart();
 
+                initialMessage("Алиса", "Left");
+
                 playSound(@".\voices\neAlica.wav");
+                initialMessage("Я не Алиса! Я Лео!", "Right");
 
                 rec.Reset();
                 busy = false;
@@ -169,7 +186,10 @@ namespace VA_Leo
                 busy = true;
                 wakeTimer.Restart();
 
+                initialMessage("Сири", "Left");
+
                 playSound(@".\voices\neSiri.wav");
+                initialMessage("Я не Сири! Я Лео!", "Right");
 
                 rec.Reset();
                 busy = false;
@@ -181,7 +201,10 @@ namespace VA_Leo
                 busy = true;
                 wakeTimer.Restart();
 
+                initialMessage("Маруся", "Left");
+
                 playSound(@".\voices\neMarusa.wav");
+                initialMessage("Я не Маруся! Я Лео!", "Right");
 
                 rec.Reset();
                 busy = false;
@@ -193,21 +216,26 @@ namespace VA_Leo
                 busy = true;
                 wakeTimer.Restart();
 
+                initialMessage("Очисти корзину", "Left");
+
                 if (Properties.Settings.Default.allowComputerControl)
                 {
                     var result = SHEmptyRecycleBin(IntPtr.Zero, null, 0);
                     if (result == 0)
                     {
                         playSound(@".\voices\bin1.wav");
+                        initialMessage("Корзина очищена", "Right");
                     }
                     else
                     {
                         playSound(@".\voices\bin2.wav");
+                        initialMessage("Корзина уже пуста!", "Right");
                     }
                 }
                 else
                 {
                     playSound(@".\voices\err1.wav");
+                    initialMessage("Мне запрещено делать это", "Right");
                 }
                 rec.Reset();
                 busy = false;
@@ -220,9 +248,12 @@ namespace VA_Leo
                 busy = true;
                 wakeTimer.Restart();
 
+                initialMessage("Закрой", "Left");
+
                 if (Properties.Settings.Default.allowComputerControl)
                 {
                     playSound(@".\voices\good.wav");
+                    initialMessage("Хорошо", "Right");
 
                     IntPtr hWnd = GetForegroundWindow();
                     int pid;
@@ -234,6 +265,7 @@ namespace VA_Leo
                 else
                 {
                     playSound(@".\voices\err1.wav");
+                    initialMessage("Мне запрещено делать это", "Right");
                 }
                 rec.Reset();
                 busy = false;
@@ -245,10 +277,13 @@ namespace VA_Leo
                 string appdt = "%APPDATA%\\Microsoft\\Windows\\Start Menu\\Programs\\Яндекс Музыка.lnk";
                 appdt = Environment.ExpandEnvironmentVariables(appdt);
 
+                initialMessage("Открой Яндекс Музыку", "Left");
+
                 startProgramm(appdt,
                     $".\\voices\\music.wav",
                     @".\voices\err3.wav",
-                    1);
+                    1,
+                    "Открываю! [Yandex Music]");
             }
 
             // Запуск ТГ
@@ -257,55 +292,73 @@ namespace VA_Leo
                 string appdt = "%APPDATA%\\Telegram Desktop\\Telegram.exe";
                 appdt = Environment.ExpandEnvironmentVariables(appdt);
 
+                initialMessage("Открой телеграм", "Left");
+
                 startProgramm(appdt,
                     $".\\voices\\open{num}.wav",
                     @".\voices\err3.wav",
-                    4);
+                    4,
+                    "Открываю! [Telegram Desktop]");
             }
 
             if ((text == "открой консоль") && !busy && active)
             {
+                initialMessage("Открой консоль", "Left");
+
                 startProgramm("cmd.exe",
                     $".\\voices\\open{num}.wav",
                     @".\voices\err2.wav",
-                    3);
+                    3,
+                    "Открываю! [Consloe]");
             }
 
             if (text == "открой вконтакте" && !busy && active)
             {
+                initialMessage("Открой ВКонтакте", "Left");
+
                 openWebsite("https://vk.com",
                     $".\\voices\\open{num}.wav",
                     @".\voices\err1.wav",
-                    4);
+                    4,
+                    "Открываю! [vk.com]");
             }
 
             if (text == "открой ютуб" && !busy && active)
             {
+                initialMessage("Открой YouTube", "Left");
+
                 openWebsite("https://youtube.com",
                     $".\\voices\\open{num}.wav",
                     @".\voices\err1.wav",
-                    3);
+                    3,
+                    "Открываю! [youtube.com]");
             }
 
             if ((text == "запусти майнкрафт" || text == "открой майн") && !busy && active)
             {
+                initialMessage("Запусти Minecraft", "Left");
+
                 startProgramm(@"C:\XboxGames\Minecraft Launcher\Content\Minecraft.exe",
                     $".\\voices\\open{num}.wav",
                     @".\voices\err2.wav",
-                    3);
+                    3,
+                    "Открываю! [Minecraft Launcher]");
             }
 
             if ((text == "открой почту" || text == "зайди на почту") && !busy && active)
             {
+                initialMessage("Открой почту", "Left");
+
                 openWebsite("https://mail.google.com",
                     $".\\voices\\open{num}.wav",
                     @".\voices\err1.wav",
-                    3);
+                    3,
+                    "Открываю! [mail.google.com]");
             }
 
         }
 
-        public void startProgramm(string target, string media, string error, int rndInt)
+        public void startProgramm(string target, string media, string error, int rndInt, string mesText)
         {
             busy = true;
             wakeTimer.Restart();
@@ -320,6 +373,7 @@ namespace VA_Leo
                     num = rnd.Next(1, rndInt);
 
                     playSound(media);
+                    initialMessage(mesText, "Right");
 
                     System.Diagnostics.Process p = new System.Diagnostics.Process();
                     p.StartInfo.FileName = target;
@@ -330,6 +384,7 @@ namespace VA_Leo
                 catch (System.ComponentModel.Win32Exception)
                 {
                     playSound(error);
+                    initialMessage("Приложение не найдено на вашем устройстве!", "Right");
 
                     text = "";
                 }
@@ -337,13 +392,14 @@ namespace VA_Leo
             else
             {
                 playSound(@".\voices\err1.wav");
+                initialMessage("Мне запрещено делать это", "Right");
             }
 
             rec.Reset();
             busy = false;
         }
 
-        public void openWebsite(string url, string media, string error, int rndInt)
+        public void openWebsite(string url, string media, string error, int rndInt, string mesText)
         {
             busy = true;
             wakeTimer.Restart();
@@ -354,6 +410,7 @@ namespace VA_Leo
             if (Properties.Settings.Default.allowBrowserStart)
             {
                 playSound(media);
+                initialMessage(mesText, "Right");
 
                 Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
                 text = "";
@@ -362,6 +419,7 @@ namespace VA_Leo
             else
             {
                 playSound(error);
+                initialMessage("Мне запрещено делать это", "Right");
             }
 
             rec.Reset();
@@ -373,6 +431,14 @@ namespace VA_Leo
             player.Open(new Uri(file, UriKind.Relative));
             player.Volume = Settings.vVoulme / 100.0f;
             player.Play();
+        }
+
+        public void initialMessage(string text, string aligment)
+        {
+            _dispatcher.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)delegate ()
+            {
+                Chat.addMessage(text, aligment);
+            });
         }
     }
 }

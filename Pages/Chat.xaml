@@ -10,6 +10,22 @@
       Title="Chat" PreviewKeyDown="hotKeys">
 
     <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="25,23,25,77">
+            <ItemsControl x:Name="chatList" Background="#FF161616" BorderBrush="#FF161616">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,0,0,10">
+                            <Rectangle Name="messageCloud" RadiusX="10" RadiusY="10" Fill="White" StrokeThickness="3" HorizontalAlignment="{Binding Path=Aligment}" 
+                                       Stroke="White" Height="50" Width="{Binding Path=Length}"/>
+                            <StackPanel Margin="5">
+                                <TextBlock Name="mes" FontSize="16" Text="{Binding Path=Message}" HorizontalAlignment="{Binding Path=Aligment}" Margin="2,0,2,0" />
+                                <TextBlock FontSize="10" Text="{Binding Path=Time}" HorizontalAlignment="{Binding Path=Aligment}" Margin="2,0,0,0"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
 
         <Image HorizontalAlignment="Left" Height="356" Margin="-92,315,0,0" VerticalAlignment="Top" Width="319" Source="/assets/images/dragon.png" 
                Opacity="0.2" StretchDirection="DownOnly"/>
@@ -17,7 +33,7 @@
         <Border BorderThickness="1" Margin="25,495,25,20" Background="#FF0E0E0E" CornerRadius="10">
             <Grid>
                 <Border BorderThickness="1" Height="28" Margin="755,0,0,0" VerticalAlignment="Center" Width="28" HorizontalAlignment="Left" 
-                        CornerRadius="50" MouseLeftButtonDown="sendButtonClick" MouseEnter="sendBtnMouseEnter" MouseLeave="sendBtnMouseLeave">
+                        CornerRadius="50" MouseLeftButtonDown="send" MouseEnter="sendBtnMouseEnter" MouseLeave="sendBtnMouseLeave">
                     <Grid Margin="-1,-1,-1,-1">
                         <Rectangle Name="SendButtonBackgound" Height="28" VerticalAlignment="Center" Width="28" HorizontalAlignment="Center" Opacity="0" 
                                    RadiusX="8" RadiusY="8" Fill="White"/>

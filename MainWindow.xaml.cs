@@ -1,12 +1,10 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using System.Windows.Threading;
 using VA_Leo.Pages;
 using static VA_Leo.Pages.Chat;
 
@@ -187,7 +185,6 @@ namespace VA_Leo
 
         public void closeApplication(object sender, EventArgs e)
         {
-            //Chat.saveMessages();
             Close();
         }
 
@@ -246,8 +243,6 @@ namespace VA_Leo
         }
         private void getChat(object sender, MouseButtonEventArgs e)
         {
-            //Chat.getMessages();
-
             removeMarkers();
             MainFrame.Content = new Chat();
             ChatBtnMarker.Opacity = 1;

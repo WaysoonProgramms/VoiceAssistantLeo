@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:tb="http://www.hardcodet.net/taskbar"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:VA_Leo"
         mc:Ignorable="d"
         Name="Window"
         Title="Ассистент Лео" Height="600" Width="1100" Background="#FF1F1F1F" Foreground="White" 

@@ -137,4 +137,20 @@
     <None Update="C:\Users\User\.nuget\packages\vosk\0.3.38\build\lib\win-x64\libwinpthread-1.dll" Link="Libraries\libwinpthread-1.dll" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="C:\Users\Waysoon\.nuget\packages\vosk\0.3.38\build\lib\win-x64\libgcc_s_seh-1.dll" Link="Assets\libgcc_s_seh-1.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="C:\Users\Waysoon\.nuget\packages\vosk\0.3.38\build\lib\win-x64\libstdc++-6.dll" Link="Assets\libstdc++-6.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="C:\Users\Waysoon\.nuget\packages\vosk\0.3.38\build\lib\win-x64\libvosk.dll" Link="Assets\libvosk.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="C:\Users\Waysoon\.nuget\packages\vosk\0.3.38\build\lib\win-x64\libwinpthread-1.dll" Link="Assets\libwinpthread-1.dll" />
+  </ItemGroup>
+
 </Project>

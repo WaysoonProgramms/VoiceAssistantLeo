@@ -1,48 +1,35 @@
-﻿using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Globalization;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Threading;
-using System.Security.Policy;
-using Newtonsoft.Json.Linq;
-using System.IO;
-using System.Xml.Serialization;
-using Windows.Storage.Streams;
-using Windows.Storage;
-using System.Diagnostics;
-using System.Windows;
-using System.Security.Cryptography.X509Certificates;
-using System.Text.Json.Serialization;
-using Newtonsoft.Json;
 
 namespace VA_Leo.Pages
 {
     public partial class Chat : Page
     {
+
+        public static Chat cht;
         
         public Chat()
         {
             InitializeComponent();
             TextBox.Text = textMessage;
             chatList.ItemsSource = MainWindow.Message;
+            cht = this;
         }
 
         public class Messages
         {
-            public string Message { get; set; }
-            public string Time { get; set; }
+            public string? Message { get; set; }
+            public string? Time { get; set; }
             public int Length { get; set; }
-            public string Aligment { get; set; }
-        }
-
-        public static void update()
-        {
-            
+            public string? Aligment { get; set; }
         }
 
         public static string textMessage = "";
+
+        private void Update()
+        {
+            helloLabel.Visibility = System.Windows.Visibility.Hidden;
+        }
 
         public static void addMessage(string text, string aligment)
         {
@@ -62,6 +49,11 @@ namespace VA_Leo.Pages
                 length = text.Length * 8 + 20;
             }
 
+            if (cht.helloLabel.Visibility == System.Windows.Visibility.Visible)
+            {
+                cht.helloLabel.Visibility = System.Windows.Visibility.Hidden;
+            }
+            
             MainWindow.Message.Add(new Messages
             {
                 Message = text,
@@ -73,9 +65,6 @@ namespace VA_Leo.Pages
 
         public void send(object sender, MouseButtonEventArgs e)
         {
-
-            addMessage(TextBox.Text, "Left");
-
             Vosk vosk = new Vosk();
             Vosk.text = TextBox.Text.ToLower();
             vosk.speechRecognized();

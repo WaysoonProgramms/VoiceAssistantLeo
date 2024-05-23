@@ -11,18 +11,22 @@ using System.IO;
 using System.Xml.Serialization;
 using Windows.Storage.Streams;
 using Windows.Storage;
+using System.Diagnostics;
+using System.Windows;
+using System.Security.Cryptography.X509Certificates;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace VA_Leo.Pages
 {
     public partial class Chat : Page
     {
-        public static ObservableCollection<Messages> Message { get; set; }
+        
         public Chat()
         {
             InitializeComponent();
             TextBox.Text = textMessage;
-            Message = new ObservableCollection<Messages> { };
-            chatList.ItemsSource = Message;
+            chatList.ItemsSource = MainWindow.Message;
         }
 
         public class Messages
@@ -31,6 +35,11 @@ namespace VA_Leo.Pages
             public string Time { get; set; }
             public int Length { get; set; }
             public string Aligment { get; set; }
+        }
+
+        public static void update()
+        {
+            
         }
 
         public static string textMessage = "";
@@ -53,7 +62,7 @@ namespace VA_Leo.Pages
                 length = text.Length * 8 + 20;
             }
 
-            Message.Add(new Messages
+            MainWindow.Message.Add(new Messages
             {
                 Message = text,
                 Time = DateTime.Now.ToShortTimeString(),
@@ -105,11 +114,6 @@ namespace VA_Leo.Pages
             {
                 textMessage = TextBox.Text;
             }
-        }
-
-        public static void saveMessages()
-        {
-            // TODO: Сохранение сообщений
         }
     }
 }

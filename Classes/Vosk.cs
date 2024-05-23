@@ -24,7 +24,7 @@ namespace VA_Leo
         public static string text; // Текст распознанный Vosk
         public static string chatReply; // Ответ в чат
         public static string chatText;
-        private static bool active = false; // Статус Wake Word
+        public static bool active = false; // Статус Wake Word
         private static int num = 1;
 
         private static readonly Logger logger = LogManager.GetCurrentClassLogger();

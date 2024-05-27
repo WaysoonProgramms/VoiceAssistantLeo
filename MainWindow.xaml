@@ -5,12 +5,12 @@
         xmlns:tb="http://www.hardcodet.net/taskbar"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Name="Window"
+        Name="AssistantLeo"
         Title="Ассистент Лео" Height="600" Width="1100" Background="#FF1F1F1F" Foreground="White" 
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/assets/icon.ico" PreviewKeyDown="hotKeys" WindowStyle="None" 
         AllowsTransparency="True" Loaded="windowLoaded">
     <Grid Background="#FF151515">
-        <Rectangle Name="Border" HorizontalAlignment="Center" Height="40" VerticalAlignment="Top" Width="1100" Fill="#FF111111" 
+        <Rectangle HorizontalAlignment="Center" Height="40" VerticalAlignment="Top" Width="1100" Fill="#FF111111" 
                    MouseLeftButtonDown="movingWindow"/>
         <Image HorizontalAlignment="Left" Height="20" Margin="15,9,0,0" VerticalAlignment="Top" Width="20" Source="/Assets/icon.ico"/>
         <Label Content="Ассистент Лео" HorizontalAlignment="Left" Margin="40,6,0,0" VerticalAlignment="Top" Foreground="White" 
@@ -37,7 +37,7 @@
             <Grid>
                 <Rectangle Name="CloseBackgound" Height="30" VerticalAlignment="Center" Width="30" HorizontalAlignment="Center" 
                            Fill="#FFA70000" Opacity="0" RadiusX="8" RadiusY="8"/>
-                <Image Name="Close" HorizontalAlignment="Center" Height="25" VerticalAlignment="Center" Width="25" Source="/assets/images/close.png"/>
+                <Image HorizontalAlignment="Center" Height="25" VerticalAlignment="Center" Width="25" Source="/assets/images/close.png"/>
             </Grid>
         </Border>
 
@@ -104,8 +104,6 @@
         <Image HorizontalAlignment="Left" Height="15" Margin="41,573,0,0" VerticalAlignment="Top" Width="15" Source="/assets/images/avatar.png"/>
         <Label Content="© WaysoonProgramms 2024" HorizontalAlignment="Left" Margin="61,570,0,0" VerticalAlignment="Top" FontSize="9" 
                Cursor="Hand" Foreground="White" MouseDown="copyrightLink" MouseEnter="copyrightMouseEnter" MouseLeave="copyrightMouseLeave" FontFamily="Montserrat Alternates" FontStyle="Italic"/>
-        <Rectangle x:Name="CopyrigtLine" HorizontalAlignment="Left" Height="1" Margin="66,587,0,0" Stroke="White" VerticalAlignment="Top" Width="134" Opacity="0"/>
-
+        <Rectangle x:Name="CopyrightLine" HorizontalAlignment="Left" Height="1" Margin="66,587,0,0" Stroke="White" VerticalAlignment="Top" Width="134" Opacity="0"/>
     </Grid>
-
 </Window>

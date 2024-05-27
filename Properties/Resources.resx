@@ -117,4 +117,39 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="MainWindow_consoleAuth_welcomeMessage" xml:space="preserve">
+    <value>Ассистент Лео 0.1 | Режим разработчика
+@WaysoonProgramms 2024
+
+Введите ключ авторизации:</value>
+  </data>
+  <data name="MainWindow_consoleAuth_accessAllowed" xml:space="preserve">
+    <value>
+
+ДОСТУП РАЗРЕШЕН!
+Запуск приложения...
+</value>
+  </data>
+  <data name="MainWindow_consoleAuth_accessDenided" xml:space="preserve">
+    <value>Неверный ключ авторизаци! ДОСТУП ОГРАНИЧЕН!</value>
+  </data>
+  <data name="devModeSing" xml:space="preserve">
+    <value>Режим разработчика</value>
+  </data>
+  <data name="error1" xml:space="preserve">
+    <value>Лео не удалось получить доступ к микрофону. Попробуйте разрешить приложению доступ к микрофону: Параметры Windows -&gt; Конфиденциальность -&gt; Разрешения -&gt; Микрофон.
+
+Код ошибки: 01</value>
+  </data>
+  <data name="MessageBox_errorSing" xml:space="preserve">
+    <value>Что-то пошло не так...</value>
+  </data>
+  <data name="Settings_AIBox_Help" xml:space="preserve">
+    <value>Этот параметр отвечает за активацию ИИ. Лео сможет отвечать на вопросы с помощью искусственного интеллекта (GPT-4)
+
+ОБРАТИТЕ ВНИМАНИЕ! Все вычисления ИИ производит на вашем устройстве для этого требуется GPU</value>
+  </data>
+  <data name="Settings_AIBox_Sing" xml:space="preserve">
+    <value>Интеграция ИИ</value>
+  </data>
 </root>

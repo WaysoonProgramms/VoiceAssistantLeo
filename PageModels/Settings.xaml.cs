@@ -1,52 +1,71 @@
-﻿using Microsoft.Win32;
+﻿using System.Runtime.InteropServices;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
 namespace VA_Leo.Pages
 {
-    public partial class Settings : Page
+    public partial class Settings
     {
         public static float vVoulme = Properties.Settings.Default.voiceVol;
         public static float sVoulme = Properties.Settings.Default.soundVol;
 
-        private readonly MediaPlayer player = new MediaPlayer();
+        private readonly MediaPlayer _player = new();
 
         public Settings()
         {
             InitializeComponent();
-
-            devModeBox.IsChecked = Properties.Settings.Default.isDevModeTrue;
-            minimizeToTrayBox.IsChecked = Properties.Settings.Default.isMinimizeToTrayTrue;
-            autoRunBox.IsChecked = Properties.Settings.Default.isAutoRun;
-            opacityBox.IsChecked = Properties.Settings.Default.allowOpacity;
-
-            appStartBox.IsChecked = Properties.Settings.Default.allowProgrammsStart;
-            browserStartBox.IsChecked = Properties.Settings.Default.allowBrowserStart;
-            usingNetworkBox.IsChecked = Properties.Settings.Default.allowNetworkUsing;
+            
+            // Функции
+            DevModeBox.IsChecked = Properties.Settings.Default.isDevModeTrue;
+            MinimizeToTrayBox.IsChecked = Properties.Settings.Default.isMinimizeToTrayTrue;
+            AutoRunBox.IsChecked = Properties.Settings.Default.isAutoRun;
+            OpacityBox.IsChecked = Properties.Settings.Default.allowOpacity;
+            
+            // Правила
+            AppStartBox.IsChecked = Properties.Settings.Default.allowProgrammsStart;
+            BrowserStartBox.IsChecked = Properties.Settings.Default.allowBrowserStart;
+            UsingNetworkBox.IsChecked = Properties.Settings.Default.allowNetworkUsing;
             AIbox.IsChecked = Properties.Settings.Default.allowAI;
-            computerControlbox.IsChecked = Properties.Settings.Default.allowComputerControl;
+            ComputerControlbox.IsChecked = Properties.Settings.Default.allowComputerControl;
 
-            voiceVolumeSlider.Value = Properties.Settings.Default.voiceVol;
-            soundVolumeSlider.Value = Properties.Settings.Default.soundVol;
+            // Звук
+            VoiceVolumeSlider.Value = Properties.Settings.Default.voiceVol;
+            SoundVolumeSlider.Value = Properties.Settings.Default.soundVol;
 
-    }
+        }
+        
+        [DllImport("shell32.dll")]
+        private static extern bool CreateShortcut(string shortcutFilePath, string targetFilePath);
 
         private void voiceVolumeSliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            vVoulme = (float)voiceVolumeSlider.Value;
+            vVoulme = (float)VoiceVolumeSlider.Value;
 
             Properties.Settings.Default.voiceVol = vVoulme;
             Properties.Settings.Default.Save();
         }
 
+        private void voiceVolumeTest(object sender, MouseEventArgs e)
+        {
+            _player.Open(new Uri(@".\voices\test.wav", UriKind.Relative));
+            _player.Volume = Settings.vVoulme / 100.0f;
+            _player.Play();
+        }
+
         private void soundVolumeSliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            sVoulme = (float)soundVolumeSlider.Value;
+            sVoulme = (float)SoundVolumeSlider.Value;
 
             Properties.Settings.Default.soundVol = sVoulme;
             Properties.Settings.Default.Save();
+        }
+
+        private void soundVolumeTest(object sender, MouseEventArgs e)
+        {
+            _player.Open(new Uri(@".\sounds\start.wav", UriKind.Relative));
+            _player.Volume = Settings.sVoulme / 100.0f;
+            _player.Play();
         }
 
         private void devModeBoxChecked(object sender, RoutedEventArgs e)
@@ -109,23 +128,22 @@ namespace VA_Leo.Pages
             Properties.Settings.Default.Save();
         }
 
-        private void AIboxChecked(object sender, RoutedEventArgs e)
+        private void aiBoxChecked(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.allowAI = true;
             Properties.Settings.Default.Save();
         }
 
-        private void AIboxUnchecked(object sender, RoutedEventArgs e)
+        private void aiBoxUnchecked(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.allowAI = false;
             Properties.Settings.Default.Save();
         }
 
-        private void AIBoxHelp(object sender, MouseButtonEventArgs e)
+        private void aiBoxHelp(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("Этот параметр отвечает за активацию ИИ. Лео сможет отвечать на вопросы с помощью искусственного интеллекта (GPT-4)" +
-                "\n\nОБРАТИТЕ ВНИМАНИЕ! Все вычисления ИИ производит на вашем устройстве для этого требуется GPU",
-                    "Интеграция ИИ", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show(Properties.Resources.Settings_AIBox_Help,
+                    Properties.Resources.Settings_AIBox_Sing, MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         private void computerControlBoxChecked(object sender, RoutedEventArgs e)
@@ -152,8 +170,6 @@ namespace VA_Leo.Pages
             Properties.Settings.Default.Save();
         }
 
-        private RegistryKey reg = Registry.CurrentUser.CreateSubKey("Software\\Microsoft\\Windows\\CurrentVersion\\Run\\");
-
         private void addToAutoRun(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.isAutoRun = true;
@@ -161,9 +177,13 @@ namespace VA_Leo.Pages
 
             try
             {
-                string dir = Environment.CurrentDirectory;
-                dir += @"\Ассистент Лео.exe";
-                reg.SetValue("LeoAssistan", dir);
+                string appdt = @"%AppData%\Microsoft\Windows\Start Menu\Programs\Startup";
+                Environment.ExpandEnvironmentVariables(appdt);
+
+                string shortcutFilePath = "Ассистент Лео.lnk";
+                string targetFilePath = Environment.CurrentDirectory + @"\Ассистент Лео.exe";
+
+                CreateShortcut(shortcutFilePath, targetFilePath);
             }
             catch
             {
@@ -180,7 +200,7 @@ namespace VA_Leo.Pages
 
             try
             {
-                reg.DeleteValue("LeoAssistan");
+                
             }
             catch
             {

@@ -10,8 +10,11 @@ using static VA_Leo.Pages.Chat;
 
 namespace VA_Leo
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
+        public static ObservableCollection<Messages>? ChatCollection { get; private set; }
+        public static bool micAccess = true;
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -22,10 +25,12 @@ namespace VA_Leo
                 consoleAuth();
             }
 
+            getChat(this, null); // Сдлеано для инициализации коллекции с сообщениями
             getHome(this, null);
-            Vosk.main();
 
-            if (Properties.Settings.Default.isMuted == true)
+            Classes.Vosk.main();
+
+            if (Properties.Settings.Default.isMuted)
             {
                 Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/microphone.png"));
                 TrayIconMuteBtn.Header = "Вкл. микрофон";
@@ -36,80 +41,77 @@ namespace VA_Leo
                 TrayIconMuteBtn.Header = "Выкл. микрофон";
             }
 
-            Vosk.update();
-
-            Message = new ObservableCollection<Messages> { };
+            Classes.Vosk.update();
+            
+            ChatCollection = new ObservableCollection<Messages>();
         }
 
-        public static ObservableCollection<Messages> Message { get; set; }
-
-        WindowState prevState;
+        [DllImport("Kernel32")]
+        private static extern void AllocConsole();
 
         [DllImport("Kernel32")]
-        public static extern void AllocConsole();
+        private static extern void FreeConsole();
 
-        [DllImport("Kernel32")]
-        public static extern void FreeConsole();
-
-        private void consoleAuth()
+        private static void consoleAuth()
         {
-            Console.WriteLine("Ассистент Лео 0.1 | Режим разработчика\n@WaysoonProgramms 2024\n\nВведите ключ авторизации:");
+            Console.WriteLine(Properties.Resources.MainWindow_consoleAuth_welcomeMessage);
 
-            List<char> passChar = new List<char>();
+            var passChar = new List<char>();
             while (true)
             {
-                ConsoleKeyInfo cki = Console.ReadKey(true);
-                if (cki.Key == ConsoleKey.Enter)
-                    break;
-                else
+                var cki = Console.ReadKey(true);
+                if (cki.Key != ConsoleKey.Enter)
                 {
-                    Console.Write("*");
+                    Console.Write(@"*");
                     passChar.Add(cki.KeyChar);
                 }
+                else
+                {
+                    break;
+                }
             }
-            string passStr = null;
-            foreach (char c in passChar)
-                passStr += c;
+            var passStr = passChar.Aggregate("", (current, c) => current + c);
 
             if (passStr == "1234")
             {
-                Console.WriteLine("\n\nДОСТУП РАЗРЕШЕН!\nЗапуск приложения...\n");
+                Console.WriteLine(Properties.Resources.MainWindow_consoleAuth_accessAllowed);
             } else
             {
-                MessageBox.Show("Неверный ключ авторизации! ДОСТУП ОГРАНИЧЕН!",
-                   "Режим разработчика", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(Properties.Resources.MainWindow_consoleAuth_accessDenided,
+                    Properties.Resources.devModeSing, MessageBoxButton.OK, MessageBoxImage.Error);
                 FreeConsole();
                 Properties.Settings.Default.isDevModeTrue = false;
                 Properties.Settings.Default.Save();
             }
         }
 
-        public static void close()
-        {
-            close();
-        }
-
         private void trayIconClick(object sender, RoutedEventArgs e)
         {
-            if (sender == TrayIconChatBtn)
+            if (Equals(sender, TrayIconChatBtn))
             {
                 getChat(TrayIconChatBtn, null);
             }
-            if (sender == TrayIconSettingsBtn)
+            if (Equals(sender, TrayIconSettingsBtn))
             {
                 getSettings(TrayIconSettingsBtn, null);
             }
 
 
             Show();
-            WindowState = prevState;
+            WindowState = WindowState.Normal;
 
             opacityAnimation(this.Name, 0, 1, 0.3, 2);
         }
 
         private void trayIconMute(object sender, RoutedEventArgs e)
         {
-            if (Properties.Settings.Default.isMuted == true)
+            if (micAccess == false)
+            {
+                Classes.Vosk.error1();
+                return;
+            }
+
+            if (Properties.Settings.Default.isMuted)
             {
                 Properties.Settings.Default.isMuted = false;
                 Properties.Settings.Default.Save();
@@ -126,7 +128,7 @@ namespace VA_Leo
                 TrayIconMuteBtn.Header = "Вкл. микрофон";
             }
 
-            Vosk.update();
+            Classes.Vosk.update();
         }
 
         private void trayIconClose(object sender, RoutedEventArgs e)
@@ -134,35 +136,29 @@ namespace VA_Leo
             Close();
         }
 
-        void movingWindow(object sender, MouseButtonEventArgs e) 
+        private void movingWindow(object sender, MouseButtonEventArgs e) 
         {
-            if (Properties.Settings.Default.allowOpacity == true)
-            {
-                this.DragMove();
-            }
-            else
-            {
-                this.DragMove();
-            }            
+            DragMove();     
         }
 
-        private void opacityAnimation(string target, double at, double to, double time, int opID)
+        private void opacityAnimation(string target, double at, double to, double time, int operation)
         {
             if (Properties.Settings.Default.allowOpacity)
             {
-                DoubleAnimation animation;
-                Storyboard storyboardFade = new Storyboard();
+                var storyboardFade = new Storyboard();
 
-                animation = new DoubleAnimation(at, to, new Duration(TimeSpan.FromSeconds(time)));
-                // Если opID = 2, то ни что не выполняется следом
-                if (opID == 0)
+                var animation = new DoubleAnimation(at, to, new Duration(TimeSpan.FromSeconds(time)));
+                
+                switch (operation)
                 {
-                    animation.Completed += closeApplication;
+                    case 0:
+                        animation.Completed += closeApplication;
+                        break;
+                    case 1:
+                        animation.Completed += hideApplication;
+                        break;
                 }
-                if (opID == 1)
-                {
-                    animation.Completed += hideApplication;
-                }
+
                 Storyboard.SetTargetName(animation, target);
                 Storyboard.SetTargetProperty(animation, new PropertyPath(MainWindow.OpacityProperty));
                 storyboardFade.FillBehavior = FillBehavior.Stop;
@@ -172,42 +168,42 @@ namespace VA_Leo
             } 
             else
             {
-                if (opID == 0)
+                switch (operation)
                 {
-                    Close();
-                }
-                if (opID == 1)
-                {
-                    Hide();
+                    case 0:
+                        Close();
+                        break;
+                    case 1:
+                        Hide();
+                        break;
                 }
             }
         }
 
-        public void closeApplication(object sender, EventArgs e)
+        private void closeApplication(object? sender, EventArgs e)
         {
             Close();
         }
 
-        public void hideApplication(object sender, EventArgs e)
+        private void hideApplication(object? sender, EventArgs e)
         {
             Hide();
         }
 
         private void closeWindow(object sender, MouseButtonEventArgs e)
         {
-            if (Properties.Settings.Default.isMinimizeToTrayTrue == true)
-            {
-                opacityAnimation(this.Name, 1, 0, 0.3, 1);
-            }
-            else
-            {
-                opacityAnimation(this.Name, 1, 0, 0.3, 0);
-            }
+            opacityAnimation(this.Name, 1, 0, 0.3, Properties.Settings.Default.isMinimizeToTrayTrue ? 1 : 0);
         }
 
-        public void mute(object sender, MouseButtonEventArgs e)
+        private void mute(object sender, MouseButtonEventArgs? e)
         {
-            if (Properties.Settings.Default.isMuted == true)
+            if (micAccess == false)
+            {
+                Classes.Vosk.error1();
+                return;
+            }
+
+            if (Properties.Settings.Default.isMuted)
             {
                 Properties.Settings.Default.isMuted = false;
                 Properties.Settings.Default.Save();
@@ -221,7 +217,7 @@ namespace VA_Leo
                 Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/microphone.png"));
             }
 
-            Vosk.update();
+            Classes.Vosk.update();
         }
 
         private void minimizeWindow(object sender, MouseButtonEventArgs e)
@@ -229,31 +225,25 @@ namespace VA_Leo
             WindowState = WindowState.Minimized;
         }
 
-        private void getHome(object sender, MouseButtonEventArgs e)
+        private void getHome(object sender, MouseButtonEventArgs? e)
         {
             removeMarkers();
             MainFrame.Content = new Home();
             HomeBtnMarker.Opacity = 1;
         }
-        private void getSettings(object sender, MouseButtonEventArgs e)
+        private void getSettings(object sender, MouseButtonEventArgs? e)
         {
             removeMarkers();
             MainFrame.Content = new Settings();
             SettingsBtnMarker.Opacity = 1;
         }
-        private void getChat(object sender, MouseButtonEventArgs e)
+        private void getChat(object sender, MouseButtonEventArgs? e)
         {
             removeMarkers();
             MainFrame.Content = new Chat();
             ChatBtnMarker.Opacity = 1;
         }
-        public void getChat()
-        {
-            removeMarkers();
-            MainFrame.Content = new Chat();
-            ChatBtnMarker.Opacity = 1;
-        }
-        private void getAbout(object sender, MouseButtonEventArgs e)
+        private void getAbout(object sender, MouseButtonEventArgs? e)
         {
             removeMarkers();
             MainFrame.Content = new About();
@@ -359,19 +349,19 @@ namespace VA_Leo
 
         private void copyrightMouseEnter(object sender, MouseEventArgs e)
         {
-            CopyrigtLine.Opacity = 1;
+            CopyrightLine.Opacity = 1;
         }
 
         private void copyrightMouseLeave(object sender, MouseEventArgs e)
         {
-            CopyrigtLine.Opacity = 0;
+            CopyrightLine.Opacity = 0;
         }
 
         private void hotKeys(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.M)
             {
-                mute(null, null);
+                mute(this, null);
             }
         }
 

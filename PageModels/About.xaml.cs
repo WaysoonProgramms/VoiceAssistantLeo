@@ -1,11 +1,10 @@
 ﻿using System.Diagnostics;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace VA_Leo.Pages
 {
-    public partial class About : Page
+    public partial class About
     {
         public About()
         {
@@ -14,7 +13,7 @@ namespace VA_Leo.Pages
 
         private void liclinkMouseEnter(object sender, MouseEventArgs e)
         {
-            liclnik.Visibility = Visibility.Visible;
+            Liclnik.Visibility = Visibility.Visible;
         }
 
         private void liclinkClick(object sender, MouseButtonEventArgs e)
@@ -25,12 +24,12 @@ namespace VA_Leo.Pages
 
         private void liclinkMouseLeave(object sender, MouseEventArgs e)
         {
-            liclnik.Visibility = Visibility.Hidden;
+            Liclnik.Visibility = Visibility.Hidden;
         }
 
         private void repolinkMouseEnter(object sender, MouseEventArgs e)
         {
-            repolink.Visibility = Visibility.Visible;
+            Repolink.Visibility = Visibility.Visible;
         }
 
         private void repolinkClick(object sender, MouseButtonEventArgs e)
@@ -41,12 +40,12 @@ namespace VA_Leo.Pages
 
         private void repolinkMouseLeave(object sender, MouseEventArgs e)
         {
-            repolink.Visibility = Visibility.Hidden;
+            Repolink.Visibility = Visibility.Hidden;
         }
 
         private void issueslinkMouseEnter(object sender, MouseEventArgs e)
         {
-            issueslink.Visibility = Visibility.Visible;
+            Issueslink.Visibility = Visibility.Visible;
         }
 
         private void issueslinkClick(object sender, MouseButtonEventArgs e)
@@ -57,7 +56,7 @@ namespace VA_Leo.Pages
 
         private void issueslinkMouseLeave(object sender, MouseEventArgs e)
         {
-            issueslink.Visibility = Visibility.Hidden;
+            Issueslink.Visibility = Visibility.Hidden;
         }
     }
 }

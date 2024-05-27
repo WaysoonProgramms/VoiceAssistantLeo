@@ -3,17 +3,23 @@ using System.Windows.Input;
 
 namespace VA_Leo.Pages
 {
-    public partial class Chat : Page
+    public partial class Chat
     {
-
-        public static Chat cht;
+        private static Chat? _chat;
+        private static string _textMessage = "";
+        private static bool _nullMessages = true;
         
         public Chat()
         {
             InitializeComponent();
-            TextBox.Text = textMessage;
-            chatList.ItemsSource = MainWindow.Message;
-            cht = this;
+            TextBox.Text = _textMessage;
+            ChatList.ItemsSource = MainWindow.ChatCollection;
+            _chat = this;
+
+            if (!_nullMessages)
+            {
+                HelloLabel.Visibility = System.Windows.Visibility.Hidden;
+            }
         }
 
         public class Messages
@@ -24,18 +30,16 @@ namespace VA_Leo.Pages
             public string? Aligment { get; set; }
         }
 
-        public static string textMessage = "";
-
-        private void Update()
-        {
-            helloLabel.Visibility = System.Windows.Visibility.Hidden;
-        }
-
         public static void addMessage(string text, string aligment)
         {
-            if (text == "")
+            if (text == string.Empty)
             {
                 return;
+            }
+
+            if (_nullMessages)
+            {
+                _nullMessages = false;
             }
 
             int length;
@@ -49,12 +53,12 @@ namespace VA_Leo.Pages
                 length = text.Length * 8 + 20;
             }
 
-            if (cht.helloLabel.Visibility == System.Windows.Visibility.Visible)
+            if (_chat!.HelloLabel.Visibility == System.Windows.Visibility.Visible)
             {
-                cht.helloLabel.Visibility = System.Windows.Visibility.Hidden;
+                _chat.HelloLabel.Visibility = System.Windows.Visibility.Hidden;
             }
             
-            MainWindow.Message.Add(new Messages
+            MainWindow.ChatCollection!.Add(new Messages
             {
                 Message = text,
                 Time = DateTime.Now.ToShortTimeString(),
@@ -63,13 +67,13 @@ namespace VA_Leo.Pages
             });
         }
 
-        public void send(object sender, MouseButtonEventArgs e)
+        private void send(object sender, MouseButtonEventArgs? e)
         {
-            Vosk vosk = new Vosk();
-            Vosk.text = TextBox.Text.ToLower();
+            Classes.Vosk vosk = new Classes.Vosk();
+            Classes.Vosk.text = TextBox.Text.ToLower();
             vosk.speechRecognized();
 
-            Console.WriteLine($"[INPUT] Введено > {Vosk.text}");
+            Console.WriteLine($@"[INPUT] Input > {Classes.Vosk.text}");
 
             TextBox.Text = string.Empty;
         }
@@ -93,7 +97,7 @@ namespace VA_Leo.Pages
 
             if (e.Key == Key.Up)
             {
-                TextBox.Text = textMessage;
+                TextBox.Text = _textMessage;
             }
         }
 
@@ -101,7 +105,7 @@ namespace VA_Leo.Pages
         {
             if (TextBox.Text != "")
             {
-                textMessage = TextBox.Text;
+                _textMessage = TextBox.Text;
             }
         }
     }

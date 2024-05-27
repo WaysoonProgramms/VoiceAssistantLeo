@@ -7,13 +7,12 @@
       d:DesignHeight="560" d:DesignWidth="850"
       Background="#FF161616"
       Title="Chat" PreviewKeyDown="hotKeys">
-
     <Grid>
         <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="25,23,25,77">
-            <ItemsControl x:Name="chatList" Background="#FF161616" BorderBrush="#FF161616">
+            <ItemsControl x:Name="ChatList" Background="#FF161616" BorderBrush="#FF161616">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="0,0,0,10">
+                        <Grid Margin="0,0,0,10" d:DataContext="{d:DesignInstance }">
                             <Rectangle Name="messageCloud" RadiusX="10" RadiusY="10" Fill="White" StrokeThickness="3" HorizontalAlignment="{Binding Path=Aligment}" 
                                        Stroke="White" Height="50" Width="{Binding Path=Length}"/>
                             <StackPanel Margin="5">
@@ -44,7 +43,7 @@
                          SelectionOpacity="1" IsTabStop="False" SpellCheck.IsEnabled="True" Language="ru-ru" TextChanged="messageBuffer" FontFamily="Montserrat Alternates"/>
             </Grid>
         </Border>
-        <Label x:Name="helloLabel" Content="Начните общение прямо сейчас..." HorizontalAlignment="Center" Margin="0,253,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Montserrat Alternates" FontStyle="Italic"/>
-
+        <Label x:Name="HelloLabel" Content="Начните общение прямо сейчас..." HorizontalAlignment="Center" Margin="0,253,0,0" VerticalAlignment="Top" 
+               Foreground="White" FontFamily="Montserrat Alternates" FontStyle="Italic"/>
     </Grid>
 </Page>

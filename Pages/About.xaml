@@ -6,7 +6,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="560" d:DesignWidth="850"
       Title="About" Width="850" Height="560" Background="#FF161616">
-
     <Grid>
         <Image HorizontalAlignment="Left" Height="356" Margin="-92,315,0,0" VerticalAlignment="Top" Width="319" Source="/assets/images/dragon.png" 
             Opacity="0.2" StretchDirection="DownOnly"/>
@@ -52,15 +51,15 @@
 
         <Label Content="Лицензия" HorizontalAlignment="Left" Margin="571,212,0,0" VerticalAlignment="Top" 
                Foreground="White" FontFamily="Montserrat Alternates" FontSize="14" MouseEnter="liclinkMouseEnter" MouseLeave="liclinkMouseLeave" MouseDown="liclinkClick"/>
-        <Rectangle x:Name="liclnik" HorizontalAlignment="Left" Height="1" Margin="576,233,0,0" Stroke="White" VerticalAlignment="Top" Width="72" Visibility="Hidden"/>
+        <Rectangle x:Name="Liclnik" HorizontalAlignment="Left" Height="1" Margin="576,233,0,0" Stroke="White" VerticalAlignment="Top" Width="72" Visibility="Hidden"/>
 
         <Label Content="Исходный код" HorizontalAlignment="Left" Margin="664,212,0,0" VerticalAlignment="Top" MouseEnter="repolinkMouseEnter" MouseLeave="repolinkMouseLeave" 
                MouseDown="repolinkClick" Foreground="White" FontFamily="Montserrat Alternates" FontSize="14"/>
-        <Rectangle x:Name="repolink" HorizontalAlignment="Left" Height="1" Margin="670,233,0,0" Stroke="White" VerticalAlignment="Top" Width="103" Visibility="Hidden"/>
+        <Rectangle x:Name="Repolink" HorizontalAlignment="Left" Height="1" Margin="670,233,0,0" Stroke="White" VerticalAlignment="Top" Width="103" Visibility="Hidden"/>
 
         <Label Content="Сообщить об ошибке" HorizontalAlignment="Left" Margin="588,248,0,0" VerticalAlignment="Top" MouseEnter="issueslinkMouseEnter" MouseLeave="issueslinkMouseLeave" 
        MouseDown="issueslinkClick" Foreground="White" FontFamily="Montserrat Alternates" FontSize="14"/>
-        <Rectangle x:Name="issueslink" HorizontalAlignment="Left" Height="1" Margin="595,269,0,0" Stroke="White" VerticalAlignment="Top" Width="162" Visibility="Hidden"/>
+        <Rectangle x:Name="Issueslink" HorizontalAlignment="Left" Height="1" Margin="595,269,0,0" Stroke="White" VerticalAlignment="Top" Width="162" Visibility="Hidden"/>
         
         <Label Content="В проекте используются иконки Icons8" HorizontalAlignment="Left" Margin="30,534,0,0" VerticalAlignment="Top" FontSize="9" 
             Foreground="White" FontFamily="Montserrat Alternates" FontStyle="Italic"/>

@@ -6,15 +6,13 @@
       mc:Ignorable="d" 
       d:DesignHeight="560" d:DesignWidth="850"
       Title="Home" Width="850" Height="560" Background="#FF161616">
-
     <Grid>
-
         <Image x:Name="Logo" HorizontalAlignment="Left" Height="213" VerticalAlignment="Top" Width="213" Margin="315,108,0,0" Source="/assets/images/dragon.png">
             <Image.Effect>
-                <DropShadowEffect BlurRadius="990" Color="#FFFF" Opacity="0.4"/>
+                <DropShadowEffect x:Name="LogoEffect" BlurRadius="990" Color="#FFFF" Opacity="0.5"/>
             </Image.Effect>
         </Image>
-
+        
         <Label Content="Ассистент Лео" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="58" 
                Margin="0,332,0,0" FontFamily="Montserrat Alternates" FontWeight="Bold" Foreground="White" Width="558"/>
         <Label Content="Простой голосовой помощник для Windows" HorizontalAlignment="Center" FontSize="14" Foreground="#FFCECECE" 

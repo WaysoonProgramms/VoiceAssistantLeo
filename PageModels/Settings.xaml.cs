@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using VA_Leo.Classes;
 
 namespace VA_Leo.Pages
 {
@@ -11,6 +12,7 @@ namespace VA_Leo.Pages
         public static float sVoulme = Properties.Settings.Default.soundVol;
 
         private readonly MediaPlayer _player = new();
+        private readonly Logger _logger = new();
 
         public Settings()
         {
@@ -190,6 +192,8 @@ namespace VA_Leo.Pages
                 MessageBox.Show("Не удалось создать запись в реестре" +
                 "\n\nКод ошибки: 02",
                     "Что-то пошло не так...", MessageBoxButton.OK, MessageBoxImage.Error);
+                
+                _logger.error("Leo was unable to add himself to autostart.");
             }
         }
 
@@ -207,6 +211,8 @@ namespace VA_Leo.Pages
                 MessageBox.Show("Не удалось изменить/удалить запись в реестре" +
                 "\n\nКод ошибки: 03",
                     "Что-то пошло не так...", MessageBoxButton.OK, MessageBoxImage.Error);
+
+                _logger.error("Leo was unable to remove himself from startup.");
             }
         }
     }

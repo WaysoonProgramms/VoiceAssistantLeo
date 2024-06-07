@@ -80,6 +80,28 @@ namespace VA_Leo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Лео не удалось загрузить последние сообщения.
+        ///
+        ///Код ошибки: 04.
+        /// </summary>
+        public static string error4 {
+            get {
+                return ResourceManager.GetString("error4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Лео не удалось сохранить последние сообщения.
+        ///
+        ///Код ошибки: 05.
+        /// </summary>
+        public static string error5 {
+            get {
+                return ResourceManager.GetString("error5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 
         ///
         ///ДОСТУП РАЗРЕШЕН!

@@ -17,18 +17,17 @@ namespace VA_Leo.Classes
     {
         private static Dispatcher? _dispatcher;
 
-        private static VoskRecognizer? _rec; // Объект распознавания VOSK
+        private static VoskRecognizer? _recognizer; // Объект распознавания VOSK
         private static WaveFileWriter? _writer; // Объект записи с микрофона
         private static bool _busy;
         
-        public static string? text; // Текст распознанный Vosk
-        private static bool _active; // Статус Wake Word
+        public static string? recognizedText;
+        private static bool _wakeWordStatus;
         private static int _num = 1;
-
-        //private static readonly Logger logger = LogManager.GetCurrentClassLogger();
-        //TODO: Доделать логгер
+        
+        private static readonly Logger Logger = new();
         private static readonly Stopwatch WakeTimer = new();
-        private static WaveInEvent _waveIn = new();
+        private static readonly WaveInEvent WaveIn = new();
         
         private enum RecycleFlags : uint;
         
@@ -38,16 +37,16 @@ namespace VA_Leo.Classes
         {
             // Инициализация модели
             var model = new Model(".\\vosk");
-            _rec = new VoskRecognizer(model, 16000f);
+            _recognizer = new VoskRecognizer(model, 16000f);
 
-            // Инициализация прослушивания
-            _waveIn.WaveFormat = new WaveFormat(16000, 1);
-            _waveIn.DataAvailable += WaveInOnDataAvailable;
+            // Инициализация записи
+            WaveIn.WaveFormat = new WaveFormat(16000, 1);
+            WaveIn.DataAvailable += WaveInOnDataAvailable;
 
             // Временный файл записи голоса
             string tmp = Path.GetTempPath();
             tmp += "assistant_leo_audio_rec_temp.wav";
-            _writer = new WaveFileWriter(tmp, _waveIn.WaveFormat);
+            _writer = new WaveFileWriter(tmp, WaveIn.WaveFormat);
 
             Dispatcher currentDispatcher = Dispatcher.CurrentDispatcher;
             _dispatcher = currentDispatcher;
@@ -67,17 +66,20 @@ namespace VA_Leo.Classes
             if (Properties.Settings.Default.isMuted)
             {
                 WakeTimer.Stop();
-                _waveIn.StopRecording();
+                WaveIn.StopRecording();
             }
             else
             {
                 try
                 {
-                    _waveIn.StartRecording();
+                    WaveIn.StartRecording();
                 }
                 catch
                 {
                     error1();
+                    
+                    Logger.warn("Leo couldn't start voice recognition. Microphone access is not allowed.");
+                    
                     MainWindow.micAccess = false;
                 }
             }
@@ -94,47 +96,49 @@ namespace VA_Leo.Classes
 
             var vosk = new Vosk();
 
-            if (_rec!.AcceptWaveform(e.Buffer, e.BytesRecorded))
+            if (_recognizer!.AcceptWaveform(e.Buffer, e.BytesRecorded))
             {
                 // Парсинг объекта с текстом
-                var pResult = JObject.Parse(_rec.Result());
-                text = pResult["text"]!.ToString();
+                var pResult = JObject.Parse(_recognizer.Result());
+                recognizedText = pResult["text"]!.ToString();
                 vosk.speechRecognized(); // Проверка результатов
             }
             else
             {
                 // Парсинг объекта с текстом
-                var pResult = JObject.Parse(_rec.PartialResult());
-                text = pResult["partial"]!.ToString();
+                var pResult = JObject.Parse(_recognizer.PartialResult());
+                recognizedText = pResult["partial"]!.ToString();
                 vosk.speechRecognized(); // Проверка результатов
             }
         }
 
         public void speechRecognized()
         {
-            if (text != "")
+            if (recognizedText != "")
             {
-                Console.WriteLine($@"[VOSK] Recognized > {text}");
+                Console.WriteLine($@"[VOSK] Recognized > {recognizedText}");
             }
 
-            if (WakeTimer.Elapsed.Seconds >= 15 && _active)
+            if (WakeTimer.Elapsed.Seconds >= 15 && _wakeWordStatus)
             {
-                _dispatcher?.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)Home.deactivateAnimation);
-
                 playSound(@".\sounds\stop.wav");
 
+                _dispatcher?.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)Home.deactivateAnimation);
+                
+                Logger.message("Assistant deactivated");
+                
                 WakeTimer.Stop();
                 WakeTimer.Reset();
-                _active = false;
+                _wakeWordStatus = false;
             }
 
             // WAKE WORD
-            if (text!.Contains("лео"))
+            if (recognizedText!.Contains("лео"))
             {
                 WakeTimer.Reset();
                 WakeTimer.Start();
 
-                if (!_active)
+                if (!_wakeWordStatus)
                 {
                     playSound(@".\sounds\start.wav");
                     initialMessage("Лео", "Left");
@@ -142,12 +146,14 @@ namespace VA_Leo.Classes
                     _dispatcher?.BeginInvoke(DispatcherPriority.Normal, (ThreadStart)Home.activateAnimation);
                 }
 
-                _active = true; 
-                _rec!.Reset();
+                _wakeWordStatus = true; 
+                _recognizer!.Reset();
+
+                Logger.message("Assistant activated");
             }
 
             // Спасибо
-            if (text == "спасибо" && !_busy && _active)
+            if (recognizedText == "спасибо" && !_busy && _wakeWordStatus)
             {
 
                 _busy = true;
@@ -157,15 +163,17 @@ namespace VA_Leo.Classes
 
                 playVoice(@".\voices\vsegda_pozyalusta.wav");
                 initialMessage("Всегда пожалуйста!", "Right");
+                
+                Logger.message($"Vosk recognized the phrase - {recognizedText}");
+                
+                recognizedText = "";
 
-                text = "";
-
-                _rec?.Reset();
+                _recognizer?.Reset();
                 _busy = false;
             }
 
             // Алиса
-            if (text == "алиса" && !_busy)
+            if (recognizedText == "алиса" && !_busy)
             {
 
                 _busy = true;
@@ -176,27 +184,28 @@ namespace VA_Leo.Classes
                 playVoice(@".\voices\neAlica.wav");
                 initialMessage("Я не Алиса! Я Лео!", "Right");
 
-                _rec?.Reset();
+                _recognizer?.Reset();
                 _busy = false;
             }
 
             // Siri
-            if (text == "сири" && !_busy)
+            if (recognizedText == "сири" && !_busy)
             {
                 _busy = true;
                 WakeTimer.Restart();
 
-                initialMessage("Сири", "Left");
+                initialMessage("Siri", "Left");
+                
 
                 playVoice(@".\voices\neSiri.wav");
-                initialMessage("Я не Сири! Я Лео!", "Right");
+                initialMessage("Я не Siri! Я Лео!", "Right");
 
-                _rec?.Reset();
+                _recognizer?.Reset();
                 _busy = false;
             }
 
             // Маруся
-            if (text == "маруся" && !_busy)
+            if (recognizedText == "маруся" && !_busy)
             {
                 _busy = true;
                 WakeTimer.Restart();
@@ -206,12 +215,12 @@ namespace VA_Leo.Classes
                 playVoice(@".\voices\neMarusa.wav");
                 initialMessage("Я не Маруся! Я Лео!", "Right");
 
-                _rec?.Reset();
+                _recognizer?.Reset();
                 _busy = false;
             }
 
             // Очистка корзины
-            if (text == "очисти корзину" && !_busy && _active)
+            if (recognizedText == "очисти корзину" && !_busy && _wakeWordStatus)
             {
                 _busy = true;
                 WakeTimer.Restart();
@@ -237,13 +246,13 @@ namespace VA_Leo.Classes
                     playVoice(@".\voices\err1.wav");
                     initialMessage("Мне запрещено делать это", "Right");
                 }
-                _rec?.Reset();
+                _recognizer?.Reset();
                 _busy = false;
 
             }
 
             // Закрытие процесса в фокусе
-            if (text == "закрой" && !_busy && _active)
+            if (recognizedText == "закрой" && !_busy && _wakeWordStatus)
             {
                 _busy = true;
                 WakeTimer.Restart();
@@ -256,8 +265,7 @@ namespace VA_Leo.Classes
                     initialMessage("Хорошо", "Right");
 
                     IntPtr hWnd = GetForegroundWindow();
-                    int processId;
-                    GetWindowThreadProcessId(hWnd, out processId);
+                    GetWindowThreadProcessId(hWnd, out var processId);
 
                     Process proc = Process.GetProcessById(processId);
                     proc.Kill();
@@ -267,12 +275,12 @@ namespace VA_Leo.Classes
                     playVoice(@".\voices\err1.wav");
                     initialMessage("Мне запрещено делать это", "Right");
                 }
-                _rec?.Reset();
+                _recognizer?.Reset();
                 _busy = false;
             }
 
             // Музыка
-            if (text == "открой яндекс музыку" && !_busy && _active)
+            if (recognizedText == "открой яндекс музыку" && !_busy && _wakeWordStatus)
             {
                 string appdt = @"%LOCAL%\Programs\YandexMusic\Яндекс Музыка.exe";
                 appdt = Environment.ExpandEnvironmentVariables(appdt);
@@ -289,7 +297,7 @@ namespace VA_Leo.Classes
             }
 
             // Запуск ТГ
-            if ((text == "открой телеграмм" || text == "открой телеграм" || text == "открой телегу") && !_busy && _active)
+            if ((recognizedText == "открой телеграмм" || recognizedText == "открой телеграм" || recognizedText == "открой телегу") && !_busy && _wakeWordStatus)
             {
                 string appdt = "%APPDATA%\\Telegram Desktop\\Telegram.exe";
                 appdt = Environment.ExpandEnvironmentVariables(appdt);
@@ -303,7 +311,7 @@ namespace VA_Leo.Classes
                     "Открываю! [Telegram Desktop]");
             }
 
-            if ((text == "открой консоль") && !_busy && _active)
+            if ((recognizedText == "открой консоль") && !_busy && _wakeWordStatus)
             {
                 initialMessage("Открой консоль", "Left");
 
@@ -314,7 +322,7 @@ namespace VA_Leo.Classes
                     "Открываю! [Consloe]");
             }
 
-            if (text == "открой вконтакте" && !_busy && _active)
+            if (recognizedText == "открой вконтакте" && !_busy && _wakeWordStatus)
             {
                 initialMessage("Открой ВКонтакте", "Left");
 
@@ -324,7 +332,7 @@ namespace VA_Leo.Classes
                     "Открываю! [vk.com]");
             }
 
-            if (text == "открой ютуб" && !_busy && _active)
+            if (recognizedText == "открой ютуб" && !_busy && _wakeWordStatus)
             {
                 initialMessage("Открой YouTube", "Left");
 
@@ -334,7 +342,7 @@ namespace VA_Leo.Classes
                     "Открываю! [youtube.com]");
             }
 
-            if ((text == "запусти майнкрафт" || text == "открой майн") && !_busy && _active)
+            if ((recognizedText == "запусти майнкрафт" || recognizedText == "открой майн") && !_busy && _wakeWordStatus)
             {
                 initialMessage("Запусти Minecraft", "Left");
 
@@ -345,7 +353,7 @@ namespace VA_Leo.Classes
                     "Открываю! [Minecraft Launcher]");
             }
 
-            if ((text == "открой почту" || text == "зайди на почту") && !_busy && _active)
+            if ((recognizedText == "открой почту" || recognizedText == "зайди на почту") && !_busy && _wakeWordStatus)
             {
                 initialMessage("Открой почту", "Left");
 
@@ -355,6 +363,18 @@ namespace VA_Leo.Classes
                     "Открываю! [mail.google.com]");
             }
 
+            if (recognizedText == "поставь на паузу" && !_busy && _wakeWordStatus)
+            {
+                _busy = true;
+                WakeTimer.Restart();
+                
+                initialMessage("Поставь на паузу", "Left");
+
+                //TODO: Пауза SMTC
+                
+                _recognizer?.Reset();
+                _busy = false;
+            }
         }
         
         private void startProgramm(string target, string media, string error, int rndInt, string mesText)
@@ -364,10 +384,8 @@ namespace VA_Leo.Classes
 
             if (Properties.Settings.Default.allowProgrammsStart)
             {
-
                 try
                 {
-
                     Random rnd = new Random();
                     _num = rnd.Next(1, rndInt);
 
@@ -377,15 +395,18 @@ namespace VA_Leo.Classes
                     var p = new Process();
                     p.StartInfo.FileName = target;
                     p.Start();
-                    text = "";
+                    recognizedText = "";
+                    _num = 1;
 
                 }
                 catch (System.ComponentModel.Win32Exception)
                 {
                     playVoice(error);
                     initialMessage("Приложение не найдено на вашем устройстве!", "Right");
-
-                    text = "";
+                    
+                    Logger.error("Leo was unable to open the program. The program was not found on the device.");
+                    
+                    recognizedText = "";
                 }
             }
             else
@@ -394,7 +415,7 @@ namespace VA_Leo.Classes
                 initialMessage("Мне запрещено делать это", "Right");
             }
 
-            _rec?.Reset();
+            _recognizer?.Reset();
             _busy = false;
         }
 
@@ -409,7 +430,7 @@ namespace VA_Leo.Classes
                 initialMessage(mesText, "Right");
 
                 Process.Start(new ProcessStartInfo { FileName = url, UseShellExecute = true });
-                text = "";
+                recognizedText = "";
 
             }
             else
@@ -418,7 +439,7 @@ namespace VA_Leo.Classes
                 initialMessage("Мне запрещено делать это", "Right");
             }
 
-            _rec?.Reset();
+            _recognizer?.Reset();
             _busy = false;
         }
 

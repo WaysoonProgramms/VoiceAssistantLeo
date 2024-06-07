@@ -18,7 +18,7 @@
         <Label Content="v0.0.1" HorizontalAlignment="Left" Margin="155,6,0,0" VerticalAlignment="Top" Foreground="#FF313131" 
                FontFamily="Montserrat Alternates" RenderTransformOrigin="0.349,0.585"/>
 
-        <tb:TaskbarIcon Visibility="Visible" ToolTipText="Ассистент Лео" IconSource="/assets/icon.ico" TrayLeftMouseDown="trayIconClick" KeyDown="hotKeys" Margin="1077,573,0,0" OpacityMask="#FF0E0E0E">
+        <tb:TaskbarIcon Name="TaskbarIcon" Visibility="Visible" ToolTipText="Ассистент Лео" IconSource="/assets/icon.ico" TrayLeftMouseDown="trayIconClick" KeyDown="hotKeys" Margin="1077,573,0,0" OpacityMask="#FF0E0E0E">
             <tb:TaskbarIcon.ContextMenu>
                 <ContextMenu>
                     <MenuItem x:Name="TrayIconMuteBtn" Header="Выкл. микрофон" Click="trayIconMute"/>

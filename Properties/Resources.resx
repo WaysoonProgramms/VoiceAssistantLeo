@@ -152,4 +152,14 @@
   <data name="Settings_AIBox_Sing" xml:space="preserve">
     <value>Интеграция ИИ</value>
   </data>
+  <data name="error4" xml:space="preserve">
+    <value>Лео не удалось загрузить последние сообщения.
+
+Код ошибки: 04</value>
+  </data>
+  <data name="error5" xml:space="preserve">
+    <value>Лео не удалось сохранить последние сообщения.
+
+Код ошибки: 05</value>
+  </data>
 </root>

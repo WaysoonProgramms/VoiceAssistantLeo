@@ -1,5 +1,8 @@
-﻿using System.Windows.Controls;
+﻿using System.Globalization;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using VA_Leo.Classes;
 
 namespace VA_Leo.Pages
 {
@@ -8,6 +11,9 @@ namespace VA_Leo.Pages
         private static Chat? _chat;
         private static string _textMessage = "";
         private static bool _nullMessages = true;
+        private static ScrollViewer _scrollViewer;
+
+        private static readonly ChatManager ChatManager = new();
         
         public Chat()
         {
@@ -20,6 +26,9 @@ namespace VA_Leo.Pages
             {
                 HelloLabel.Visibility = System.Windows.Visibility.Hidden;
             }
+            
+            ScrollBox.ScrollToEnd();
+            _scrollViewer = ScrollBox;
         }
 
         public class Messages
@@ -28,8 +37,10 @@ namespace VA_Leo.Pages
             public string? Time { get; set; }
             public int Length { get; set; }
             public string? Aligment { get; set; }
+            public string? DateMessage { get; set; }
+            public bool IsDateVisible { get; set; }
         }
-
+        
         public static void addMessage(string text, string aligment)
         {
             if (text == string.Empty)
@@ -42,38 +53,91 @@ namespace VA_Leo.Pages
                 _nullMessages = false;
             }
 
-            int length;
-
-            if (text.Length < 5)
-            {
-                length = text.Length + 50;
-            }
-            else
-            {
-                length = text.Length * 8 + 20;
-            }
+            var ft = new FormattedText(text, 
+                CultureInfo.CurrentCulture, 
+                0, 
+                new Typeface("Montserrat Alternates"), 
+                14, 
+                Brushes.White, 
+                96);
+            var length = (int)ft.WidthIncludingTrailingWhitespace + 20;
 
             if (_chat!.HelloLabel.Visibility == System.Windows.Visibility.Visible)
             {
                 _chat.HelloLabel.Visibility = System.Windows.Visibility.Hidden;
             }
-            
+
+            var isDateVisible = true;
+            if (Properties.Settings.Default.nowDate == DateTime.Now.ToShortDateString())
+            {
+                isDateVisible = false;
+            }
+            else
+            {
+                Properties.Settings.Default.nowDate = DateTime.Now.ToShortDateString();
+                Properties.Settings.Default.Save();
+            }
+
             MainWindow.ChatCollection!.Add(new Messages
             {
                 Message = text,
                 Time = DateTime.Now.ToShortTimeString(),
                 Length = length,
-                Aligment = aligment
+                Aligment = aligment,
+                DateMessage = DateTime.Now.ToShortDateString(),
+                IsDateVisible = isDateVisible
             });
+            
+            ChatManager.serializeChat(text, aligment, DateTime.Now.ToShortTimeString(), DateTime.Now.ToShortDateString(), isDateVisible);
+            _scrollViewer.ScrollToEnd();
+        }
+        
+        public static void addMessage(string? text, string? aligment, string? time, string? date, bool isDateVisible)
+        {
+            if (text == string.Empty)
+            {
+                return;
+            }
+
+            if (_nullMessages)
+            {
+                _nullMessages = false;
+            }
+
+            var ft = new FormattedText(text, 
+                CultureInfo.CurrentCulture, 
+                0, 
+                new Typeface("Montserrat Alternates"), 
+                14, 
+                Brushes.White, 
+                96);
+            var length = (int)ft.WidthIncludingTrailingWhitespace + 20;
+
+            if (_chat!.HelloLabel.Visibility == System.Windows.Visibility.Visible)
+            {
+                _chat.HelloLabel.Visibility = System.Windows.Visibility.Hidden;
+            }
+
+            MainWindow.ChatCollection!.Add(new Messages
+            {
+                Message = text,
+                Time = time,
+                Length = length,
+                Aligment = aligment,
+                DateMessage = date,
+                IsDateVisible = isDateVisible
+            });
+            
+            _scrollViewer.ScrollToEnd();
         }
 
         private void send(object sender, MouseButtonEventArgs? e)
         {
             Classes.Vosk vosk = new Classes.Vosk();
-            Classes.Vosk.text = TextBox.Text.ToLower();
+            Classes.Vosk.recognizedText = TextBox.Text.ToLower();
             vosk.speechRecognized();
 
-            Console.WriteLine($@"[INPUT] Input > {Classes.Vosk.text}");
+            Console.WriteLine($@"[INPUT] Input > {Classes.Vosk.recognizedText}");
 
             TextBox.Text = string.Empty;
         }
@@ -90,14 +154,14 @@ namespace VA_Leo.Pages
 
         private void hotKeys(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            switch (e.Key)
             {
-                send(SendButton, null);
-            }
-
-            if (e.Key == Key.Up)
-            {
-                TextBox.Text = _textMessage;
+                case Key.Enter:
+                    send(SendButton, null);
+                    break;
+                case Key.Up:
+                    TextBox.Text = _textMessage;
+                    break;
             }
         }
 

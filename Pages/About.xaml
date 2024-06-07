@@ -18,7 +18,7 @@
             распознает команды с помощью Vosk API. В начале разработки он не 
             планировался как полноценный проект. Изначально он был начат как 
             проект для себя, для изучения .NET и С#. Немного позже стало 
-            понятно, что <Italic>Лео имеет большой потанцеал</Italic>, в качестве моего 
+            понятно, что <Italic>Лео имеет большой потенциал</Italic>, в качестве моего 
             первого крупного проекта.
         </TextBlock>
 
@@ -35,7 +35,7 @@
         <TextBlock HorizontalAlignment="Left" Margin="30,362,0,0" VerticalAlignment="Top" 
                 Foreground="White" FontSize="14" Width="474" Height="59" FontFamily="Montserrat Alternates" TextWrapping="Wrap">
             А вот сама идея создать своего голосового помощника появилась
-            после того, как я посмотрел видео, где писали своего ассистена — <Bold>Jarvis</Bold>.
+            после того, как я посмотрел видео, где писали своего ассистента — <Bold>Jarvis</Bold>.
         </TextBlock>
 
         <TextBlock HorizontalAlignment="Left" Margin="30,420,0,0" VerticalAlignment="Top" 

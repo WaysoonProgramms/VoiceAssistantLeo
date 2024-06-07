@@ -2,24 +2,37 @@
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:vaLeo="clr-namespace:VA_Leo"
       mc:Ignorable="d" 
       d:DesignHeight="560" d:DesignWidth="850"
       Background="#FF161616"
       Title="Chat" PreviewKeyDown="hotKeys">
     <Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="25,23,25,77">
+        <ScrollViewer Name="ScrollBox" VerticalScrollBarVisibility="Hidden" Margin="25,23,25,77">
             <ItemsControl x:Name="ChatList" Background="#FF161616" BorderBrush="#FF161616">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0,0,0,10" d:DataContext="{d:DesignInstance }">
-                            <Rectangle Name="messageCloud" RadiusX="10" RadiusY="10" Fill="White" StrokeThickness="3" HorizontalAlignment="{Binding Path=Aligment}" 
-                                       Stroke="White" Height="50" Width="{Binding Path=Length}"/>
-                            <StackPanel Margin="5">
-                                <TextBlock Name="mes" FontSize="16" Text="{Binding Path=Message}" HorizontalAlignment="{Binding Path=Aligment}" Margin="2,0,2,0" />
-                                <TextBlock FontSize="10" Text="{Binding Path=Time}" HorizontalAlignment="{Binding Path=Aligment}" Margin="2,0,0,0"/>
-                            </StackPanel>
+                            <TextBlock Name="DateMessage" FontFamily="Montserrat Alternates" Foreground="White" FontSize="12" Text="{Binding Path=DateMessage}" 
+                                       HorizontalAlignment="Center" Margin="0,2,0,0" Visibility="Hidden"/>
+                            <Grid Name="Grid" Margin="0,0,0,0">
+                                <Rectangle Name="messageCloud" RadiusX="10" RadiusY="10" Fill="White" StrokeThickness="3" HorizontalAlignment="{Binding Path=Aligment}" 
+                                           Stroke="White" Height="50" Width="{Binding Path=Length}"/>
+                                <StackPanel Name="Block" Margin="5">
+                                    <TextBlock Name="Message" FontFamily="Montserrat Alternates" FontSize="14" Text="{Binding Path=Message}" 
+                                               HorizontalAlignment="{Binding Path=Aligment}" Margin="4,2,4,0" />
+                                    <TextBlock Name="Time" FontSize="9" FontFamily="Montserrat Alternates" Text="{Binding Path=Time}" 
+                                               HorizontalAlignment="{Binding Path=Aligment}" Margin="4,2,4,0"/>
+                                </StackPanel>
+                            </Grid>
                         </Grid>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding Path=IsDateVisible}" Value="true">
+                                <Setter TargetName="DateMessage" Property="Visibility" Value="Visible" />
+                                <Setter TargetName="Grid" Property="Margin" Value="0,30,0,0"/>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>

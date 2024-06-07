@@ -2,9 +2,11 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using VA_Leo.Classes;
 using VA_Leo.Pages;
 using static VA_Leo.Pages.Chat;
 
@@ -12,8 +14,10 @@ namespace VA_Leo
 {
     public partial class MainWindow
     {
-        public static ObservableCollection<Messages>? ChatCollection { get; private set; }
+        public static ObservableCollection<Messages>? ChatCollection { get; set; }
         public static bool micAccess = true;
+
+        private static ChatManager _chatManager = new();
         
         public MainWindow()
         {
@@ -44,6 +48,8 @@ namespace VA_Leo
             Classes.Vosk.update();
             
             ChatCollection = new ObservableCollection<Messages>();
+            
+            _chatManager.deserializeChat();
         }
 
         [DllImport("Kernel32")]
@@ -182,6 +188,7 @@ namespace VA_Leo
 
         private void closeApplication(object? sender, EventArgs e)
         {
+            TaskbarIcon.Visibility = Visibility.Hidden;
             Close();
         }
 
@@ -238,7 +245,7 @@ namespace VA_Leo
             SettingsBtnMarker.Opacity = 1;
         }
         private void getChat(object sender, MouseButtonEventArgs? e)
-        {
+        { 
             removeMarkers();
             MainFrame.Content = new Chat();
             ChatBtnMarker.Opacity = 1;
@@ -363,6 +370,8 @@ namespace VA_Leo
             {
                 mute(this, null);
             }
+
+            // TODO: Сочетание клавиш Ctrl + L вызывает папку с логами
         }
 
         private void windowLoaded(object sender, RoutedEventArgs e)

@@ -3,37 +3,29 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
-    <RootNamespace>VA_Leo</RootNamespace>
+    <RootNamespace>Leo</RootNamespace>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <AssemblyName>Ассистент Лео</AssemblyName>
-    <Platforms>AnyCPU;x64</Platforms>
+    <Platforms>AnyCPU</Platforms>
     <ApplicationIcon>assets/icon.ico</ApplicationIcon>
     <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <Configurations>Debug;Release</Configurations>
+    <Copyright>(c) Антон Меньшов 2023-2024</Copyright>
+    <Description>Простой голосовой помощник для Windows</Description>
+    <Company>WaysoonProgramms</Company>
+    <Version>0.0.1</Version>
+    <ProductVersion>0.0.1</ProductVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>portable</DebugType>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <DebugType>portable</DebugType>
-  </PropertyGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>portable</DebugType>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <DebugType>portable</DebugType>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <None Remove="Assets\icon.ico" />
-    <None Remove="Fonts\MontserratAlternates-ExtraBold.ttf" />
-    <None Remove="Fonts\MontserratAlternates-Regular.ttf" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Caliburn.Micro.Core" Version="4.0.212" />
@@ -67,26 +59,28 @@
     <Resource Include="Assets\images\yes.png" />
     <Resource Include="Assets\sounds\start.wav" />
     <Resource Include="Assets\sounds\stop.wav" />
-    <Resource Include="Assets\voices\anekdot1.wav" />
-    <Resource Include="Assets\voices\bin1.wav" />
-    <Resource Include="Assets\voices\bin2.wav" />
-    <Resource Include="Assets\voices\err1.wav" />
-    <Resource Include="Assets\voices\err2.wav" />
-    <Resource Include="Assets\voices\err3.wav" />
-    <Resource Include="Assets\voices\err4.wav" />
-    <Resource Include="Assets\voices\err5.wav" />
+    <Resource Include="Assets\voices\bin_messages\bin1.wav" />
+    <Resource Include="Assets\voices\bin_messages\bin2.wav" />
+    <Resource Include="Assets\voices\errors\err1.wav" />
+    <Resource Include="Assets\voices\errors\err2.wav" />
+    <Resource Include="Assets\voices\errors\err3.wav" />
+    <Resource Include="Assets\voices\errors\err4.wav" />
+    <Resource Include="Assets\voices\errors\err5.wav" />
     <Resource Include="Assets\voices\good.wav" />
-    <Resource Include="Assets\voices\infobtn.wav" />
-    <Resource Include="Assets\voices\music.wav" />
-    <Resource Include="Assets\voices\neAlica.wav" />
-    <Resource Include="Assets\voices\neMarusa.wav" />
-    <Resource Include="Assets\voices\neSiri.wav" />
-    <Resource Include="Assets\voices\open0.wav" />
-    <Resource Include="Assets\voices\open1.wav" />
-    <Resource Include="Assets\voices\open2.wav" />
-    <Resource Include="Assets\voices\open3.wav" />
-    <Resource Include="Assets\voices\vsegda_pozyalusta.wav" />
-    <Resource Include="Assets\voices\zarikrolen.wav" />
+    <Resource Include="Assets\voices\happyListening.wav" />
+    <Resource Include="Assets\voices\denial\alica.wav" />
+    <Resource Include="Assets\voices\denial\marusa.wav" />
+    <Resource Include="Assets\voices\denial\siri.wav" />
+    <Resource Include="Assets\voices\denial\cortana.wav" />
+    <Resource Include="Assets\voices\open\open0.wav" />
+    <Resource Include="Assets\voices\open\open1.wav" />
+    <Resource Include="Assets\voices\open\open2.wav" />
+    <Resource Include="Assets\voices\open\open3.wav" />
+    <Resource Include="Assets\voices\thanksYou.wav" />
+    <Resource Include="Assets\voices\leads\day.wav" />
+    <Resource Include="Assets\voices\leads\night.wav" />
+    <Resource Include="Assets\voices\leads\evening.wav" />
+    <Resource Include="Assets\voices\leads\morning.wav" />
     <Resource Include="Fonts\MontserratAlternates-ExtraBold.ttf" />
     <Resource Include="Fonts\MontserratAlternates-Regular.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
@@ -118,38 +112,6 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="C:\Users\User\.nuget\packages\vosk\0.3.38\build\lib\win-x64\libgcc_s_seh-1.dll" Link="Libraries\libgcc_s_seh-1.dll" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="C:\Users\User\.nuget\packages\vosk\0.3.38\build\lib\win-x64\libstdc++-6.dll" Link="Libraries\libstdc++-6.dll" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="C:\Users\User\.nuget\packages\vosk\0.3.38\build\lib\win-x64\libvosk.dll" Link="Libraries\libvosk.dll" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="C:\Users\User\.nuget\packages\vosk\0.3.38\build\lib\win-x64\libwinpthread-1.dll" Link="Libraries\libwinpthread-1.dll" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="C:\Users\Waysoon\.nuget\packages\vosk\0.3.38\build\lib\win-x64\libgcc_s_seh-1.dll" Link="Assets\libgcc_s_seh-1.dll" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="C:\Users\Waysoon\.nuget\packages\vosk\0.3.38\build\lib\win-x64\libstdc++-6.dll" Link="Assets\libstdc++-6.dll" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="C:\Users\Waysoon\.nuget\packages\vosk\0.3.38\build\lib\win-x64\libvosk.dll" Link="Assets\libvosk.dll" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="C:\Users\Waysoon\.nuget\packages\vosk\0.3.38\build\lib\win-x64\libwinpthread-1.dll" Link="Assets\libwinpthread-1.dll" />
   </ItemGroup>
 
 </Project>

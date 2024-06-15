@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace VA_Leo.Properties {
+namespace Leo.Properties {
     using System;
     
     
@@ -136,11 +136,31 @@ namespace VA_Leo.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Количество сообщений достигло 10 000. Это может замедлить работу приложения. Так же, большое количество сообщений увеличивает вес приложения.
+        ///
+        ///Очистить сообщения?.
+        /// </summary>
+        public static string message1 {
+            get {
+                return ResourceManager.GetString("message1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Что-то пошло не так....
         /// </summary>
-        public static string MessageBox_errorSing {
+        public static string MessageBox_errorSign {
             get {
-                return ResourceManager.GetString("MessageBox_errorSing", resourceCulture);
+                return ResourceManager.GetString("MessageBox_errorSign", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Обратите внимание!.
+        /// </summary>
+        public static string MessageBox_messageSign {
+            get {
+                return ResourceManager.GetString("MessageBox_messageSign", resourceCulture);
             }
         }
         

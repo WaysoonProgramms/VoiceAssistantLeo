@@ -1,10 +1,11 @@
-﻿using System.IO;
+﻿using System.Collections.ObjectModel;
+using System.IO;
 using System.Windows;
 using Newtonsoft.Json;
-using VA_Leo.Pages;
-using VA_Leo.Properties;
+using Leo.PageModels;
+using Leo.Properties;
 
-namespace VA_Leo.Classes
+namespace Leo.Classes
 {
     public class MessageData
     {
@@ -13,6 +14,7 @@ namespace VA_Leo.Classes
         public string? Date { get; init; }
         public string? Aligment { get; init; }
         public bool IsDateVisible { get; init; }
+        public string? Id { get; init; }
     }
     
     public class ChatManager
@@ -31,10 +33,15 @@ namespace VA_Leo.Classes
             {
                 FileStream file = File.Create(_path);
                 file.Close();
+                Properties.Settings.Default.messagesId = 0;
+                Properties.Settings.Default.nowDate = "01.01.01";
+                Properties.Settings.Default.Save();
+                MainWindow.ChatCollection = new ObservableCollection<Chat.Messages>();
+                Chat.NullMessages = true;
             }
         }
 
-        public async void serializeChat(string? text, string? aligment, string? time, string? date, bool isDateVisible)
+        public async void serializeChat(string? text, string? aligment, string? time, string? date, bool isDateVisible, int id)
         {
             await using StreamWriter writer = new StreamWriter(_path, true);
             MessageData messageData = new MessageData()
@@ -43,7 +50,8 @@ namespace VA_Leo.Classes
                 Time = time,
                 Date = date,
                 Aligment = aligment,
-                IsDateVisible = isDateVisible
+                IsDateVisible = isDateVisible,
+                Id = id.ToString()
             };
             string json = JsonConvert.SerializeObject(messageData, Formatting.Indented);
             
@@ -58,7 +66,7 @@ namespace VA_Leo.Classes
                 while (true)
                 {
                     string line = "";
-                    for (int i = 0; i <= 6; i++)
+                    for (int i = 0; i <= 7; i++)
                     {
                         line += await reader.ReadLineAsync();
                     }
@@ -67,14 +75,41 @@ namespace VA_Leo.Classes
                         break;
                     }
                     MessageData? md = JsonConvert.DeserializeObject<MessageData>(line);
-                    Chat.addMessage(md?.Text, md?.Aligment, md?.Time, md?.Date, md!.IsDateVisible);
+                    if (md?.Id == "10000")
+                    {
+                        Logger.message("Chat messages have reached 10,000 and need clearing");
+                        MessageBoxResult messageBoxResult = MessageBox.Show(Resources.message1, Resources.MessageBox_messageSign, MessageBoxButton.YesNo,
+                            MessageBoxImage.Information);
+                        if (messageBoxResult == MessageBoxResult.Yes)
+                        {
+                            reader.Close();
+                            clearChat();
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        Chat.addMessage(md?.Text, md?.Aligment, md?.Time, md?.Date, md!.IsDateVisible);
+                    }
                 }
             }
             catch
             {
                 Logger.error("Leo failed to load recent messages");
-                MessageBox.Show(Resources.error4, Resources.MessageBox_errorSing, MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show(Resources.error4, Resources.MessageBox_errorSign, MessageBoxButton.OK, MessageBoxImage.Error);
             }
+        }
+
+        private void clearChat()
+        {
+            Properties.Settings.Default.messagesId = 0;
+            Properties.Settings.Default.nowDate = "01.01.01";
+            Properties.Settings.Default.Save();
+            File.Delete(_path);
+            FileStream file = File.Create(_path);
+            file.Close();
+            MainWindow.ChatCollection = new ObservableCollection<Chat.Messages>();
+            Chat.NullMessages = true;
         }
     }
 }

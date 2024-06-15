@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace VA_Leo.Classes
+namespace Leo.Classes
 {
     public class Logger
     {

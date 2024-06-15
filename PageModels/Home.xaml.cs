@@ -1,4 +1,4 @@
-﻿namespace VA_Leo.Pages
+﻿namespace Leo.PageModels
 {
     public partial class Home
     {
@@ -15,7 +15,7 @@
 
         public static async void activateAnimation()
         {
-            for (int i = 0; i < 50; i++)
+            for (var i = 0; i < 50; i++)
             {
                 _hm!.LogoEffect.Opacity = _hm.LogoEffect.Opacity + 0.1;
                 await Task.Delay(10);
@@ -26,7 +26,7 @@
 
         public static async void deactivateAnimation()
         {
-            for (int i = 0; i < 50; i++)
+            for (var i = 0; i < 50; i++)
             {
                 _hm!.LogoEffect.Opacity = _hm.LogoEffect.Opacity - 0.1;
                 await Task.Delay(10);

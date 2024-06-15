@@ -2,22 +2,29 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows;
-using System.Windows.Forms.VisualStyles;
+using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Input;
+//using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
-using VA_Leo.Classes;
-using VA_Leo.Pages;
-using static VA_Leo.Pages.Chat;
+using Leo.Classes;
+using Leo.PageModels;
+using static Leo.PageModels.Chat;
+using Control = System.Windows.Forms.Control;
+using KeyEventArgs = System.Windows.Input.KeyEventArgs;
+using MessageBox = System.Windows.MessageBox;
+using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 
-namespace VA_Leo
+namespace Leo
 {
     public partial class MainWindow
     {
         public static ObservableCollection<Messages>? ChatCollection { get; set; }
-        public static bool micAccess = true;
+        public static bool MicAccess = true;
+        //private readonly MediaPlayer _player = new();
 
-        private static ChatManager _chatManager = new();
+        private static readonly ChatManager ChatManager = new();
         
         public MainWindow()
         {
@@ -36,12 +43,12 @@ namespace VA_Leo
 
             if (Properties.Settings.Default.isMuted)
             {
-                Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/microphone.png"));
+                Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/mute.png"));
                 TrayIconMuteBtn.Header = "Вкл. микрофон";
             }
             else
             {
-                Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/mute.png"));
+                Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/microphone.png"));
                 TrayIconMuteBtn.Header = "Выкл. микрофон";
             }
 
@@ -49,7 +56,7 @@ namespace VA_Leo
             
             ChatCollection = new ObservableCollection<Messages>();
             
-            _chatManager.deserializeChat();
+            ChatManager.deserializeChat();
         }
 
         [DllImport("Kernel32")]
@@ -106,12 +113,12 @@ namespace VA_Leo
             Show();
             WindowState = WindowState.Normal;
 
-            opacityAnimation(this.Name, 0, 1, 0.3, 2);
+            opacityAnimation(Name, 0, 1, 0.3, 2);
         }
 
         private void trayIconMute(object sender, RoutedEventArgs e)
         {
-            if (micAccess == false)
+            if (MicAccess == false)
             {
                 Classes.Vosk.error1();
                 return;
@@ -122,7 +129,7 @@ namespace VA_Leo
                 Properties.Settings.Default.isMuted = false;
                 Properties.Settings.Default.Save();
 
-                Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/mute.png"));
+                Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/microphone.png"));
                 TrayIconMuteBtn.Header = "Выкл. микрофон";
             }
             else
@@ -130,7 +137,7 @@ namespace VA_Leo
                 Properties.Settings.Default.isMuted = true;
                 Properties.Settings.Default.Save();
 
-                Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/microphone.png"));
+                Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/mute.png"));
                 TrayIconMuteBtn.Header = "Вкл. микрофон";
             }
 
@@ -204,7 +211,7 @@ namespace VA_Leo
 
         private void mute(object sender, MouseButtonEventArgs? e)
         {
-            if (micAccess == false)
+            if (MicAccess == false)
             {
                 Classes.Vosk.error1();
                 return;
@@ -215,13 +222,13 @@ namespace VA_Leo
                 Properties.Settings.Default.isMuted = false;
                 Properties.Settings.Default.Save();
 
-                Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/mute.png"));
+                Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/microphone.png"));
             } else
             {
                 Properties.Settings.Default.isMuted = true;
                 Properties.Settings.Default.Save();
 
-                Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/microphone.png"));
+                Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/mute.png"));
             }
 
             Classes.Vosk.update();
@@ -371,12 +378,22 @@ namespace VA_Leo
                 mute(this, null);
             }
 
-            // TODO: Сочетание клавиш Ctrl + L вызывает папку с логами
+            if (e.Key == Key.L && Control.ModifierKeys == Keys.Control)
+            {
+                Process.Start("explorer.exe", ".\\logs");
+            }
         }
 
         private void windowLoaded(object sender, RoutedEventArgs e)
         {
-            opacityAnimation(this.Name, 0, 1, 0.3, 2);
+            opacityAnimation(Name, 0, 1, 0.3, 2);
         }
+
+        // private void playVoice(string path)
+        // {
+        //     _player.Open(new Uri(path, UriKind.Relative));
+        //     _player.Volume = Settings.sVoulme / 100.0f;
+        //     _player.Play();
+        // }
     }
 }

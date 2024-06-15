@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Input;
 
-namespace VA_Leo.Pages
+namespace Leo.PageModels
 {
     public partial class About
     {
@@ -57,6 +57,22 @@ namespace VA_Leo.Pages
         private void issueslinkMouseLeave(object sender, MouseEventArgs e)
         {
             Issueslink.Visibility = Visibility.Hidden;
+        }
+        
+        private void siteLinkMouseEnter(object sender, MouseEventArgs e)
+        {
+            Sitelink.Visibility = Visibility.Visible;
+        }
+
+        private void siteLinkClick(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo 
+                { FileName = "https://voiceassistantleo.tilda.ws/ru/home", UseShellExecute = true });
+        }
+
+        private void siteLinkMouseLeave(object sender, MouseEventArgs e)
+        {
+            Sitelink.Visibility = Visibility.Hidden;
         }
     }
 }

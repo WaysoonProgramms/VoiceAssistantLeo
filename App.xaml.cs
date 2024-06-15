@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 
-namespace VA_Leo
+namespace Leo
 {
     /// <summary>
     /// Interaction logic for App.xaml

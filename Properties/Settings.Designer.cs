@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace VA_Leo.Properties {
+namespace Leo.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -211,6 +211,18 @@ namespace VA_Leo.Properties {
             }
             set {
                 this["nowDate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int messagesId {
+            get {
+                return ((int)(this["messagesId"]));
+            }
+            set {
+                this["messagesId"] = value;
             }
         }
     }

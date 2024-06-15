@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="VA_Leo.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Leo.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="isMuted" Type="System.Boolean" Scope="User">
@@ -49,6 +49,9 @@
     </Setting>
     <Setting Name="nowDate" Type="System.String" Scope="User">
       <Value Profile="(Default)">29.05.2024</Value>
+    </Setting>
+    <Setting Name="messagesId" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

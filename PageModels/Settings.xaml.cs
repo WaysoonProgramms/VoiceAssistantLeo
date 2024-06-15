@@ -2,14 +2,14 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using VA_Leo.Classes;
+using Leo.Classes;
 
-namespace VA_Leo.Pages
+namespace Leo.PageModels
 {
     public partial class Settings
     {
-        public static float vVoulme = Properties.Settings.Default.voiceVol;
-        public static float sVoulme = Properties.Settings.Default.soundVol;
+        public static float VoiceVoulme = Properties.Settings.Default.voiceVol;
+        public static float SoundVoulme = Properties.Settings.Default.soundVol;
 
         private readonly MediaPlayer _player = new();
         private readonly Logger _logger = new();
@@ -18,6 +18,7 @@ namespace VA_Leo.Pages
         {
             InitializeComponent();
             
+            // Инициализация настроек:
             // Функции
             DevModeBox.IsChecked = Properties.Settings.Default.isDevModeTrue;
             MinimizeToTrayBox.IsChecked = Properties.Settings.Default.isMinimizeToTrayTrue;
@@ -37,36 +38,36 @@ namespace VA_Leo.Pages
 
         }
         
-        [DllImport("shell32.dll")]
+        [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
         private static extern bool CreateShortcut(string shortcutFilePath, string targetFilePath);
 
         private void voiceVolumeSliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            vVoulme = (float)VoiceVolumeSlider.Value;
+            VoiceVoulme = (float)VoiceVolumeSlider.Value;
 
-            Properties.Settings.Default.voiceVol = vVoulme;
+            Properties.Settings.Default.voiceVol = VoiceVoulme;
             Properties.Settings.Default.Save();
         }
 
         private void voiceVolumeTest(object sender, MouseEventArgs e)
         {
             _player.Open(new Uri(@".\voices\test.wav", UriKind.Relative));
-            _player.Volume = Settings.vVoulme / 100.0f;
+            _player.Volume = Settings.VoiceVoulme / 100.0f;
             _player.Play();
         }
 
         private void soundVolumeSliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            sVoulme = (float)SoundVolumeSlider.Value;
+            SoundVoulme = (float)SoundVolumeSlider.Value;
 
-            Properties.Settings.Default.soundVol = sVoulme;
+            Properties.Settings.Default.soundVol = SoundVoulme;
             Properties.Settings.Default.Save();
         }
 
         private void soundVolumeTest(object sender, MouseEventArgs e)
         {
             _player.Open(new Uri(@".\sounds\start.wav", UriKind.Relative));
-            _player.Volume = Settings.sVoulme / 100.0f;
+            _player.Volume = Settings.SoundVoulme / 100.0f;
             _player.Play();
         }
 
@@ -179,11 +180,11 @@ namespace VA_Leo.Pages
 
             try
             {
-                string appdt = @"%AppData%\Microsoft\Windows\Start Menu\Programs\Startup";
-                Environment.ExpandEnvironmentVariables(appdt);
+                const string path = @"%AppData%\Microsoft\Windows\Start Menu\Programs\Startup";
+                Environment.ExpandEnvironmentVariables(path);
 
-                string shortcutFilePath = "Ассистент Лео.lnk";
-                string targetFilePath = Environment.CurrentDirectory + @"\Ассистент Лео.exe";
+                const string shortcutFilePath = "Ассистент Лео.lnk";
+                var targetFilePath = Environment.CurrentDirectory + @"\Ассистент Лео.exe";
 
                 CreateShortcut(shortcutFilePath, targetFilePath);
             }

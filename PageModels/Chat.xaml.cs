@@ -2,16 +2,16 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using VA_Leo.Classes;
+using Leo.Classes;
 
-namespace VA_Leo.Pages
+namespace Leo.PageModels
 {
     public partial class Chat
     {
         private static Chat? _chat;
         private static string _textMessage = "";
-        private static bool _nullMessages = true;
-        private static ScrollViewer _scrollViewer;
+        public static bool NullMessages = true;
+        private static ScrollViewer? _scrollViewer;
 
         private static readonly ChatManager ChatManager = new();
         
@@ -22,13 +22,15 @@ namespace VA_Leo.Pages
             ChatList.ItemsSource = MainWindow.ChatCollection;
             _chat = this;
 
-            if (!_nullMessages)
+            if (!NullMessages)
             {
                 HelloLabel.Visibility = System.Windows.Visibility.Hidden;
             }
             
             ScrollBox.ScrollToEnd();
             _scrollViewer = ScrollBox;
+
+            TextBox.Focus();
         }
 
         public class Messages
@@ -48,9 +50,9 @@ namespace VA_Leo.Pages
                 return;
             }
 
-            if (_nullMessages)
+            if (NullMessages)
             {
-                _nullMessages = false;
+                NullMessages = false;
             }
 
             var ft = new FormattedText(text, 
@@ -87,9 +89,13 @@ namespace VA_Leo.Pages
                 DateMessage = DateTime.Now.ToShortDateString(),
                 IsDateVisible = isDateVisible
             });
+
+            Properties.Settings.Default.messagesId += 1;
+            Properties.Settings.Default.Save();
             
-            ChatManager.serializeChat(text, aligment, DateTime.Now.ToShortTimeString(), DateTime.Now.ToShortDateString(), isDateVisible);
-            _scrollViewer.ScrollToEnd();
+            ChatManager.serializeChat(text, aligment, DateTime.Now.ToShortTimeString(), 
+                DateTime.Now.ToShortDateString(), isDateVisible, Properties.Settings.Default.messagesId);
+            _scrollViewer?.ScrollToEnd();
         }
         
         public static void addMessage(string? text, string? aligment, string? time, string? date, bool isDateVisible)
@@ -99,9 +105,9 @@ namespace VA_Leo.Pages
                 return;
             }
 
-            if (_nullMessages)
+            if (NullMessages)
             {
-                _nullMessages = false;
+                NullMessages = false;
             }
 
             var ft = new FormattedText(text, 
@@ -128,16 +134,16 @@ namespace VA_Leo.Pages
                 IsDateVisible = isDateVisible
             });
             
-            _scrollViewer.ScrollToEnd();
+            _scrollViewer?.ScrollToEnd();
         }
 
         private void send(object sender, MouseButtonEventArgs? e)
         {
-            Classes.Vosk vosk = new Classes.Vosk();
-            Classes.Vosk.recognizedText = TextBox.Text.ToLower();
+            var vosk = new Classes.Vosk();
+            Classes.Vosk.RecognizedText = TextBox.Text.ToLower();
             vosk.speechRecognized();
 
-            Console.WriteLine($@"[INPUT] Input > {Classes.Vosk.recognizedText}");
+            Console.WriteLine($@"[INPUT] Input > {Classes.Vosk.RecognizedText}");
 
             TextBox.Text = string.Empty;
         }
@@ -160,7 +166,10 @@ namespace VA_Leo.Pages
                     send(SendButton, null);
                     break;
                 case Key.Up:
-                    TextBox.Text = _textMessage;
+                    if (_textMessage != string.Empty)
+                        TextBox.Text = _textMessage;
+                    else
+                        System.Media.SystemSounds.Exclamation.Play();
                     break;
             }
         }

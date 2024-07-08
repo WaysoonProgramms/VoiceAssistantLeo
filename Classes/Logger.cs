@@ -4,7 +4,7 @@ namespace Leo.Classes
 {
     public class Logger
     {
-        private readonly string _path = ".\\logs\\";
+        private readonly string _path = @".\Logs\";
         private readonly DateTime _thisDay = DateTime.Now;
 
         public Logger()

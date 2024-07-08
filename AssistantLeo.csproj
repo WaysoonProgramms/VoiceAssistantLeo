@@ -17,6 +17,8 @@
     <Company>WaysoonProgramms</Company>
     <Version>0.0.1</Version>
     <ProductVersion>0.0.1</ProductVersion>
+    <AssemblyVersion>0.0.1</AssemblyVersion>
+    <FileVersion>0.0.1</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -37,54 +39,182 @@
   </ItemGroup>
 
   <ItemGroup>
+	<Resource Include="Assets\Fonts\MontserratAlternates-ExtraBold.ttf" />
+	<Resource Include="Assets\Fonts\MontserratAlternates-Regular.ttf">
+	  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	</Resource>
 	<Resource Include="Assets\icon.ico" />
-    <Resource Include="Assets\images\avatar.png" />
-    <Resource Include="Assets\images\Chat.png" />
-    <Resource Include="Assets\images\close.png" />
-    <Resource Include="Assets\images\data.png" />
-    <Resource Include="Assets\images\dragon.png" />
-    <Resource Include="Assets\images\functions.png" />
-    <Resource Include="Assets\images\githubIcon.png" />
-    <Resource Include="Assets\images\hide.png" />
-    <Resource Include="Assets\images\Home.png" />
-    <Resource Include="Assets\images\info.png" />
-    <Resource Include="Assets\images\microphone.png" />
-    <Resource Include="Assets\images\mute.png" />
-    <Resource Include="Assets\images\rules.png" />
-    <Resource Include="Assets\images\send.png" />
-    <Resource Include="Assets\images\settings.png" />
-    <Resource Include="Assets\images\sleep.png" />
-    <Resource Include="Assets\images\sound.png" />
-    <Resource Include="Assets\images\tgLogo.png" />
-    <Resource Include="Assets\images\yes.png" />
-    <Resource Include="Assets\sounds\start.wav" />
-    <Resource Include="Assets\sounds\stop.wav" />
-    <Resource Include="Assets\voices\bin_messages\bin1.wav" />
-    <Resource Include="Assets\voices\bin_messages\bin2.wav" />
-    <Resource Include="Assets\voices\errors\err1.wav" />
-    <Resource Include="Assets\voices\errors\err2.wav" />
-    <Resource Include="Assets\voices\errors\err3.wav" />
-    <Resource Include="Assets\voices\errors\err4.wav" />
-    <Resource Include="Assets\voices\errors\err5.wav" />
-    <Resource Include="Assets\voices\good.wav" />
-    <Resource Include="Assets\voices\happyListening.wav" />
-    <Resource Include="Assets\voices\denial\alica.wav" />
-    <Resource Include="Assets\voices\denial\marusa.wav" />
-    <Resource Include="Assets\voices\denial\siri.wav" />
-    <Resource Include="Assets\voices\denial\cortana.wav" />
-    <Resource Include="Assets\voices\open\open0.wav" />
-    <Resource Include="Assets\voices\open\open1.wav" />
-    <Resource Include="Assets\voices\open\open2.wav" />
-    <Resource Include="Assets\voices\open\open3.wav" />
-    <Resource Include="Assets\voices\thanksYou.wav" />
-    <Resource Include="Assets\voices\leads\day.wav" />
-    <Resource Include="Assets\voices\leads\night.wav" />
-    <Resource Include="Assets\voices\leads\evening.wav" />
-    <Resource Include="Assets\voices\leads\morning.wav" />
-    <Resource Include="Fonts\MontserratAlternates-ExtraBold.ttf" />
-    <Resource Include="Fonts\MontserratAlternates-Regular.ttf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
+    <Resource Include="Assets\Images\avatar.png" />
+    <Resource Include="Assets\Images\Chat.png" />
+    <Resource Include="Assets\Images\close.png" />
+    <Resource Include="Assets\Images\data.png" />
+    <Resource Include="Assets\Images\dragon.png" />
+    <Resource Include="Assets\Images\functions.png" />
+    <Resource Include="Assets\Images\githubIcon.png" />
+    <Resource Include="Assets\Images\hide.png" />
+    <Resource Include="Assets\Images\Home.png" />
+    <Resource Include="Assets\Images\info.png" />
+    <Resource Include="Assets\Images\microphone.png" />
+    <Resource Include="Assets\Images\mute.png" />
+    <Resource Include="Assets\Images\rules.png" />
+    <Resource Include="Assets\Images\send.png" />
+    <Resource Include="Assets\Images\settings.png" />
+    <Resource Include="Assets\Images\sleep.png" />
+    <Resource Include="Assets\Images\sound.png" />
+    <Resource Include="Assets\Images\tgLogo.png" />
+    <Resource Include="Assets\Images\yes.png" />
+    <AdditionalFiles Include="Assets\Sounds\start.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Sounds\stop.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Voices\bin_messages\bin1.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Voices\bin_messages\bin2.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Voices\errors\err1.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Voices\errors\err2.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Voices\errors\err3.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Voices\errors\err4.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Voices\errors\err5.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Voices\good.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Voices\happyListening.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Voices\denial\alica.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Voices\denial\marusa.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Voices\denial\siri.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Voices\denial\cortana.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Voices\open\open0.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Voices\open\open1.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Voices\open\open2.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Voices\open\open3.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Voices\thanksYou.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Voices\leads\day.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Voices\leads\night.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Voices\leads\evening.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <AdditionalFiles Include="Assets\Voices\leads\morning.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <None Remove="VoskModel\am\final.mdl" />
+    <AdditionalFiles Include="VoskModel\am\final.mdl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <None Remove="VoskModel\conf\mfcc.conf" />
+    <AdditionalFiles Include="VoskModel\conf\mfcc.conf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <None Remove="VoskModel\conf\model.conf" />
+    <AdditionalFiles Include="VoskModel\conf\model.conf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <None Remove="VoskModel\graph\phones\word_boundary.int" />
+    <AdditionalFiles Include="VoskModel\graph\phones\word_boundary.int">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <None Remove="VoskModel\graph\disambig_tid.int" />
+    <AdditionalFiles Include="VoskModel\graph\disambig_tid.int">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <None Remove="VoskModel\graph\Gr.fst" />
+    <AdditionalFiles Include="VoskModel\graph\Gr.fst">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <None Remove="VoskModel\graph\HCLr.fst" />
+    <AdditionalFiles Include="VoskModel\graph\HCLr.fst">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <None Remove="VoskModel\ivector\final.dubm" />
+    <AdditionalFiles Include="VoskModel\ivector\final.dubm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <None Remove="VoskModel\ivector\final.ie" />
+    <AdditionalFiles Include="VoskModel\ivector\final.ie">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <None Remove="VoskModel\ivector\final.mat" />
+    <AdditionalFiles Include="VoskModel\ivector\final.mat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <None Remove="VoskModel\ivector\global_cmvn.stats" />
+    <AdditionalFiles Include="VoskModel\ivector\global_cmvn.stats">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <None Remove="VoskModel\ivector\online_cmvn.conf" />
+    <AdditionalFiles Include="VoskModel\ivector\online_cmvn.conf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <None Remove="VoskModel\ivector\splice.conf" />
+    <AdditionalFiles Include="VoskModel\ivector\splice.conf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <None Remove="Assets\Voices\test.wav" />
+    <AdditionalFiles Include="Assets\Voices\test.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <None Remove="Logs\README.txt" />
+    <AdditionalFiles Include="Logs\README.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </AdditionalFiles>
+    <None Remove="Assets\Images\warn.png" />
+    <Resource Include="Assets\Images\warn.png" />
+    <None Remove="Assets\Images\error.png" />
+    <Resource Include="Assets\Images\error.png" />
+    <None Update="C:\Users\Waysoon\.nuget\packages\vosk\0.3.38\build\lib\win-x64\libgcc_s_seh-1.dll">
+      <Link>Assets\Libraries\libgcc_s_seh-1.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="C:\Users\Waysoon\.nuget\packages\vosk\0.3.38\build\lib\win-x64\libstdc++-6.dll">
+      <Link>Assets\Libraries\libstdc++-6.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="C:\Users\Waysoon\.nuget\packages\vosk\0.3.38\build\lib\win-x64\libvosk.dll">
+      <Link>Assets\Libraries\libvosk.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="C:\Users\Waysoon\.nuget\packages\vosk\0.3.38\build\lib\win-x64\libwinpthread-1.dll">
+      <Link>Assets\Libraries\libwinpthread-1.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -101,17 +231,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <Page Update="Windows\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <XamlRuntime>Wpf</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
+    <Folder Include="Fonts\" />
   </ItemGroup>
 
 </Project>

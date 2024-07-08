@@ -12,21 +12,21 @@
             <ItemsControl x:Name="ChatList" Background="#FF161616" BorderBrush="#FF161616">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="0,0,0,10" d:DataContext="{d:DesignInstance }">
+                        <Grid Margin="0,0,0,10" d:DataContext="{d:DesignInstance}">
                             <TextBlock Name="DateMessage" FontFamily="Montserrat Alternates" Foreground="White" FontSize="12" Text="{Binding Path=DateMessage}" 
                                        HorizontalAlignment="Center" Margin="0,2,0,0" Visibility="Hidden"/>
                             <Grid Name="Grid" Margin="0,0,0,0">
-                                <Rectangle Name="messageCloud" RadiusX="10" RadiusY="10" Fill="White" StrokeThickness="3" HorizontalAlignment="{Binding Path=Aligment}" 
+                                <Rectangle Name="messageCloud" RadiusX="10" RadiusY="10" Fill="White" StrokeThickness="3" HorizontalAlignment="{Binding Path=Alignment}" 
                                            Stroke="White" Height="50" Width="{Binding Path=Length}"/>
                                 <StackPanel Name="Block" Margin="5">
                                     <TextBlock Name="Message" FontFamily="Montserrat Alternates" FontSize="14" Text="{Binding Path=Message}" 
-                                               HorizontalAlignment="{Binding Path=Aligment}" Margin="4,2,4,0" />
+                                               HorizontalAlignment="{Binding Path=Alignment}" Margin="4,2,4,0" />
                                     <TextBlock Name="Time" FontSize="9" FontFamily="Montserrat Alternates" Text="{Binding Path=Time}" 
-                                               HorizontalAlignment="{Binding Path=Aligment}" Margin="4,2,4,0"/>
+                                               HorizontalAlignment="{Binding Path=Alignment}" Margin="4,2,4,0"/>
                                 </StackPanel>
                             </Grid>
                         </Grid>
-                        <DataTemplate.Triggers>
+                        <DataTemplate.Triggers >
                             <DataTrigger Binding="{Binding Path=IsDateVisible}" Value="true">
                                 <Setter TargetName="DateMessage" Property="Visibility" Value="Visible" />
                                 <Setter TargetName="Grid" Property="Margin" Value="0,30,0,0"/>
@@ -45,7 +45,7 @@
                 <Border BorderThickness="1" Height="28" Margin="755,0,0,0" VerticalAlignment="Center" Width="28" HorizontalAlignment="Left" 
                         CornerRadius="50" MouseLeftButtonDown="send" MouseEnter="sendBtnMouseEnter" MouseLeave="sendBtnMouseLeave">
                     <Grid Margin="-1,-1,-1,-1">
-                        <Rectangle Name="SendButtonBackgound" Height="28" VerticalAlignment="Center" Width="28" HorizontalAlignment="Center" Opacity="0" 
+                        <Rectangle Name="SendButtonBackground" Height="28" VerticalAlignment="Center" Width="28" HorizontalAlignment="Center" Opacity="0" 
                                    RadiusX="8" RadiusY="8" Fill="White"/>
                         <Image Name="SendButton" HorizontalAlignment="Center" Height="24" VerticalAlignment="Center" Width="24" Source="/assets/images/send.png"/>
                     </Grid>

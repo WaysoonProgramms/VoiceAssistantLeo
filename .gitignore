@@ -231,6 +231,8 @@ _pkginfo.txt
 
 # Others
 ClientBin/
+Logs/
+/VSZero.vsix
 ~$*
 *~
 *.dbmdl
@@ -364,14 +366,3 @@ FodyWeavers.xsd
 
 # NuGet packages
 packages/
-
-Новая озвучка/
-/Setup
-/VoiceAssistantLui/TTS Module/build/TTS
-/VoiceAssistantLui/TTS Module/dist/TTS
-/VoiceAssistantLui/ChatGPT Module/build/gpt4
-/VoiceAssistantLui/ChatGPT Module/dist/gpt4
-/Silero TTS Module/dist/tts
-/Silero TTS Module/build/tts
-/VSZero.vsix
-/.idea/.idea.VA Leo/.idea

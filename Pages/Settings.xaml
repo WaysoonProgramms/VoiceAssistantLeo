@@ -4,91 +4,162 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="560" d:DesignWidth="850"
+      d:DesignHeight="950" d:DesignWidth="850"
       Title="Settings"
       Background="#FF151515">
-    <Grid>
-        <Image HorizontalAlignment="Left" Height="356" Margin="-92,315,0,0" VerticalAlignment="Top" Width="319" Source="/assets/images/dragon.png" 
-               Opacity="0.2" StretchDirection="DownOnly"/>
-        <Rectangle HorizontalAlignment="Left" Height="234" Margin="-67,332,0,0" VerticalAlignment="Top" Width="66" Fill="#FF151515"/>
-
-        <Image Margin="173,69,637,451" Width="40" Height="40" Source="/assets/images/functions.png"/>
-        <Label Content="Функции" HorizontalAlignment="Left" Margin="218,71,0,0" FontSize="18" FontFamily="Montserrat Alternates" 
-               Foreground="White" VerticalAlignment="Top" />
-
-        <Image Margin="552,68,258,452" Width="40" Height="40" Source="/assets/images/data.png"/>
-        <Label Content="Данные" HorizontalAlignment="Left" Margin="596,70,0,0" FontSize="18" FontFamily="Montserrat Alternates" 
-               Foreground="White" VerticalAlignment="Top"/>
-
-        <Image Margin="179,304,631,216" Width="40" Height="40" Source="/assets/images/rules.png"/>
-        <Label Content="Правила" HorizontalAlignment="Left" Margin="224,306,0,0" FontSize="18" FontFamily="Montserrat Alternates" 
-               Foreground="White" VerticalAlignment="Top"/>
-
-        <Image Margin="572,332,238,188" Width="40" Height="40" Source="/assets/images/sound.png"/>
-        <Label Content="Звук" HorizontalAlignment="Left" Margin="617,334,0,0" FontSize="18" FontFamily="Montserrat Alternates" 
-               Foreground="White"  VerticalAlignment="Top"/>
-
-        <CheckBox x:Name="DevModeBox" Content="Режим разработчика" ToolTip="Функции для тестирования и разработки. ТОЛЬКО ДЛЯ ОПЫТНЫХ ПОЛЬЗВАТЕЛЕЙ!" 
-                  FontFamily="Montserrat Alternates" HorizontalAlignment="Left" Margin="104,128,0,0" VerticalAlignment="Top" Foreground="White" 
-                  BorderBrush="White" Checked="devModeBoxChecked" Unchecked="devModeBoxUnchecked"/>
-        <CheckBox x:Name="AutoRunBox" Content="Запуск с системой" IsEnabled="False" ToolTip="Запускать ассистента с системой. (В РАЗРАБОТКЕ)" 
-                  HorizontalAlignment="Left" Margin="104,150,0,0" VerticalAlignment="Top" FontFamily="Montserrat Alternates" 
-                  Foreground="White" BorderBrush="White" Checked="addToAutoRun" Unchecked="removeToAutoRun"/>
-        <CheckBox x:Name="MinimizeToTrayBox" Content="Сворачивать в трей" ToolTip="Сворачивать ассистента в трей вместо закрытия" HorizontalAlignment="Left" 
-                  FontFamily="Montserrat Alternates"  Margin="104,172,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="White" 
-                  Checked="minimizeToTrayBoxChecked" Unchecked="minimizeToTrayBoxUnchecked"/>
-        <CheckBox x:Name="OpacityBox" Content="Эффекты прозрачности" ToolTip="Использовать эффект прозрачности" HorizontalAlignment="Left" 
-                  FontFamily="Montserrat Alternates"  Margin="104,194,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="White" 
-                  Checked="opacityBoxChecked" Unchecked="opacityBoxUnchecked"/>
-
-        <CheckBox x:Name="AppStartBox" Content="Запуск приложений на устройстве" ToolTip="Разрешить ассистенту открывать приложения на вашем устройстве по запросу" 
-                  FontFamily="Montserrat Alternates"  HorizontalAlignment="Left" Margin="104,360,0,0" VerticalAlignment="Top" Foreground="White" 
-                  BorderBrush="White" IsChecked="False" Checked="appStartBoxChecked" Unchecked="appStartBoxUnchecked"/>
-        <CheckBox x:Name="BrowserStartBox" Content="Запуск браузера по умолчанию" 
-                  ToolTip="Разрешить ассистенту открывать браузер по умолчанию на вашем устройстве по запросу" FontFamily="Montserrat Alternates" 
-                  HorizontalAlignment="Left" Margin="104,383,0,0" VerticalAlignment="Top" Foreground="White" BorderBrush="White" 
-                  IsChecked="False" Checked="browserStartBoxChecked" Unchecked="browserStartBoxUnchecked"/>
-        <CheckBox x:Name="UsingNetworkBox" Content="Использование интернет соединения" 
-                  ToolTip="Разрешить ассистенту использовать интернет соединение" 
-                  FontFamily="Montserrat Alternates" HorizontalAlignment="Left" 
-                  Margin="104,407,0,0" VerticalAlignment="Top" Foreground="White" 
-                  BorderBrush="White" IsChecked="False" Checked="usingNetworkBoxChecked" Unchecked="usingNetworkBoxUnchecked"/>
-        <CheckBox x:Name="AiBox" Content="Интеграция ИИ" IsEnabled="False" 
-                  ToolTip="Включить голосовой интерфейс для ИИ. (В РАЗРАБОТКЕ)" HorizontalAlignment="Left" Margin="104,431,0,0" 
-                  VerticalAlignment="Top" FontFamily="Montserrat Alternates"  Foreground="White" BorderBrush="White" Checked="aiBoxChecked" 
-                  Unchecked="aiBoxUnchecked"/>
-        <CheckBox x:Name="ComputerControlBox" Content="Управление компьютером"
-                  ToolTip="Разрешить ассистенту управлять компьютером" HorizontalAlignment="Left" 
-                  Margin="104,454,0,0" FontFamily="Montserrat Alternates"
-                  VerticalAlignment="Top" Foreground="White" BorderBrush="White" 
-                  IsChecked="False" Checked="computerControlBoxChecked" Unchecked="computerControlBoxUnchecked"/>
-
-        <Image HorizontalAlignment="Left" Height="13" Margin="232,427,0,0" VerticalAlignment="Top" Width="13"
-               RenderTransformOrigin="0.5,0.5" Source="/Assets/images/info.png"
-               ToolTip="Подробнее..." MouseDown="aiBoxHelp" Cursor="Hand"/>
-
-        <ComboBox HorizontalAlignment="Left" Margin="499,139,0,0" VerticalAlignment="Top" Width="234" SelectedIndex="0" 
-                  Height="23" FontFamily="Montserrat Alternates" >
-            <TextBlock Text="Русский, Россия"/>
-        </ComboBox>
-        <Label Content="Язык приложения" FontFamily="Montserrat Alternates"  HorizontalAlignment="Left" Margin="497,115,0,0" 
-               VerticalAlignment="Top" Foreground="White"/>
-        <ComboBox HorizontalAlignment="Left" Margin="499,183,0,0" VerticalAlignment="Top" Width="234" SelectedIndex="0"
-                  Height="23" FontFamily="Montserrat Alternates" >
-            <TextBlock Text="Русский, Россия"/>
-        </ComboBox>
-        <Label Content="Язык озвучки и общения" FontFamily="Montserrat Alternates"  HorizontalAlignment="Left" Margin="497,159,0,0" 
-               VerticalAlignment="Top" Foreground="White"/>
-
-        <Slider x:Name="SoundVolumeSlider" HorizontalAlignment="Left" Margin="497,397,0,0" VerticalAlignment="Top" Width="236"
-                Maximum="100" SmallChange="1" 
-                AutoToolTipPlacement="TopLeft" ValueChanged="soundVolumeSliderValueChanged" PreviewMouseUp="soundVolumeTest"/>
-        <Label Content="Уведомления и оповещения" FontFamily="Montserrat Alternates"  HorizontalAlignment="Left" Margin="497,373,0,0" 
-               VerticalAlignment="Top" Foreground="White"/>
-        <Slider x:Name="VoiceVolumeSlider" HorizontalAlignment="Left" Margin="497,439,0,0" VerticalAlignment="Top" Width="236" Maximum="100" 
-                SmallChange="1" AutoToolTipPlacement="TopLeft" ValueChanged="voiceVolumeSliderValueChanged" PreviewMouseUp="voiceVolumeTest"/>
-        <Label Content="Голос ассистента" FontFamily="Montserrat Alternates"  HorizontalAlignment="Left" Margin="497,415,0,0" 
-               VerticalAlignment="Top" Foreground="White"/>
-
-    </Grid>
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        <Grid Height="950">
+            <Image Margin="-50,65,637,0" VerticalAlignment="Top" Width="40" Height="40" Source="/assets/images/functions.png"/>
+            <Label Content="Основные" HorizontalAlignment="Left" Margin="110,71,0,0" FontSize="18" FontFamily="Montserrat Alternates" 
+                   Foreground="White" VerticalAlignment="Top" />
+    
+            <Image Margin="-50,230,631,0" VerticalAlignment="Top" Width="40" Height="40" Source="/assets/images/rules.png"/>
+            <Label Content="Разрешения" HorizontalAlignment="Left" Margin="110,236,0,0" FontSize="18" FontFamily="Montserrat Alternates" 
+                   Foreground="White" VerticalAlignment="Top"/>
+            
+            <Image Margin="-50,393,631,0" VerticalAlignment="Top" Width="40" Height="40" Source="/assets/images/sound.png"/>
+            <Label Content="Громкость" HorizontalAlignment="Left" Margin="110,397,0,0" FontSize="18" FontFamily="Montserrat Alternates" 
+                   Foreground="White" VerticalAlignment="Top"/>
+            
+            <Image Margin="-50,555,631,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="40" Height="40" Source="/assets/images/additionally.png"/>
+            <Label Content="Дополнительные инструменты" HorizontalAlignment="Left" Margin="110,559,0,0" FontSize="18" FontFamily="Montserrat Alternates" 
+                   Foreground="White" VerticalAlignment="Top"/>
+            
+            <Image Margin="-50,730,631,0" VerticalAlignment="Top"  Width="40" Height="40" Source="/assets/images/accessibility_features.png"/>
+            <Label Content="Специальные возможности" HorizontalAlignment="Left" Margin="110,735,0,0" FontSize="18" FontFamily="Montserrat Alternates" 
+                   Foreground="White" VerticalAlignment="Top"/>
+    
+            
+            <Grid Width="220" Height="100" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="65,120,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                   
+                <CheckBox Grid.Row="0" x:Name="DevModeBox" Style="{StaticResource ToggleSwitchStyle}" 
+                          ToolTip="Функции для тестирования и разработки. ТОЛЬКО ДЛЯ ОПЫТНЫХ ПОЛЬЗВАТЕЛЕЙ!" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                          BorderBrush="White" Checked="devModeBoxChecked" Unchecked="devModeBoxUnchecked" IsEnabled="False" Content="Режим разработчика" 
+                          FontFamily="Montserrat Alternates" Foreground="White"/>
+            
+                <CheckBox Grid.Row="1" x:Name="AutoRunBox" Style="{StaticResource ToggleSwitchStyle}" IsEnabled="False" 
+                          ToolTip="Запускать ассистента с системой. (В РАЗРАБОТКЕ)" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="White" 
+                          Checked="addToAutoRun" Unchecked="removeToAutoRun" Content="Запуск с системой" FontFamily="Montserrat Alternates" 
+                          Foreground="White"/>
+            
+                <CheckBox Grid.Row="2" x:Name="MinimizeToTrayBox" Style="{StaticResource ToggleSwitchStyle}" 
+                          ToolTip="Сворачивать ассистента в трей вместо закрытия" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="White" 
+                          Checked="minimizeToTrayBoxChecked" Unchecked="minimizeToTrayBoxUnchecked" Content="Сворачивать в трей" FontFamily="Montserrat Alternates" 
+                          Foreground="White"/>
+            
+                <CheckBox Grid.Row="3" x:Name="OpacityBox" Style="{StaticResource ToggleSwitchStyle}" 
+                          ToolTip="Использовать эффект прозрачности" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="White" 
+                          Checked="opacityBoxChecked" Unchecked="opacityBoxUnchecked" Content="Эффекты прозрачности" FontFamily="Montserrat Alternates" Foreground="White"/>
+            </Grid>
+              
+            <ComboBox HorizontalAlignment="Left" Margin="499,139,0,0" VerticalAlignment="Top" Width="234" SelectedIndex="0" 
+                      Height="23" FontFamily="Montserrat Alternates" >
+                   <TextBlock Text="Русский, Россия"/>
+            </ComboBox>
+            <Label Content="Язык приложения" FontFamily="Montserrat Alternates"  HorizontalAlignment="Left" Margin="497,115,0,0" 
+                   VerticalAlignment="Top" Foreground="White"/>
+            
+            <ComboBox HorizontalAlignment="Left" Margin="499,183,0,0" VerticalAlignment="Top" Width="234" SelectedIndex="0"
+                      Height="23" FontFamily="Montserrat Alternates" >
+                   <TextBlock Text="Русский, Россия"/>
+            </ComboBox>
+            <Label Content="Язык озвучки и общения" FontFamily="Montserrat Alternates"  HorizontalAlignment="Left" Margin="497,159,0,0" 
+                   VerticalAlignment="Top" Foreground="White"/>
+            
+            <Grid Width="310" Height="100" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="65,285,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                   
+                <CheckBox Grid.Row="0" x:Name="AppStartBox" Style="{StaticResource ToggleSwitchStyle}" 
+                      ToolTip="Разрешить ассистенту открывать приложения на вашем устройстве по запросу" 
+                      HorizontalAlignment="Left" VerticalAlignment="Top"
+                      BorderBrush="White" Checked="appStartBoxChecked" Unchecked="appStartBoxUnchecked" Content="Запуск приложений на устройстве" 
+                      FontFamily="Montserrat Alternates" Foreground="White"/>
+                
+                <CheckBox Grid.Row="1" x:Name="BrowserStartBox" Style="{StaticResource ToggleSwitchStyle}" 
+                          ToolTip="Разрешить ассистенту по запросу открывать браузер по умолчанию на вашем устройстве"
+                          HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="White" 
+                          Checked="browserStartBoxChecked" Unchecked="browserStartBoxUnchecked" Content="Открытие веб-страниц" 
+                          FontFamily="Montserrat Alternates"  Foreground="White"/>
+            
+                <CheckBox Grid.Row="2" x:Name="UsingNetworkBox" Style="{StaticResource ToggleSwitchStyle}"
+                          ToolTip="Разрешить ассистенту использовать интернет соединение. Вашим провайдером может взиматься плата за интернет трафик" 
+                          HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="White" 
+                          Checked="usingNetworkBoxChecked" Unchecked="usingNetworkBoxUnchecked" Content="Использование интернет соединения" 
+                          FontFamily="Montserrat Alternates" Foreground="White"/>
+            
+                <CheckBox Grid.Row="3" x:Name="ComputerControlBox" Style="{StaticResource ToggleSwitchStyle}"
+                          ToolTip="Разрешить ассистенту управлять Вашим устройством" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="White" 
+                          Checked="computerControlBoxChecked" Unchecked="computerControlBoxUnchecked" Content="Управление устройством" 
+                          FontFamily="Montserrat Alternates" Foreground="White" />
+            </Grid >
+    
+            <Slider x:Name="SoundVolumeSlider" HorizontalAlignment="Left" Margin="68,470,0,0" VerticalAlignment="Top" Width="236"
+                    Maximum="100" SmallChange="1" 
+                    AutoToolTipPlacement="TopLeft" ValueChanged="soundVolumeSliderValueChanged" PreviewMouseUp="soundVolumeTest"/>
+            <Label Content="Уведомления и оповещения" FontFamily="Montserrat Alternates"  HorizontalAlignment="Left" Margin="68,445,0,0" 
+                   VerticalAlignment="Top" Foreground="White"/>
+            
+            <Slider x:Name="VoiceVolumeSlider" HorizontalAlignment="Left" Margin="68,515,0,0" VerticalAlignment="Top" Width="236" Maximum="100" 
+                    SmallChange="1" AutoToolTipPlacement="TopLeft" ValueChanged="voiceVolumeSliderValueChanged" PreviewMouseUp="voiceVolumeTest"/>
+            <Label Content="Голос ассистента" FontFamily="Montserrat Alternates"  HorizontalAlignment="Left" Margin="68,490,0,0" 
+                   VerticalAlignment="Top" Foreground="White"/>
+            
+            <Grid Width="720" Height="100" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="65,605,0,0">
+                   <Grid.RowDefinitions>
+                          <RowDefinition></RowDefinition>
+                          <RowDefinition></RowDefinition>
+                          <RowDefinition></RowDefinition> 
+                   </Grid.RowDefinitions>
+                   
+                   <Grid.ColumnDefinitions>
+                          <ColumnDefinition Width="420"></ColumnDefinition>
+                          <ColumnDefinition Width="220"></ColumnDefinition>
+                   </Grid.ColumnDefinitions>
+                   
+                   <Button Grid.Column="0" Grid.Row="0" Style="{StaticResource LeoButtonStyle}" Height="20" Width="160" Content="Очистить сообщения" FontFamily="Montserrat Alternates"
+                           HorizontalAlignment="Left" Click="clearMessages"/>
+                   <Button Grid.Column="0" Grid.Row="1" Style="{StaticResource LeoButtonStyle}" Height="20" Width="160" Content="Открыть папку логов" FontFamily="Montserrat Alternates"
+                           HorizontalAlignment="Left" Click="openLogs"/>
+                   <Button Grid.Column="0" Grid.Row="2" Style="{StaticResource LeoButtonStyle}" Height="20" Width="160" Content="Настройки Vosk" FontFamily="Montserrat Alternates"
+                           HorizontalAlignment="Left" IsEnabled="False"/>
+                   <Button Grid.Column="1" Grid.Row="0" Style="{StaticResource LeoButtonStyle}" Height="20" Width="160" Content="Сброс настроек" FontFamily="Montserrat Alternates"
+                           HorizontalAlignment="Left" Click="settingsReset"/>
+                   <Button Grid.Column="1" Grid.Row="1" Style="{StaticResource LeoButtonStyle}" Height="20" Width="160" Content="Проверить обновления" FontFamily="Montserrat Alternates"
+                           HorizontalAlignment="Left" IsEnabled="False"/>
+            </Grid>
+            
+            <Grid Width="310" Height="100" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="65,790,0,0">
+                   <Grid.RowDefinitions>
+                          <RowDefinition Height="40"></RowDefinition>
+                          <RowDefinition></RowDefinition>
+                          <RowDefinition></RowDefinition>
+                          <RowDefinition></RowDefinition>
+                   </Grid.RowDefinitions>
+                   
+                   <CheckBox Grid.Row="0" x:Name="OffLotMessageWarnBox" Style="{StaticResource ToggleSwitchStyle}"
+                             HorizontalAlignment="Left" VerticalAlignment="Top" 
+                             BorderBrush="White" Checked="offLotMessageWarnBoxChecked" Unchecked="offLotMessageWarnBoxUnchecked"/>
+                   <TextBlock Grid.Row="0" FontFamily="Montserrat Alternates" Foreground="White" Width="250" Height="30" HorizontalAlignment="Left" TextWrapping="Wrap"
+                              Margin="45,0,0,10">
+                          Отключить предупреждение о превышении лимита сообщений
+                   </TextBlock>
+                   
+                   <CheckBox Grid.Row="1" x:Name="NotSaveMessageBox" Style="{StaticResource ToggleSwitchStyle}" 
+                             ToolTip="Не сохранять историю запросов" HorizontalAlignment="Left" VerticalAlignment="Top" BorderBrush="White" 
+                             Checked="notSaveMessagesBoxChecked" Unchecked="notSaveMessagesBoxUnchecked" Content="Не сохранять сообщения" 
+                             FontFamily="Montserrat Alternates" Foreground="White"/>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
 </Page>

@@ -225,5 +225,29 @@ namespace Leo.Properties {
                 this["messagesId"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool notSaveMessages {
+            get {
+                return ((bool)(this["notSaveMessages"]));
+            }
+            set {
+                this["notSaveMessages"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool offLotMessageWarn {
+            get {
+                return ((bool)(this["offLotMessageWarn"]));
+            }
+            set {
+                this["offLotMessageWarn"] = value;
+            }
+        }
     }
 }

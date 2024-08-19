@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using Leo.Classes;
+using System.Diagnostics;
 using MessageBox = Leo.WindowModels.MessageBox;
 
 namespace Leo.PageModels
@@ -31,13 +32,15 @@ namespace Leo.PageModels
             AppStartBox.IsChecked = Properties.Settings.Default.allowProgrammsStart;
             BrowserStartBox.IsChecked = Properties.Settings.Default.allowBrowserStart;
             UsingNetworkBox.IsChecked = Properties.Settings.Default.allowNetworkUsing;
-            AiBox.IsChecked = Properties.Settings.Default.allowAI;
             ComputerControlBox.IsChecked = Properties.Settings.Default.allowComputerControl;
 
             // Звук
             VoiceVolumeSlider.Value = Properties.Settings.Default.voiceVol;
             SoundVolumeSlider.Value = Properties.Settings.Default.soundVol;
-
+            
+            // Спец. Возможности
+            NotSaveMessageBox.IsChecked = Properties.Settings.Default.notSaveMessages;
+            OffLotMessageWarnBox.IsChecked = Properties.Settings.Default.offLotMessageWarn;
         }
         
         [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
@@ -133,24 +136,6 @@ namespace Leo.PageModels
             Properties.Settings.Default.Save();
         }
 
-        private void aiBoxChecked(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.allowAI = true;
-            Properties.Settings.Default.Save();
-        }
-
-        private void aiBoxUnchecked(object sender, RoutedEventArgs e)
-        {
-            Properties.Settings.Default.allowAI = false;
-            Properties.Settings.Default.Save();
-        }
-
-        private void aiBoxHelp(object sender, MouseButtonEventArgs e)
-        {
-            _messageBox.showMessage(Properties.Resources.MessageBox_errorSign,
-                    Properties.Resources.Settings_AIBox_Help, MessageBox.MessageBoxType.Info, MessageBox.MessageBoxButtons.Ok);
-        }
-
         private void computerControlBoxChecked(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.allowComputerControl = true;
@@ -218,6 +203,78 @@ namespace Leo.PageModels
 
                 _logger.error("Leo was unable to remove himself from startup.");
             }
+        }
+
+        private void openLogs(object sender, RoutedEventArgs e)
+        {
+            Process.Start("explorer.exe", @".\Logs");
+        }
+
+        private void clearMessages(object sender, RoutedEventArgs e)
+        {
+            ChatManager chatManager = new();
+            chatManager.clearChat();
+        }
+
+        private void settingsReset(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.isDevModeTrue = false;
+            Properties.Settings.Default.isMinimizeToTrayTrue = false;
+            Properties.Settings.Default.isAutoRun = false;
+            Properties.Settings.Default.allowOpacity = true;
+
+            Properties.Settings.Default.allowProgrammsStart = true;
+            Properties.Settings.Default.allowBrowserStart = true;
+            Properties.Settings.Default.allowNetworkUsing = true;
+            Properties.Settings.Default.allowComputerControl = true;
+
+            Properties.Settings.Default.voiceVol = 100.0f;
+            Properties.Settings.Default.soundVol = 100.0f;
+
+            Properties.Settings.Default.notSaveMessages = false;
+            Properties.Settings.Default.offLotMessageWarn = false;
+            
+            Properties.Settings.Default.Save();
+
+            DevModeBox.IsChecked = Properties.Settings.Default.isDevModeTrue;
+            MinimizeToTrayBox.IsChecked = Properties.Settings.Default.isMinimizeToTrayTrue;
+            AutoRunBox.IsChecked = Properties.Settings.Default.isAutoRun;
+            OpacityBox.IsChecked = Properties.Settings.Default.allowOpacity;
+            
+            AppStartBox.IsChecked = Properties.Settings.Default.allowProgrammsStart;
+            BrowserStartBox.IsChecked = Properties.Settings.Default.allowBrowserStart;
+            UsingNetworkBox.IsChecked = Properties.Settings.Default.allowNetworkUsing;
+            ComputerControlBox.IsChecked = Properties.Settings.Default.allowComputerControl;
+            
+            VoiceVolumeSlider.Value = Properties.Settings.Default.voiceVol;
+            SoundVolumeSlider.Value = Properties.Settings.Default.soundVol;
+            
+            NotSaveMessageBox.IsChecked = Properties.Settings.Default.notSaveMessages;
+            OffLotMessageWarnBox.IsChecked = Properties.Settings.Default.offLotMessageWarn;
+        }
+        
+        private void notSaveMessagesBoxChecked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.notSaveMessages = true;
+            Properties.Settings.Default.Save();
+        }
+
+        private void notSaveMessagesBoxUnchecked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.notSaveMessages = false;
+            Properties.Settings.Default.Save();
+        }
+        
+        private void offLotMessageWarnBoxChecked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.offLotMessageWarn = true;
+            Properties.Settings.Default.Save();
+        }
+
+        private void offLotMessageWarnBoxUnchecked(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.offLotMessageWarn = false;
+            Properties.Settings.Default.Save();
         }
     }
 }

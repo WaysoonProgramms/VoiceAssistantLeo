@@ -19,6 +19,7 @@
     <ProductVersion>0.0.1</ProductVersion>
     <AssemblyVersion>0.0.1</AssemblyVersion>
     <FileVersion>0.0.1</FileVersion>
+    <NeutralLanguage>ru</NeutralLanguage>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -40,9 +41,7 @@
 
   <ItemGroup>
 	<Resource Include="Assets\Fonts\MontserratAlternates-ExtraBold.ttf" />
-	<Resource Include="Assets\Fonts\MontserratAlternates-Regular.ttf">
-	  <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	</Resource>
+	<Resource Include="Assets\Fonts\MontserratAlternates.ttf" />
 	<Resource Include="Assets\icon.ico" />
     <Resource Include="Assets\Images\avatar.png" />
     <Resource Include="Assets\Images\Chat.png" />
@@ -215,6 +214,11 @@
       <Link>Assets\Libraries\libwinpthread-1.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Remove="Assets\Images\additionally.png" />
+    <Resource Include="Assets\Images\additionally.png" />
+    <None Remove="Assets\Images\accessibility_features.png" />
+    <Resource Include="Assets\Images\accessibility_features.png" />
+    <None Remove="Assets\deafult_settings.config" />
   </ItemGroup>
 
   <ItemGroup>
@@ -236,10 +240,6 @@
       <XamlRuntime>Wpf</XamlRuntime>
       <SubType>Designer</SubType>
     </Page>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Fonts\" />
   </ItemGroup>
 
 </Project>

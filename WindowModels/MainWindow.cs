@@ -4,11 +4,11 @@ using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
 using Leo.Classes;
 using Leo.PageModels;
 using static Leo.PageModels.Chat;
 using Control = System.Windows.Forms.Control;
+using Image = System.Windows.Controls.Image;
 using KeyEventArgs = System.Windows.Input.KeyEventArgs;
 using MouseEventArgs = System.Windows.Input.MouseEventArgs;
 
@@ -32,18 +32,29 @@ namespace Leo.WindowModels
 
             if (Properties.Settings.Default.isMuted)
             {
-                Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/mute.png"));
+                Mute.Content = (Image)TryFindResource("MuteImage");
                 TrayIconMuteBtn.Header = "Вкл. микрофон";
             }
             else
             {
-                Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/microphone.png"));
+                Mute.Content = (Image)TryFindResource("MicrophoneImage");
                 TrayIconMuteBtn.Header = "Выкл. микрофон";
             }
 
             Classes.Vosk.update();
             ChatCollection = new ObservableCollection<Messages>();
             Console.WriteLine(@"(C) Copyright Menshov Anton Romanovich (WaysoonProgramms) 2023-2024");
+
+            if (MicAccess == false)
+            {
+                Mute.Content = (Image)TryFindResource("MuteImage");
+                Mute.Opacity = 0.5;
+                Mute.IsEnabled = false;
+                
+                TrayIconMuteBtn.Header = "Вкл. микрофон";
+                TrayIconMuteBtn.IsEnabled = false;
+                TrayIconMuteBtn.Opacity = 0.5;
+            }
         }
         
 
@@ -78,7 +89,7 @@ namespace Leo.WindowModels
                 Properties.Settings.Default.isMuted = false;
                 Properties.Settings.Default.Save();
 
-                Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/microphone.png"));
+                Mute.Content = (Image)TryFindResource("MicrophoneImage");
                 TrayIconMuteBtn.Header = "Выкл. микрофон";
             }
             else
@@ -86,7 +97,7 @@ namespace Leo.WindowModels
                 Properties.Settings.Default.isMuted = true;
                 Properties.Settings.Default.Save();
 
-                Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/mute.png"));
+                Mute.Content = (Image)TryFindResource("MuteImage");
                 TrayIconMuteBtn.Header = "Вкл. микрофон";
             }
 
@@ -121,7 +132,7 @@ namespace Leo.WindowModels
                 }
 
                 Storyboard.SetTargetName(animation, target);
-                Storyboard.SetTargetProperty(animation, new PropertyPath(MainWindow.OpacityProperty));
+                Storyboard.SetTargetProperty(animation, new PropertyPath(OpacityProperty));
                 storyboardFade.FillBehavior = FillBehavior.Stop;
                 storyboardFade.Children.Add(animation);
 
@@ -152,12 +163,12 @@ namespace Leo.WindowModels
             Hide();
         }
 
-        private void closeWindow(object sender, MouseButtonEventArgs e)
+        private void closeWindow(object sender, EventArgs e)
         {
-            opacityAnimation(this.Name, 1, 0, 0.3, Properties.Settings.Default.isMinimizeToTrayTrue ? 1 : 0);
+            opacityAnimation(Name, 1, 0, 0.3, Properties.Settings.Default.isMinimizeToTrayTrue ? 1 : 0);
         }
 
-        private void mute(object sender, MouseButtonEventArgs? e)
+        private void mute(object sender, EventArgs? e)
         {
             if (MicAccess == false)
             {
@@ -170,19 +181,19 @@ namespace Leo.WindowModels
                 Properties.Settings.Default.isMuted = false;
                 Properties.Settings.Default.Save();
 
-                Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/microphone.png"));
+                Mute.Content = (Image)TryFindResource("MicrophoneImage");
             } else
             {
                 Properties.Settings.Default.isMuted = true;
                 Properties.Settings.Default.Save();
 
-                Mute.Source = BitmapFrame.Create(new Uri(@"pack://application:,,,/Assets/images/mute.png"));
+                Mute.Content = (Image)TryFindResource("MuteImage");
             }
 
             Classes.Vosk.update();
         }
 
-        private void minimizeWindow(object sender, MouseButtonEventArgs e)
+        private void minimizeWindow(object sender, EventArgs e)
         {
             WindowState = WindowState.Minimized;
         }
@@ -271,42 +282,6 @@ namespace Leo.WindowModels
         {
             opacityAnimation(AboutBtnFillMarker.Name, 0.1, 0, 0.1, 2);
             AboutBtnFillMarker.Opacity = 0;
-        }
-
-        private void closeBtnMouseEnter(object sender, MouseEventArgs e)
-        {
-            opacityAnimation(CloseBackground.Name, 0, 1, 0.1, 2);
-            CloseBackground.Opacity = 1;
-        }
-
-        private void closeBtnMouseLeave(object sender, MouseEventArgs e)
-        {
-            opacityAnimation(CloseBackground.Name, 1, 0, 0.1, 2);
-            CloseBackground.Opacity = 0;
-        }
-
-        private void minimizeBtnMouseEnter(object sender, MouseEventArgs e)
-        {
-            opacityAnimation(MinimizeBackground.Name, 0, 0.2, 0.1, 2);
-            MinimizeBackground.Opacity = 0.2;
-        }
-
-        private void minimizeBtnMouseLeave(object sender, MouseEventArgs e)
-        {
-            opacityAnimation(MinimizeBackground.Name, 0.2, 0, 0.1, 2);
-            MinimizeBackground.Opacity = 0;
-        }
-
-        private void muteBtnMouseEnter(object sender, MouseEventArgs e)
-        {
-            opacityAnimation(MuteBackground.Name, 0, 0.2, 0.1, 2);
-            MuteBackground.Opacity = 0.2;
-        }
-
-        private void muteBtnMouseLeave(object sender, MouseEventArgs e)
-        {
-            opacityAnimation(MuteBackground.Name, 0.2, 0, 0.1, 2);
-            MuteBackground.Opacity = 0;
         }
 
         private void copyrightMouseEnter(object sender, MouseEventArgs e)

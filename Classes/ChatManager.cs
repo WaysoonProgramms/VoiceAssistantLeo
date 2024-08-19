@@ -26,26 +26,40 @@ namespace Leo.Classes
         
         public ChatManager()
         {
-            try
+            if (Properties.Settings.Default.notSaveMessages == false)
             {
-                FileStream file = File.Open(_path, FileMode.Open);
-                file.Close();
+                try
+                {
+                    FileStream file = File.Open(_path, FileMode.Open);
+                    file.Close();
+                }
+                catch
+                {
+                    FileStream file = File.Create(_path);
+                    file.Close();
+                    File.SetAttributes(_path, FileAttributes.Hidden);
+                    Properties.Settings.Default.messagesId = 0;
+                    Properties.Settings.Default.nowDate = "01.01.01";
+                    Properties.Settings.Default.Save();
+                    MainWindow.ChatCollection = new ObservableCollection<Chat.Messages>();
+                    Chat.NullMessages = true;
+                }
             }
-            catch
+            else
             {
-                FileStream file = File.Create(_path);
-                file.Close();
-                File.SetAttributes(_path, FileAttributes.Hidden);
-                Properties.Settings.Default.messagesId = 0;
-                Properties.Settings.Default.nowDate = "01.01.01";
-                Properties.Settings.Default.Save();
                 MainWindow.ChatCollection = new ObservableCollection<Chat.Messages>();
                 Chat.NullMessages = true;
             }
+            
         }
 
         public async void serializeChat(string? text, string? alignment, string? time, string? date, bool isDateVisible, int id)
         {
+            if (Properties.Settings.Default.notSaveMessages)
+            {
+                return;
+            }
+            
             await using StreamWriter writer = new StreamWriter(_path, true);
             MessageData messageData = new MessageData()
             {
@@ -63,6 +77,11 @@ namespace Leo.Classes
 
         public async void deserializeChat()
         {
+            if (Properties.Settings.Default.notSaveMessages)
+            {
+                return;
+            }
+            
             try
             {
                 using StreamReader reader = new StreamReader(_path);
@@ -78,7 +97,7 @@ namespace Leo.Classes
                         break;
                     }
                     MessageData? md = JsonConvert.DeserializeObject<MessageData>(line);
-                    if (int.Parse(md?.Id!) >= 10000)
+                    if (int.Parse(md?.Id!) >= 10000 && Properties.Settings.Default.offLotMessageWarn == false)
                     {
                         Logger.message("Chat messages have reached 10,000 and need clearing");
                         _messageBox.showMessage(Resources.MessageBox_messageSign, Resources.message1,
@@ -91,10 +110,13 @@ namespace Leo.Classes
                                 {
                                     reader.Close();
                                     clearChat();
-                                    break;
                                 }
+                                else
+                                {
+                                    continue;
+                                }
+                                break;
                             }
-                            return Task.CompletedTask;
                         });
                         if (_messageBox.Results == 0)
                         {
@@ -120,7 +142,7 @@ namespace Leo.Classes
             }
         }
 
-        private void clearChat()
+        public void clearChat()
         {
             Properties.Settings.Default.messagesId = 0;
             Properties.Settings.Default.nowDate = "01.01.01";

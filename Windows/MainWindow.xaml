@@ -9,12 +9,19 @@
         Title="Ассистент Лео" Height="600" Width="1100" Background="#FF1F1F1F" Foreground="White" 
         ResizeMode="NoResize" WindowStartupLocation="CenterScreen" Icon="/assets/icon.ico" PreviewKeyDown="hotKeys" WindowStyle="None" 
         AllowsTransparency="True" Loaded="windowLoaded">
+    <Window.Resources>
+        <Image x:Key="CloseImage" Source="/Assets/images/close.png"/>
+        <Image x:Key="MinimizeImage" Source="/assets/images/hide.png"/>
+        <Image x:Key="MuteImage" Source="/Assets/images/mute.png"/>
+        <Image x:Key="MicrophoneImage" Source="/Assets/images/microphone.png"/>
+        <Image x:Key="HomeImage" Source="/Assets/Images/Home.png"/>
+    </Window.Resources>
     <Grid Background="#FF151515">
         <Rectangle HorizontalAlignment="Center" Height="40" VerticalAlignment="Top" Width="1100" Fill="#FF111111" 
                    MouseLeftButtonDown="movingWindow"/>
         <Image HorizontalAlignment="Left" Height="20" Margin="15,9,0,0" VerticalAlignment="Top" Width="20" Source="/Assets/icon.ico"/>
         <Label Content="Ассистент Лео" HorizontalAlignment="Left" Margin="40,6,0,0" VerticalAlignment="Top" Foreground="White" 
-               FontFamily="#Montserrat Alternates" RenderTransformOrigin="0.349,0.585" />
+               FontFamily="Montserrat Alternates" RenderTransformOrigin="0.349,0.585" />
         <Label Content="v0.0.1" HorizontalAlignment="Left" Margin="155,6,0,0" VerticalAlignment="Top" Foreground="#FF313131" 
                FontFamily="Montserrat Alternates" RenderTransformOrigin="0.349,0.585"/>
 
@@ -32,83 +39,74 @@
                 </ContextMenu>
             </tb:TaskbarIcon.ContextMenu>
         </tb:TaskbarIcon>
-
-        <Border BorderThickness="1" Height="30" Margin="0,5,5,0" VerticalAlignment="Top" Width="30" HorizontalAlignment="Right" 
-                CornerRadius="50" MouseLeftButtonDown="closeWindow" MouseEnter="closeBtnMouseEnter" MouseLeave="closeBtnMouseLeave">
-            <Grid>
-                <Rectangle Name="CloseBackground" Height="30" VerticalAlignment="Center" Width="30" HorizontalAlignment="Center" 
-                           Fill="#FFA70000" Opacity="0" RadiusX="8" RadiusY="8"/>
-                <Image HorizontalAlignment="Center" Height="25" VerticalAlignment="Center" Width="25" Source="/assets/images/close.png"/>
-            </Grid>
-        </Border>
-
-        <Border BorderThickness="1" Height="30" Margin="0,5,85,0" VerticalAlignment="Top" Width="30" HorizontalAlignment="Right" 
-                CornerRadius="50" MouseLeftButtonDown="mute" MouseEnter="muteBtnMouseEnter" MouseLeave="muteBtnMouseLeave" RenderTransformOrigin="0.55,0.535">
-            <Grid>
-                <Rectangle Name="MuteBackground" Height="30" VerticalAlignment="Center" Width="30" HorizontalAlignment="Center" Opacity="0" 
-                           RadiusX="8" RadiusY="8" Fill="White"/>
-                <Image Name="Mute" HorizontalAlignment="Center" Height="25" VerticalAlignment="Center" Width="25" Source="/Assets/images/microphone.png"/>
-            </Grid>
-        </Border>
-
-        <Border BorderThickness="1" Height="30" Margin="0,5,45,0" VerticalAlignment="Top" Width="30" HorizontalAlignment="Right" 
-                CornerRadius="50" MouseLeftButtonDown="minimizeWindow" MouseEnter="minimizeBtnMouseEnter" MouseLeave="minimizeBtnMouseLeave">
-            <Grid>
-                <Rectangle Name="MinimizeBackground" Height="30" VerticalAlignment="Center" Width="30" HorizontalAlignment="Center" 
-                           Opacity="0" RadiusX="8" RadiusY="8" Fill="White"/>
-                <Image Name="Minimize" HorizontalAlignment="Center" Height="25" VerticalAlignment="Center" Width="25" Source="/assets/images/hide.png"/>
-            </Grid>
-        </Border>
+        
+        <Button Style="{StaticResource CloseButtonsStyle}" Height="30" Margin="0,5,5,0" VerticalAlignment="Top" Width="30" HorizontalAlignment="Right" 
+                Click="closeWindow" Content="{StaticResource CloseImage}"/>
+        
+        <Button Name="Mute" Style="{StaticResource FrameButtonsStyle}" Height="30" Margin="0,5,85,0" VerticalAlignment="Top" Width="30" HorizontalAlignment="Right" 
+                Click="mute" Content="{StaticResource MicrophoneImage}"/>
+        
+        <Button Style="{StaticResource FrameButtonsStyle}" Height="30" Margin="0,5,45,0" VerticalAlignment="Top" Width="30" HorizontalAlignment="Right" 
+                Click="minimizeWindow" Content="{StaticResource MinimizeImage}"/>
 
         <Frame Name="MainFrame" Margin="250,40,0,0" NavigationUIVisibility="Hidden" IsTabStop="False"/>
 
-        <Border BorderThickness="1" Margin="0,60,850,500" MouseLeftButtonDown="getHome" MouseEnter="homeBtnMouseEnter" 
+        <Grid Width="249" Height="160" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,60,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            
+            <Border Grid.Row="0" BorderThickness="1" MouseLeftButtonDown="getHome" MouseEnter="homeBtnMouseEnter" 
                 MouseLeave="homeBtnMouseLeave" Cursor="Hand">
-            <Grid>
-                <Rectangle x:Name="HomeBtnFillMarker" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="248" Fill="White" Opacity="0"/>
-                <Rectangle x:Name="HomeBtnMarker" HorizontalAlignment="Left" Height="40" VerticalAlignment="Center" Width="5" 
+                <Grid>
+                    <Rectangle x:Name="HomeBtnFillMarker" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="249" Fill="White" Opacity="0"/>
+                    <Rectangle x:Name="HomeBtnMarker" HorizontalAlignment="Left" Height="40" VerticalAlignment="Center" Width="5" 
                            Margin="-1,0,0,0" Fill="White" Opacity="0"/>
-                <Image HorizontalAlignment="Left" Height="26" Margin="13,0,0,0" VerticalAlignment="Center" Width="25" Source="/assets/images/Home.png"/>
-                <Label Content="Домашняя" HorizontalAlignment="Left" Margin="43,0,0,0" VerticalAlignment="Center" 
-                       FontSize="12" FontFamily="Montserrat Alternates" Foreground="White" RenderTransformOrigin="0.349,0.585"/>
-            </Grid>
-        </Border>
+                    <Image HorizontalAlignment="Left" Height="26" Margin="13,0,0,0" VerticalAlignment="Center" Width="25" Source="/assets/images/Home.png"/>
+                    <Label Content="Домашняя" HorizontalAlignment="Left" Margin="43,0,0,0" VerticalAlignment="Center" 
+                       FontSize="12" FontFamily="Montserrat Alternates" Foreground="White"/>
+                </Grid>
+            </Border>
 
-        <Border BorderThickness="1" Margin="0,100,850,461" MouseLeftButtonDown="getSettings" MouseEnter="settingsBtnMouseEnter" 
-                MouseLeave="settingsBtnMouseLeave" Cursor="Hand">
-            <Grid>
-                <Rectangle x:Name="SettingsBtnFillMarker" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="248" Fill="White" Opacity="0"/>
-                <Rectangle x:Name="SettingsBtnMarker" HorizontalAlignment="Left" Height="40" VerticalAlignment="Center" Width="5" Margin="-1,0,0,0" 
+            <Border Grid.Row="1" BorderThickness="1" MouseLeftButtonDown="getSettings" MouseEnter="settingsBtnMouseEnter" 
+                    MouseLeave="settingsBtnMouseLeave" Cursor="Hand">
+                <Grid>
+                    <Rectangle x:Name="SettingsBtnFillMarker" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="249" Fill="White" Opacity="0"/>
+                    <Rectangle x:Name="SettingsBtnMarker" HorizontalAlignment="Left" Height="40" VerticalAlignment="Center" Width="5" Margin="-1,0,0,0" 
                            Fill="White" Opacity="0"/>
-                <Image HorizontalAlignment="Left" Height="26" Margin="13,0,0,1" VerticalAlignment="Center" Width="25" Source="/assets/images/settings.png"/>
-                <Label Content="Настройки" HorizontalAlignment="Left" Margin="43,0,0,0" VerticalAlignment="Center" 
+                    <Image HorizontalAlignment="Left" Height="26" Margin="13,0,0,1" VerticalAlignment="Center" Width="25" Source="/assets/images/settings.png"/>
+                    <Label Content="Настройки" HorizontalAlignment="Left" Margin="43,0,0,0" VerticalAlignment="Center" 
                        FontSize="12" FontFamily="Montserrat Alternates" Foreground="White" RenderTransformOrigin="0.348,0.526"/>
-            </Grid>
-        </Border>
+                </Grid>
+            </Border>
 
-        <Border BorderThickness="1" Margin="0,139,850,421" MouseLeftButtonDown="getChat" MouseEnter="chatBtnMouseEnter" 
+            <Border Grid.Row="2" BorderThickness="1" MouseLeftButtonDown="getChat" MouseEnter="chatBtnMouseEnter" 
                 MouseLeave="chatBtnMouseLeave" Cursor="Hand">
-            <Grid>
-                <Rectangle x:Name="ChatBtnFillMarker" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="249" Fill="White" Opacity="0"/>
-                <Rectangle x:Name="ChatBtnMarker" HorizontalAlignment="Left" Height="40" VerticalAlignment="Center" Width="5" Margin="-1,0,0,0" 
+                <Grid>
+                    <Rectangle x:Name="ChatBtnFillMarker" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="249" Fill="White" Opacity="0"/>
+                    <Rectangle x:Name="ChatBtnMarker" HorizontalAlignment="Left" Height="40" VerticalAlignment="Center" Width="5" Margin="-1,0,0,0" 
                            Fill="White" Opacity="0"/>
-                <Image HorizontalAlignment="Left" Height="26" Margin="13,0,0,1" VerticalAlignment="Center" Width="25" Source="/assets/images/Chat.png"/>
-                <Label Content="Чат" HorizontalAlignment="Left" Margin="43,0,0,0" VerticalAlignment="Center" 
+                    <Image HorizontalAlignment="Left" Height="26" Margin="13,0,0,1" VerticalAlignment="Center" Width="25" Source="/assets/images/Chat.png"/>
+                    <Label Content="Чат" HorizontalAlignment="Left" Margin="43,0,0,0" VerticalAlignment="Center" 
                        FontSize="12" FontFamily="Montserrat Alternates" Foreground="White" RenderTransformOrigin="0.348,0.526" />
-            </Grid>
-        </Border>
+                </Grid>
+            </Border>
 
-        <Border BorderThickness="1" Margin="0,179,850,380" MouseLeftButtonDown="getAbout" MouseEnter="aboutBtnMouseEnter" 
+            <Border Grid.Row="3" BorderThickness="1" MouseLeftButtonDown="getAbout" MouseEnter="aboutBtnMouseEnter" 
                 MouseLeave="aboutBtnMouseLeave" Cursor="Hand">
-            <Grid>
-                <Rectangle x:Name="AboutBtnFillMarker" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="249" Fill="White" Opacity="0"/>
-                <Rectangle x:Name="AboutBtnMarker" HorizontalAlignment="Left" Height="40" VerticalAlignment="Center" Width="5" Margin="-1,0,0,0" 
+                <Grid>
+                    <Rectangle x:Name="AboutBtnFillMarker" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="249" Fill="White" Opacity="0"/>
+                    <Rectangle x:Name="AboutBtnMarker" HorizontalAlignment="Left" Height="40" VerticalAlignment="Center" Width="5" Margin="-1,0,0,0" 
                            Fill="White" Opacity="0"/>
-                <Image HorizontalAlignment="Left" Height="26" Margin="13,0,0,1" VerticalAlignment="Center" Width="25" Source="/assets/images/Info.png"/>
-                <Label Content="О проекте" HorizontalAlignment="Left" Margin="43,0,0,0" VerticalAlignment="Center" 
+                    <Image HorizontalAlignment="Left" Height="26" Margin="13,0,0,1" VerticalAlignment="Center" Width="25" Source="/assets/images/Info.png"/>
+                    <Label Content="О проекте" HorizontalAlignment="Left" Margin="43,0,0,0" VerticalAlignment="Center" 
                        FontSize="12" FontFamily="Montserrat Alternates" Foreground="White" RenderTransformOrigin="0.348,0.526"/>
-            </Grid>
-        </Border>
+                </Grid>
+            </Border>
+        </Grid>
 
         <Image HorizontalAlignment="Left" Height="15" Margin="41,573,0,0" VerticalAlignment="Top" Width="15" Source="/assets/images/avatar.png"/>
         <Label Content="© WaysoonProgramms 2024" HorizontalAlignment="Left" Margin="61,570,0,0" VerticalAlignment="Top" FontSize="9" Foreground="White"

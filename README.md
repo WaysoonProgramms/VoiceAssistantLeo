@@ -47,6 +47,12 @@ WakeWord, а с таким сложным именем было сложно к 
 распазноет голос <a href="https://github.com/alphacep/vosk-api">Voks API</a>.
 </p>
 
+<h1> Скриншот приложения </h1>
+<picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./Assets/Repo/banner.png">
+    <img src="./Assets/Repo/screenshot.png" alt="Screenshot">
+</picture>
+
 <h1> Голосовые Команды </h1>
 <p>
 Что-бы активировать ассистента необходимо назвать его имя (<i>Лео</i>). Вы можете как назвать ассистента вместе

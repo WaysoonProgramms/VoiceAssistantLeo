@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Windows;
 using System.Windows.Input;
+using Leo.WindowModels;
 
 namespace Leo.PageModels
 {
@@ -22,7 +23,7 @@ namespace Leo.PageModels
             { FileName = "https://raw.githubusercontent.com/WaysoonProgramms/VoiceAssistantLeo/master/LICENSE", UseShellExecute = true });
         }
 
-        private void liclinkMouseLeave(object sender, MouseEventArgs e)
+        private void licLinkMouseLeave(object sender, MouseEventArgs e)
         {
             LicenseLink.Visibility = Visibility.Hidden;
         }
@@ -73,6 +74,21 @@ namespace Leo.PageModels
         private void siteLinkMouseLeave(object sender, MouseEventArgs e)
         {
             SiteLink.Visibility = Visibility.Hidden;
+        }
+        
+        private void skillsLinkMouseEnter(object sender, MouseEventArgs e)
+        {
+            SkillsLink.Visibility = Visibility.Visible;
+        }
+        
+        private void skillsLinkClick(object sender, MouseButtonEventArgs e)
+        {
+            MainWindow.getSkillsPage();
+        }
+
+        private void skillsLinkMouseLeave(object sender, MouseEventArgs e)
+        {
+            SkillsLink.Visibility = Visibility.Hidden;
         }
     }
 }

@@ -20,14 +20,15 @@ namespace Leo.WindowModels
         public static bool MicAccess = true;
 
         private static readonly ChatManager ChatManager = new();
+        private static MainWindow? Instance { get; set; }
 
         public MainWindow()
         {
             InitializeComponent();
             
-            getChat(this, null); // Сдлеано для инициализации коллекции с сообщениями
+            getChatPage(this, null); // Сдлеано для инициализации коллекции с сообщениями
             ChatManager.deserializeChat();
-            getHome(this, null);
+            getHomePage(this, null);
             Classes.Vosk.main();
 
             if (Properties.Settings.Default.isMuted)
@@ -55,6 +56,8 @@ namespace Leo.WindowModels
                 TrayIconMuteBtn.IsEnabled = false;
                 TrayIconMuteBtn.Opacity = 0.5;
             }
+            
+            Instance = this;
         }
         
 
@@ -62,11 +65,11 @@ namespace Leo.WindowModels
         {
             if (Equals(sender, TrayIconChatBtn))
             {
-                getChat(TrayIconChatBtn, null);
+                getChatPage(TrayIconChatBtn, null);
             }
             if (Equals(sender, TrayIconSettingsBtn))
             {
-                getSettings(TrayIconSettingsBtn, null);
+                getSettingsPage(TrayIconSettingsBtn, null);
             }
 
 
@@ -198,34 +201,42 @@ namespace Leo.WindowModels
             WindowState = WindowState.Minimized;
         }
 
-        private void getHome(object sender, MouseButtonEventArgs? e)
+        private void getHomePage(object sender, MouseButtonEventArgs? e)
         {
             removeMarkers();
             MainFrame.Content = new Home();
             HomeBtnMarker.Opacity = 1;
         }
-        private void getSettings(object sender, MouseButtonEventArgs? e)
+        private void getSettingsPage(object sender, MouseButtonEventArgs? e)
         {
             removeMarkers();
             MainFrame.Content = new Settings();
             SettingsBtnMarker.Opacity = 1;
         }
-        private void getChat(object sender, MouseButtonEventArgs? e)
+        private void getChatPage(object sender, MouseButtonEventArgs? e)
         { 
             removeMarkers();
             MainFrame.Content = new Chat();
             ChatBtnMarker.Opacity = 1;
         }
-        private void getAbout(object sender, MouseButtonEventArgs? e)
+        private void getAboutPage(object sender, MouseButtonEventArgs? e)
         {
             removeMarkers();
             MainFrame.Content = new About();
             AboutBtnMarker.Opacity = 1;
         }
-        private void copyrightLink(object sender, MouseButtonEventArgs e)
+        public static void backAboutPage()
+        {
+            Instance!.MainFrame.Content = new About();
+        }
+        public static void getSkillsPage()
+        {
+            Instance!.MainFrame.Content = new Skills();
+        }
+        private void authorLink(object sender, MouseButtonEventArgs e)
         {
             Process.Start(new ProcessStartInfo 
-            { FileName = "https://raw.githubusercontent.com/WaysoonProgramms/VoiceAssistantLeo/master/LICENSE", UseShellExecute = true });
+            { FileName = "https://github.com/WaysoonProgramms", UseShellExecute = true });
         }
 
         private void removeMarkers()
@@ -284,14 +295,14 @@ namespace Leo.WindowModels
             AboutBtnFillMarker.Opacity = 0;
         }
 
-        private void copyrightMouseEnter(object sender, MouseEventArgs e)
+        private void authorMouseEnter(object sender, MouseEventArgs e)
         {
-            CopyrightLine.Opacity = 1;
+            AuthorLine.Opacity = 1;
         }
 
-        private void copyrightMouseLeave(object sender, MouseEventArgs e)
+        private void authorMouseLeave(object sender, MouseEventArgs e)
         {
-            CopyrightLine.Opacity = 0;
+            AuthorLine.Opacity = 0;
         }
 
         private void hotKeys(object sender, KeyEventArgs e)

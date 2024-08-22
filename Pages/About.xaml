@@ -55,7 +55,7 @@
         <Rectangle x:Name="LicenseLink" HorizontalAlignment="Left" Height="1" Margin="576,233,0,0" Stroke="White" VerticalAlignment="Top" 
                    Width="72" Visibility="Hidden"/>
         <Rectangle Fill="Transparent" Margin="571,220,0,0" Width="80" Height="13" HorizontalAlignment="Left" VerticalAlignment="Top" 
-                   MouseEnter="licLinkMouseEnter" MouseLeave="liclinkMouseLeave" MouseDown="licLinkClick"/>
+                   MouseEnter="licLinkMouseEnter" MouseLeave="licLinkMouseLeave" MouseDown="licLinkClick"/>
 
         <Label Content="Исходный код" HorizontalAlignment="Left" Margin="664,212,0,0" VerticalAlignment="Top" Foreground="White" 
                FontFamily="Montserrat Alternates" FontSize="14"/>
@@ -77,6 +77,13 @@
                    Width="155" Visibility="Hidden"/>
         <Rectangle Fill="Transparent" Margin="597,296,0,0" Width="157" Height="13" HorizontalAlignment="Left" VerticalAlignment="Top" 
                    MouseEnter="siteLinkMouseEnter" MouseLeave="siteLinkMouseLeave" MouseDown="siteLinkClick"/>
+        
+        <Label Content="Умения" HorizontalAlignment="Left" Margin="640,330,0,0" VerticalAlignment="Top" 
+               Foreground="White" FontFamily="Montserrat Alternates" FontSize="14"/>
+        <Rectangle x:Name="SkillsLink" HorizontalAlignment="Left" Height="1" Margin="644,352,0,0" Stroke="White" VerticalAlignment="Top" 
+                   Width="60" Visibility="Hidden"/>
+        <Rectangle Fill="Transparent" Margin="640,337,0,0" Width="67" Height="13" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                   MouseEnter="skillsLinkMouseEnter" MouseLeave="skillsLinkMouseLeave" MouseDown="skillsLinkClick"/>
         
         <Label Content="В проекте используются иконки Icons8" HorizontalAlignment="Left" Margin="30,534,0,0" VerticalAlignment="Top" FontSize="9" 
             Foreground="White" FontFamily="Montserrat Alternates" FontStyle="Italic"/>

@@ -41,7 +41,7 @@
 
   <ItemGroup>
 	<Resource Include="Assets\Fonts\MontserratAlternates-ExtraBold.ttf" />
-	<Resource Include="Assets\Fonts\MontserratAlternates.ttf" />
+	<Resource Include="Assets\Fonts\MontserratAlternates-Regular.ttf" />
 	<Resource Include="Assets\icon.ico" />
     <Resource Include="Assets\Images\avatar.png" />
     <Resource Include="Assets\Images\Chat.png" />
@@ -219,6 +219,8 @@
     <None Remove="Assets\Images\accessibility_features.png" />
     <Resource Include="Assets\Images\accessibility_features.png" />
     <None Remove="Assets\deafult_settings.config" />
+    <None Remove="Assets\Images\back.png" />
+    <Resource Include="Assets\Images\back.png" />
   </ItemGroup>
 
   <ItemGroup>

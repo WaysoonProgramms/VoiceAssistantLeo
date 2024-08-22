@@ -7,25 +7,25 @@
       d:DesignHeight="950" d:DesignWidth="850"
       Title="Settings"
       Background="#FF151515">
-    <ScrollViewer VerticalScrollBarVisibility="Hidden">
+    <ScrollViewer >
         <Grid Height="950">
-            <Image Margin="-50,65,637,0" VerticalAlignment="Top" Width="40" Height="40" Source="/assets/images/functions.png"/>
+            <Image Margin="-40,65,637,0" VerticalAlignment="Top" Width="40" Height="40" Source="/assets/images/functions.png"/>
             <Label Content="Основные" HorizontalAlignment="Left" Margin="110,71,0,0" FontSize="18" FontFamily="Montserrat Alternates" 
                    Foreground="White" VerticalAlignment="Top" />
     
-            <Image Margin="-50,230,631,0" VerticalAlignment="Top" Width="40" Height="40" Source="/assets/images/rules.png"/>
+            <Image Margin="-40,230,631,0" VerticalAlignment="Top" Width="40" Height="40" Source="/assets/images/rules.png"/>
             <Label Content="Разрешения" HorizontalAlignment="Left" Margin="110,236,0,0" FontSize="18" FontFamily="Montserrat Alternates" 
                    Foreground="White" VerticalAlignment="Top"/>
             
-            <Image Margin="-50,393,631,0" VerticalAlignment="Top" Width="40" Height="40" Source="/assets/images/sound.png"/>
+            <Image Margin="-40,393,631,0" VerticalAlignment="Top" Width="40" Height="40" Source="/assets/images/sound.png"/>
             <Label Content="Громкость" HorizontalAlignment="Left" Margin="110,397,0,0" FontSize="18" FontFamily="Montserrat Alternates" 
                    Foreground="White" VerticalAlignment="Top"/>
             
-            <Image Margin="-50,555,631,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="40" Height="40" Source="/assets/images/additionally.png"/>
+            <Image Margin="-40,555,631,0" VerticalAlignment="Top" HorizontalAlignment="Center" Width="40" Height="40" Source="/assets/images/additionally.png"/>
             <Label Content="Дополнительные инструменты" HorizontalAlignment="Left" Margin="110,559,0,0" FontSize="18" FontFamily="Montserrat Alternates" 
                    Foreground="White" VerticalAlignment="Top"/>
             
-            <Image Margin="-50,730,631,0" VerticalAlignment="Top"  Width="40" Height="40" Source="/assets/images/accessibility_features.png"/>
+            <Image Margin="-40,730,631,0" VerticalAlignment="Top"  Width="40" Height="40" Source="/assets/images/accessibility_features.png"/>
             <Label Content="Специальные возможности" HorizontalAlignment="Left" Margin="110,735,0,0" FontSize="18" FontFamily="Montserrat Alternates" 
                    Foreground="White" VerticalAlignment="Top"/>
     

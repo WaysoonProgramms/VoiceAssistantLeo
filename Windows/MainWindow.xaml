@@ -59,7 +59,7 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             
-            <Border Grid.Row="0" BorderThickness="1" MouseLeftButtonDown="getHome" MouseEnter="homeBtnMouseEnter" 
+            <Border Grid.Row="0" BorderThickness="1" MouseLeftButtonDown="getHomePage" MouseEnter="homeBtnMouseEnter" 
                 MouseLeave="homeBtnMouseLeave" Cursor="Hand">
                 <Grid>
                     <Rectangle x:Name="HomeBtnFillMarker" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="249" Fill="White" Opacity="0"/>
@@ -71,7 +71,7 @@
                 </Grid>
             </Border>
 
-            <Border Grid.Row="1" BorderThickness="1" MouseLeftButtonDown="getSettings" MouseEnter="settingsBtnMouseEnter" 
+            <Border Grid.Row="1" BorderThickness="1" MouseLeftButtonDown="getSettingsPage" MouseEnter="settingsBtnMouseEnter" 
                     MouseLeave="settingsBtnMouseLeave" Cursor="Hand">
                 <Grid>
                     <Rectangle x:Name="SettingsBtnFillMarker" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="249" Fill="White" Opacity="0"/>
@@ -83,7 +83,7 @@
                 </Grid>
             </Border>
 
-            <Border Grid.Row="2" BorderThickness="1" MouseLeftButtonDown="getChat" MouseEnter="chatBtnMouseEnter" 
+            <Border Grid.Row="2" BorderThickness="1" MouseLeftButtonDown="getChatPage" MouseEnter="chatBtnMouseEnter" 
                 MouseLeave="chatBtnMouseLeave" Cursor="Hand">
                 <Grid>
                     <Rectangle x:Name="ChatBtnFillMarker" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="249" Fill="White" Opacity="0"/>
@@ -95,7 +95,7 @@
                 </Grid>
             </Border>
 
-            <Border Grid.Row="3" BorderThickness="1" MouseLeftButtonDown="getAbout" MouseEnter="aboutBtnMouseEnter" 
+            <Border Grid.Row="3" BorderThickness="1" MouseLeftButtonDown="getAboutPage" MouseEnter="aboutBtnMouseEnter" 
                 MouseLeave="aboutBtnMouseLeave" Cursor="Hand">
                 <Grid>
                     <Rectangle x:Name="AboutBtnFillMarker" HorizontalAlignment="Center" Height="40" VerticalAlignment="Center" Width="249" Fill="White" Opacity="0"/>
@@ -108,12 +108,12 @@
             </Border>
         </Grid>
 
-        <Image HorizontalAlignment="Left" Height="15" Margin="41,573,0,0" VerticalAlignment="Top" Width="15" Source="/assets/images/avatar.png"/>
-        <Label Content="© WaysoonProgramms 2024" HorizontalAlignment="Left" Margin="61,570,0,0" VerticalAlignment="Top" FontSize="9" Foreground="White"
+        <Image HorizontalAlignment="Left" Height="15" Margin="50,573,0,0" VerticalAlignment="Top" Width="15" Source="/assets/images/avatar.png"/>
+        <Label Content="© WaysoonProgramms" HorizontalAlignment="Left" Margin="70,570,0,0" VerticalAlignment="Top" FontSize="9" Foreground="White"
                FontFamily="Montserrat Alternates" FontStyle="Italic"/>
-        <Rectangle x:Name="CopyrightLine" HorizontalAlignment="Left" Height="1" Margin="66,587,0,0" Stroke="White" VerticalAlignment="Top" 
-                   Width="134" Opacity="0"/>
-        <Rectangle Fill="Transparent" Height="10" Width="140" HorizontalAlignment="Left" Margin="63,575,0,0" VerticalAlignment="Top"
-                   MouseEnter="copyrightMouseEnter" MouseLeave="copyrightMouseLeave" MouseLeftButtonDown="copyrightLink"/>
+        <Rectangle x:Name="AuthorLine" HorizontalAlignment="Left" Height="1" Margin="75,587,0,0" Stroke="White" VerticalAlignment="Top" 
+                   Width="110" Opacity="0"/>
+        <Rectangle Fill="Transparent" Height="10" Width="140" HorizontalAlignment="Left" Margin="48,575,0,0" VerticalAlignment="Top"
+                   MouseEnter="authorMouseEnter" MouseLeave="authorMouseLeave" MouseLeftButtonDown="authorLink"/>
     </Grid>
 </Window>

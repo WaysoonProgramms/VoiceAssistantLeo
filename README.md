@@ -49,7 +49,6 @@ WakeWord, а с таким сложным именем было сложно к 
 
 <h1> Скриншот приложения </h1>
 <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./Assets/Repo/banner.png">
     <img src="./Assets/Repo/screenshot.png" alt="Screenshot">
 </picture>
 

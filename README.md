@@ -86,4 +86,10 @@ WakeWord, а с таким сложным именем было сложно к 
     <li><code>04</code> - Не удалось загрузить последние сообщения из чата</li>
 </ul>
 
+<h1> Связаться со мной </h1>
+<ul>
+  <li> Почта: antrome@yandex.ru </li>
+  <li> Telegram: @ant0nio_Way </li>
+</ul>
+
 <i>В проекте используются иконки с сайта <a href="https://icons8.ru/">Icons8.ru</a></i>

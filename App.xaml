@@ -168,5 +168,6 @@
         <Style TargetType="{x:Type ScrollBar}">
             <Setter Property="Template" Value="{StaticResource VerticalScrollBar}"/>
         </Style>
+        <Label x:Key="Version" Content="1.0.0"/>
     </Application.Resources>
 </Application>

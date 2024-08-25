@@ -47,7 +47,7 @@
         <Image HorizontalAlignment="Left" Height="70" Margin="636,77,0,0" VerticalAlignment="Top" Width="70" Source="/Assets/images/dragon.png"/>
         <Label Content="Ассистент Лео" HorizontalAlignment="Left" Margin="587,149,0,0" VerticalAlignment="Top" 
                FontFamily="Montserrat Alternates" Foreground="White" FontSize="18"/>
-        <Label Content="Версия 0.0.1" HorizontalAlignment="Left" Margin="629,172,0,0" VerticalAlignment="Top" FontFamily="Montserrat Alternates" 
+        <Label Content="Версия 1.0.0" HorizontalAlignment="Left" Margin="629,172,0,0" VerticalAlignment="Top" FontFamily="Montserrat Alternates" 
                Foreground="#FF656565"/>
         
         <Label Content="Лицензия" HorizontalAlignment="Left" Margin="571,212,0,0" VerticalAlignment="Top" 

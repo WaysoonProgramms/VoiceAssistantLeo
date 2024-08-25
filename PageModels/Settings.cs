@@ -21,24 +21,19 @@ namespace Leo.PageModels
         {
             InitializeComponent();
             
-            // Инициализация настроек:
-            // Функции
             DevModeBox.IsChecked = Properties.Settings.Default.isDevModeTrue;
             MinimizeToTrayBox.IsChecked = Properties.Settings.Default.isMinimizeToTrayTrue;
             AutoRunBox.IsChecked = Properties.Settings.Default.isAutoRun;
             OpacityBox.IsChecked = Properties.Settings.Default.allowOpacity;
             
-            // Правила
             AppStartBox.IsChecked = Properties.Settings.Default.allowProgrammsStart;
             BrowserStartBox.IsChecked = Properties.Settings.Default.allowBrowserStart;
             UsingNetworkBox.IsChecked = Properties.Settings.Default.allowNetworkUsing;
             ComputerControlBox.IsChecked = Properties.Settings.Default.allowComputerControl;
-
-            // Звук
+            
             VoiceVolumeSlider.Value = Properties.Settings.Default.voiceVol;
             SoundVolumeSlider.Value = Properties.Settings.Default.soundVol;
             
-            // Спец. Возможности
             NotSaveMessageBox.IsChecked = Properties.Settings.Default.notSaveMessages;
             OffLotMessageWarnBox.IsChecked = Properties.Settings.Default.offLotMessageWarn;
         }
@@ -57,7 +52,7 @@ namespace Leo.PageModels
         private void voiceVolumeTest(object sender, MouseEventArgs e)
         {
             _player.Open(new Uri(@".\voices\test.wav", UriKind.Relative));
-            _player.Volume = Settings.VoiceVolume / 100.0f;
+            _player.Volume = VoiceVolume / 100.0f;
             _player.Play();
         }
 
@@ -72,7 +67,7 @@ namespace Leo.PageModels
         private void soundVolumeTest(object sender, MouseEventArgs e)
         {
             _player.Open(new Uri(@".\sounds\start.wav", UriKind.Relative));
-            _player.Volume = Settings.SoundVolume / 100.0f;
+            _player.Volume = SoundVolume / 100.0f;
             _player.Play();
         }
 
@@ -81,7 +76,6 @@ namespace Leo.PageModels
             Properties.Settings.Default.isDevModeTrue = true;
             Properties.Settings.Default.Save();
         }
-
         private void devModeBoxUnchecked(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.isDevModeTrue = false;
@@ -93,7 +87,6 @@ namespace Leo.PageModels
             Properties.Settings.Default.isMinimizeToTrayTrue = true;
             Properties.Settings.Default.Save();
         }
-
         private void minimizeToTrayBoxUnchecked(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.isMinimizeToTrayTrue = false;
@@ -105,7 +98,6 @@ namespace Leo.PageModels
             Properties.Settings.Default.allowProgrammsStart = true;
             Properties.Settings.Default.Save();
         }
-
         private void appStartBoxUnchecked(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.allowProgrammsStart = false;
@@ -117,7 +109,6 @@ namespace Leo.PageModels
             Properties.Settings.Default.allowBrowserStart = true;
             Properties.Settings.Default.Save();
         }
-
         private void browserStartBoxUnchecked(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.allowBrowserStart = false;
@@ -129,7 +120,6 @@ namespace Leo.PageModels
             Properties.Settings.Default.allowNetworkUsing = true;
             Properties.Settings.Default.Save();
         }
-
         private void usingNetworkBoxUnchecked(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.allowNetworkUsing = false;
@@ -141,7 +131,6 @@ namespace Leo.PageModels
             Properties.Settings.Default.allowComputerControl = true;
             Properties.Settings.Default.Save();
         }
-
         private void computerControlBoxUnchecked(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.allowComputerControl = false;
@@ -153,7 +142,6 @@ namespace Leo.PageModels
             Properties.Settings.Default.allowOpacity = true;
             Properties.Settings.Default.Save();
         }
-
         private void opacityBoxUnchecked(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.allowOpacity = false;
@@ -179,9 +167,7 @@ namespace Leo.PageModels
             }
             catch
             { 
-                
                 _messageBox.showMessage(message, label, MessageBox.MessageBoxType.Error, MessageBox.MessageBoxButtons.Ok);
-                
                 _logger.error("Leo was unable to add himself to autostart.");
             }
         }
@@ -193,22 +179,16 @@ namespace Leo.PageModels
             var message = "Не удалось изменить/удалить запись в реестре\n\nКод ошибки: 03";
             var label = "Что-то пошло не так...";
             
-            try
-            {
-                
-            }
+            try { }
             catch
-            {
+            { 
                 _messageBox.showMessage(message, label, MessageBox.MessageBoxType.Error, MessageBox.MessageBoxButtons.Ok);
-
                 _logger.error("Leo was unable to remove himself from startup.");
             }
         }
 
         private void openLogs(object sender, RoutedEventArgs e)
-        {
-            Process.Start("explorer.exe", @".\Logs");
-        }
+        { Process.Start("explorer.exe", @".\Logs"); }
 
         private void clearMessages(object sender, RoutedEventArgs e)
         {

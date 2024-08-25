@@ -60,6 +60,10 @@ namespace Leo.WindowModels
             Instance = this;
         }
         
+        private void windowLoaded(object sender, RoutedEventArgs e)
+        {
+            opacityAnimation(Name, 0, 1, 0.3, 2);
+        }
 
         private void trayIconClick(object sender, RoutedEventArgs e)
         {
@@ -127,10 +131,10 @@ namespace Leo.WindowModels
                 switch (operation)
                 {
                     case 0:
-                        animation.Completed += closeApplication;
+                        animation.Completed += animationCompletedClose;
                         break;
                     case 1:
-                        animation.Completed += hideApplication;
+                        animation.Completed += animationCompletedHide;
                         break;
                 }
 
@@ -155,13 +159,13 @@ namespace Leo.WindowModels
             }
         }
 
-        private void closeApplication(object? sender, EventArgs e)
+        private void animationCompletedClose(object? sender, EventArgs e)
         {
             TaskbarIcon.Visibility = Visibility.Hidden;
             Close();
         }
 
-        private void hideApplication(object? sender, EventArgs e)
+        private void animationCompletedHide(object? sender, EventArgs e)
         {
             Hide();
         }
@@ -169,6 +173,11 @@ namespace Leo.WindowModels
         private void closeWindow(object sender, EventArgs e)
         {
             opacityAnimation(Name, 1, 0, 0.3, Properties.Settings.Default.isMinimizeToTrayTrue ? 1 : 0);
+        }
+        
+        private void minimizeWindow(object sender, EventArgs e)
+        {
+            WindowState = WindowState.Minimized;
         }
 
         private void mute(object sender, EventArgs? e)
@@ -196,11 +205,6 @@ namespace Leo.WindowModels
             Classes.Vosk.update();
         }
 
-        private void minimizeWindow(object sender, EventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
-
         private void getHomePage(object sender, MouseButtonEventArgs? e)
         {
             removeMarkers();
@@ -225,20 +229,14 @@ namespace Leo.WindowModels
             MainFrame.Content = new About();
             AboutBtnMarker.Opacity = 1;
         }
-        public static void backAboutPage()
-        {
-            Instance!.MainFrame.Content = new About();
-        }
         public static void getSkillsPage()
         {
             Instance!.MainFrame.Content = new Skills();
         }
-        private void authorLink(object sender, MouseButtonEventArgs e)
+        public static void backAboutPage()
         {
-            Process.Start(new ProcessStartInfo 
-            { FileName = "https://github.com/WaysoonProgramms", UseShellExecute = true });
+            Instance!.MainFrame.Content = new About();
         }
-
         private void removeMarkers()
         {
             HomeBtnMarker.Opacity = 0;
@@ -246,13 +244,18 @@ namespace Leo.WindowModels
             ChatBtnMarker.Opacity = 0;
             AboutBtnMarker.Opacity = 0;
         }
+        
+        private void authorLink(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo 
+            { FileName = "https://github.com/WaysoonProgramms", UseShellExecute = true });
+        }
 
         private void homeBtnMouseEnter(object sender, MouseEventArgs e)
         {
             opacityAnimation(HomeBtnFillMarker.Name, 0, 0.1, 0.1, 2);
             HomeBtnFillMarker.Opacity = 0.1;
         }
-
         private void homeBtnMouseLeave(object sender, MouseEventArgs e)
         {
             opacityAnimation(HomeBtnFillMarker.Name, 0.1, 0, 0.1, 2);
@@ -264,7 +267,6 @@ namespace Leo.WindowModels
             opacityAnimation(SettingsBtnFillMarker.Name, 0, 0.1, 0.1, 2);
             SettingsBtnFillMarker.Opacity = 0.1;
         }
-
         private void settingsBtnMouseLeave(object sender, MouseEventArgs e)
         {
             opacityAnimation(SettingsBtnFillMarker.Name, 0.1, 0, 0.1, 2);
@@ -276,7 +278,6 @@ namespace Leo.WindowModels
             opacityAnimation(ChatBtnFillMarker.Name, 0, 0.1, 0.1, 2);
             ChatBtnFillMarker.Opacity = 0.1;
         }
-
         private void chatBtnMouseLeave(object sender, MouseEventArgs e)
         {
             opacityAnimation(ChatBtnFillMarker.Name, 0.1, 0, 0.1, 2);
@@ -288,7 +289,6 @@ namespace Leo.WindowModels
             opacityAnimation(AboutBtnFillMarker.Name, 0, 0.1, 0.1, 2);
             AboutBtnFillMarker.Opacity = 0.1;
         }
-
         private void aboutBtnMouseLeave(object sender, MouseEventArgs e)
         {
             opacityAnimation(AboutBtnFillMarker.Name, 0.1, 0, 0.1, 2);
@@ -299,7 +299,6 @@ namespace Leo.WindowModels
         {
             AuthorLine.Opacity = 1;
         }
-
         private void authorMouseLeave(object sender, MouseEventArgs e)
         {
             AuthorLine.Opacity = 0;
@@ -316,11 +315,6 @@ namespace Leo.WindowModels
             {
                 Process.Start("explorer.exe", ".\\logs");
             }
-        }
-
-        private void windowLoaded(object sender, RoutedEventArgs e)
-        {
-            opacityAnimation(Name, 0, 1, 0.3, 2);
         }
     }
 }
